@@ -44,26 +44,30 @@
     overflow: hidden;
     box-shadow: var(--shadow-soft);
     margin-bottom: 16px;
-    background: linear-gradient(135deg, #cfe2ff, #eaf3ff);
-    min-height: 170px;
+    background: #000;
+    min-height: 190px;
   }
 
+  /* 封面用你的插畫 images/cover.png */
   header.trip-header::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg,#cfe2ff,#eaf3ff);
-    opacity: 0.9;
+    background-image: url("images/cover.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
   }
 
+  /* 上面一層藍色漸層，讓字清楚 */
   header.trip-header::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
       150deg,
-      rgba(16, 52, 120, 0.55),
-      rgba(16, 52, 120, 0.2)
+      rgba(16, 52, 120, 0.70),
+      rgba(16, 52, 120, 0.30)
     );
   }
 
@@ -260,6 +264,18 @@
     background: #fdfdff;
     border-radius: 16px;
     border: 1px solid #e2e7f3;
+  }
+
+  /* 餐廳區塊：灰色 */
+  .section-block.section-restaurant {
+    background: #f4f4f6;
+    border-color: #d0d2dc;
+  }
+
+  /* 逛街／景點區塊：深藍系 */
+  .section-block.section-spot {
+    background: #dde7ff;
+    border-color: rgba(23, 74, 155, 0.6);
   }
 
   .section-title {
@@ -535,10 +551,10 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>天神地下街 & 晚餐</span>
-            <span class="section-note">搭地鐵至天神站，開始逛街行程</span>
+            <span class="section-note">以用餐為主，順路逛街</span>
           </div>
 
           <div class="timeline-item">
@@ -662,7 +678,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-spot">
           <div class="section-title">
             <span>逛街：博多 AMU PLAZA・天神・藥院</span>
           </div>
@@ -705,7 +721,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>點心 & 晚餐</span>
           </div>
@@ -773,7 +789,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>早餐 & 太宰府天滿宮</span>
           </div>
@@ -801,7 +817,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-spot">
           <div class="section-title">
             <span>寶滿宮 竈門神社</span>
           </div>
@@ -818,7 +834,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>逛街 & 燒肉晚餐</span>
           </div>
@@ -887,7 +903,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>出發前 & 午餐</span>
           </div>
@@ -913,7 +929,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-spot">
           <div class="section-title">
             <span>小倉城 & 皿倉山</span>
           </div>
@@ -961,7 +977,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>晚餐：鰻魚飯</span>
           </div>
@@ -1019,7 +1035,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>前往由布院 & 午餐</span>
           </div>
@@ -1045,7 +1061,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-spot">
           <div class="section-title">
             <span>Snoopy 茶屋 & 湯布院花卉村</span>
           </div>
@@ -1071,7 +1087,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-spot">
           <div class="section-title">
             <span>金鱗湖 & 溫泉・晚餐</span>
           </div>
@@ -1106,7 +1122,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>由布院小吃清單</span>
             <span class="section-note">視情況彈性安排</span>
@@ -1214,7 +1230,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-spot">
           <div class="section-title">
             <span>清晨金鱗湖 & 返回博多</span>
           </div>
@@ -1242,7 +1258,7 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block section-restaurant">
           <div class="section-title">
             <span>博多午餐 & 逛街</span>
           </div>
@@ -1305,11 +1321,11 @@
     <section class="extra-section">
       <div class="extra-card">
         <div class="extra-title">想買清單</div>
-        <div class="extra-note">這裡可以當成「購物雷達」，把 PPT 裡面想買的東西整理進來，邊逛邊打勾。</div>
+        <div class="extra-note">把 PPT 裡想買的東西整理在這裡，逛街時可以直接勾。</div>
 
         <div class="checklist-item">
           <input type="checkbox">
-          <div class="checklist-label">AUX PARADIS 香水（具體香味可自己填）</div>
+          <div class="checklist-label">AUX PARADIS 香水（可自行填寫具體香味）</div>
         </div>
         <div class="checklist-item">
           <input type="checkbox">
@@ -1317,29 +1333,29 @@
         </div>
         <div class="checklist-item">
           <input type="checkbox">
-          <div class="checklist-label">博多車站預定入手的衣服、鞋子或包包（可自行改成品牌名稱）</div>
+          <div class="checklist-label">博多車站預計購入的服飾／鞋子／包包（可改成品牌）</div>
         </div>
         <div class="checklist-item">
           <input type="checkbox">
-          <div class="checklist-label">由布院甜點：Mana Mana 可麗露、B-speak 生乳捲、Milch 布丁</div>
+          <div class="checklist-label">由布院甜點：Mana Mana 可麗露、B-speak、生乳捲、Milch 布丁</div>
         </div>
       </div>
 
       <div class="extra-card">
-        <div class="extra-title">遺憾清單 / 下次再去</div>
-        <div class="extra-note">這裡可以記錄這次沒排到、或臨時取消的點，下次再訪福岡或九州時用。</div>
+        <div class="extra-title">遺憾清單・下次再去</div>
+        <div class="extra-note">這次沒去成、沒吃到的，全部記在這裡，下一次福岡直上。</div>
 
         <div class="checklist-item">
           <input type="checkbox">
-          <div class="checklist-label">這次沒吃到的名店（可以改成店名，例如：一蘭總本店、某家燒肉等）</div>
+          <div class="checklist-label">這次沒吃到的名店（改成實際店名：例如某家燒肉或拉麵）</div>
         </div>
         <div class="checklist-item">
           <input type="checkbox">
-          <div class="checklist-label">沒時間去的小景點／咖啡廳（例如：警固公園聖誕燈飾等）</div>
+          <div class="checklist-label">沒時間去的景點／咖啡廳（例如：警固公園燈飾、某家選物店等）</div>
         </div>
         <div class="checklist-item">
           <input type="checkbox">
-          <div class="checklist-label">其他城市：例如長崎、熊本或別府（如果之後想排更大圈的行程）</div>
+          <div class="checklist-label">其他想去的城市：長崎、熊本、別府…（之後排大九州行程）</div>
         </div>
       </div>
     </section>
@@ -1365,7 +1381,7 @@
       });
     });
 
-    // Google Maps 連結：自動幫每個 place 生成「地圖」按鈕
+    // Google Maps 連結：自動幫每個 place 生「地圖」按鈕
     document.querySelectorAll(".timeline-item").forEach((item) => {
       const placeEl = item.querySelector(".place");
       const details = item.querySelector(".details");
@@ -1387,7 +1403,7 @@
       details.appendChild(tools);
     });
 
-    // 天氣：使用 Open-Meteo API（無需金鑰）
+    // 天氣：Open-Meteo API（無需金鑰）
     const locationConfig = {
       fukuoka: { lat: 33.59, lon: 130.40 },
       dazaifu: { lat: 33.52, lon: 130.53 },
@@ -1396,7 +1412,6 @@
     };
 
     function weatherText(code) {
-      // 簡化版 weathercode 對應
       if (code === 0) return "晴朗";
       if (code === 1 || code === 2) return "多雲";
       if (code === 3) return "陰天";
@@ -1412,7 +1427,7 @@
 
     async function loadWeatherForCard(card) {
       const locKey = card.dataset.location;
-      const dateStr = card.dataset.date; // yyyy-mm-dd
+      const dateStr = card.dataset.date;
       const cfg = locationConfig[locKey];
       const tempEl = card.querySelector("[data-role='temp']");
       const descEl = card.querySelector("[data-role='desc']");
