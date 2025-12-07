@@ -59,7 +59,7 @@
       color: var(--color-text-sub);
     }
 
-    /* 封面：4:3 比例 */
+    /* 封面 4:3 */
     .hero-cover {
       margin: 8px 16px 8px;
       border-radius: 28px;
@@ -238,11 +238,67 @@
       color: #8a520f;
     }
 
+    /* 天氣條 + 建議穿著（卡片第二個區塊） */
+    .weather-strip {
+      margin-top: 6px;
+      padding: 6px 8px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fdf3e2, #f1ebe5);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+      font-size: 11px;
+      color: #5f4d38;
+    }
+    .weather-strip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .weather-strip-main {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .weather-hour {
+      min-width: 54px;
+      padding: 4px 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.7);
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .weather-hour-time {
+      font-size: 10px;
+      color: #a27d4c;
+    }
+    .weather-hour-temp {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .advice-card {
+      margin-top: 8px;
+      padding: 10px 12px;
+      background: #f6f2ec;
+      border-radius: 16px;
+      font-size: 11px;
+      color: #5f4d38;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .advice-row-title {
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
     .spots-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 4px;
+      margin-top: 10px;
     }
 
     .spot-card {
@@ -295,6 +351,11 @@
       flex-wrap: wrap;
       gap: 6px;
     }
+    .spot-note {
+      font-size: 11px;
+      color: #c0582b;
+      font-weight: 700;
+    }
     .btn-ghost {
       border-radius: var(--radius-pill);
       border: 1px solid #e0d7cc;
@@ -316,22 +377,6 @@
       cursor: pointer;
     }
     .input-file input { display: none; }
-
-    .advice-card {
-      margin-top: 10px;
-      padding: 10px 12px;
-      background: #f6f2ec;
-      border-radius: 16px;
-      font-size: 11px;
-      color: #5f4d38;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
-    .advice-row-title {
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
 
     /* 必買清單 Tab */
     .check-switcher {
@@ -421,6 +466,14 @@
       font-size: 11px;
       color: var(--color-text-sub);
     }
+    .check-main-title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .check-main-sub {
+      font-size: 11px;
+      color: var(--color-text-sub);
+    }
     .check-photo-box {
       border-radius: 12px;
       background: #f0ede9;
@@ -459,103 +512,6 @@
       cursor: pointer;
     }
 
-    /* 記帳 Tab */
-    .expense-card {
-      background: rgba(255,255,255,0.97);
-      border-radius: 20px;
-      padding: 12px;
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
-    .expense-card h3 {
-      margin: 0 0 6px;
-      font-size: 14px;
-    }
-    .rate-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      font-size: 11px;
-    }
-    .rate-item {
-      background: #fdfbf8;
-      border-radius: 12px;
-      padding: 6px;
-    }
-    .rate-item label {
-      display: block;
-      font-size: 11px;
-      margin-bottom: 2px;
-    }
-    .rate-item input {
-      width: 100%;
-      border-radius: 999px;
-      border: 1px solid #e0d4c6;
-      padding: 2px 6px;
-      font-size: 11px;
-    }
-
-    .expense-list {
-      margin-top: 6px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .expense-row {
-      background: #fdfbf8;
-      border-radius: 12px;
-      padding: 6px;
-      display: grid;
-      grid-template-columns: 68px 72px 1fr 70px 80px 28px;
-      gap: 4px;
-      align-items: center;
-    }
-    .expense-row select,
-    .expense-row input[type="number"],
-    .expense-row input[type="text"] {
-      width: 100%;
-      border-radius: 999px;
-      border: 1px solid #e0d4c6;
-      font-size: 11px;
-      padding: 2px 6px;
-      background: #ffffff;
-    }
-    .expense-row .exp-note {
-      border-radius: 999px;
-    }
-    .exp-rate-display, .exp-twd {
-      font-size: 11px;
-      text-align: right;
-    }
-    .btn-del {
-      border: none;
-      background: transparent;
-      font-size: 14px;
-      cursor: pointer;
-      color: #b37a5a;
-    }
-    .expense-summary {
-      margin-top: 6px;
-      font-size: 12px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* 天氣 Tab */
-    .weather-note {
-      font-size: 12px;
-      color: var(--color-text-sub);
-      margin: 4px 4px 8px;
-    }
-    .weather-tip-card {
-      background: rgba(255,255,255,0.97);
-      border-radius: 18px;
-      padding: 10px 12px;
-      box-shadow: var(--shadow-soft);
-      font-size: 12px;
-    }
-
     @media (min-width: 420px) {
       .hero-cover { margin: 10px 18px 8px; }
     }
@@ -571,7 +527,7 @@
 
     <!-- 封面 4:3 -->
     <section class="hero-cover">
-      <img src="cover.jpg" alt="福岡旅程封面" class="hero-img" />
+      <img src="cover.png" alt="福岡旅程封面" class="hero-img" />
       <div class="hero-overlay"></div>
       <div class="hero-text">
         <p class="hero-text-main">福岡 6 日 5 夜</p>
@@ -591,19 +547,19 @@
             </button>
             <button class="day-chip" data-day="d2">
               <span class="date">12/14 日</span>
-              <span class="label">天婦羅 · 小倉城 · 夜景</span>
+              <span class="label">Pain stock · 小倉 · 皿倉山</span>
             </button>
             <button class="day-chip" data-day="d3">
               <span class="date">12/15 一</span>
-              <span class="label">櫛田神社 · 博多逛街</span>
+              <span class="label">櫛田神社 · 壽喜燒 · 明太子麵包</span>
             </button>
             <button class="day-chip" data-day="d4">
               <span class="date">12/16 二</span>
-              <span class="label">太宰府 · 竈門神社</span>
+              <span class="label">太宰府 · 竈門神社 · 燒肉</span>
             </button>
             <button class="day-chip" data-day="d5">
               <span class="date">12/17 三</span>
-              <span class="label">由布院 · 溫泉</span>
+              <span class="label">由布院 · 金鱗湖 · 溫泉</span>
             </button>
             <button class="day-chip" data-day="d6">
               <span class="date">12/18 四</span>
@@ -624,11 +580,24 @@
                 <div class="day-tag">飛機 · 逛街 · 牛腸鍋</div>
               </div>
 
+              <!-- 天氣＋建議穿著（第二個區塊） -->
+              <div class="weather-strip" data-weather-day="d1"></div>
+              <div class="advice-card">
+                <div>
+                  <div class="advice-row-title">天氣 & 溫度</div>
+                  <div>預估約 8–15°C，多雲為主，日夜溫差不算大。</div>
+                </div>
+                <div>
+                  <div class="advice-row-title">建議穿著</div>
+                  <div>長袖上衣＋薄外套即可，飛機與機場冷氣較強，鞋子以好走為主。</div>
+                </div>
+              </div>
+
               <div class="spots-list">
                 <!-- BOUL'ANGE -->
                 <div class="spot-card">
                   <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?japan,bakery" alt="BOUL'ANGE 麵包" />
+                    <img class="spot-photo" src="boulange.png" alt="BOUL'ANGE 麵包" />
                   </div>
                   <div class="spot-content">
                     <div class="spot-tag">食物 · 麵包</div>
@@ -649,13 +618,14 @@
                 <!-- 前田屋 -->
                 <div class="spot-card">
                   <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?motsunabe,japan" alt="前田屋 牛腸鍋" />
+                    <img class="spot-photo" src="maedaya.png" alt="前田屋 牛腸鍋" />
                   </div>
                   <div class="spot-content">
                     <div class="spot-tag">食物 · 晚餐</div>
                     <div class="spot-name">博多もつ鍋 前田屋 今泉店</div>
                     <div class="spot-desc">味噌口味牛腸鍋是招牌，第一晚的重點晚餐，適合拍一張「旅程開局」照片。</div>
                     <div class="spot-actions">
+                      <div class="spot-note">★ 建議提早抵達附近排隊</div>
                       <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/博多もつ鍋+前田屋+今泉">
                         <span class="icon">📍</span><span>Google Maps</span>
                       </button>
@@ -667,17 +637,6 @@
                   </div>
                 </div>
               </div>
-
-              <div class="advice-card">
-                <div>
-                  <div class="advice-row-title">天氣 & 溫度</div>
-                  <div>預估約 8–15°C，多雲為主，日夜溫差不算大。</div>
-                </div>
-                <div>
-                  <div class="advice-row-title">建議穿著</div>
-                  <div>長袖上衣＋薄外套即可，飛機與機場冷氣較強，鞋子以好走為主。</div>
-                </div>
-              </div>
             </article>
           </div>
 
@@ -687,97 +646,12 @@
               <div class="day-card-header">
                 <div class="day-info">
                   <div class="date">DAY 2 · 12/14 (日)</div>
-                  <div class="location">天神 · 小倉 · 皿倉山</div>
+                  <div class="location">Pain stock · 小倉 · 皿倉山</div>
                 </div>
-                <div class="day-tag">天婦羅 · 城堡 · 夜景</div>
+                <div class="day-tag">麵包 · 城鎮散步 · 夜景</div>
               </div>
 
-              <div class="spots-list">
-                <!-- 天婦羅ひらお -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?tempura,japan" alt="天婦羅" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 午餐</div>
-                    <div class="spot-name">天婦羅 ひらお 大名店</div>
-                    <div class="spot-desc">現炸天婦羅超高 CP 值，可以從天神出發前往，吃完再搭車往小倉。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/天ぷら+ひらお+大名">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 天婦羅照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 小倉城 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?japanese,castle" alt="城堡" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">景點 · 城堡</div>
-                    <div class="spot-name">小倉城</div>
-                    <div class="spot-desc">可以參觀天守、庭園與周邊城下町，是北九州地標景點之一。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/小倉城">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 城堡照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 皿倉山夜景 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?night,city,japan" alt="夜景" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">景點 · 夜景</div>
-                    <div class="spot-name">皿倉山</div>
-                    <div class="spot-desc">搭纜車與接駁車上山，看日落與點燈後夜景，被稱為「新日本三大夜景」之一。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/皿倉山+展望台">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 夜景照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 鰻魚 四代目菊川 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?unagi,japan" alt="鰻魚飯" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 晚餐</div>
-                    <div class="spot-name">うなぎ四代目菊川 中洲春吉店</div>
-                    <div class="spot-desc">份量澎湃的鰻魚飯，搭配福岡限定明太子，作為滿滿一日的收尾。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/四代目菊川+中洲春吉">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 鰻魚飯照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+              <div class="weather-strip" data-weather-day="d2"></div>
               <div class="advice-card">
                 <div>
                   <div class="advice-row-title">天氣 & 溫度</div>
@@ -788,849 +662,10 @@
                   <div>好走的球鞋＋防風外套，山上看夜景時可加圍巾或毛帽。</div>
                 </div>
               </div>
-            </article>
-          </div>
-
-          <!-- Day 3 -->
-          <div class="day-panel" data-day="d3">
-            <article class="day-card">
-              <div class="day-card-header">
-                <div class="day-info">
-                  <div class="date">DAY 3 · 12/15 (一)</div>
-                  <div class="location">博多 · 櫛田神社 · 天神 · 藥院</div>
-                </div>
-                <div class="day-tag">壽喜燒 · 神社 · 逛街</div>
-              </div>
 
               <div class="spots-list">
-                <!-- 壽喜燒 -->
+                <!-- Pain stock 早餐 -->
                 <div class="spot-card">
                   <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?sukiyaki,japan" alt="壽喜燒" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 午餐</div>
-                    <div class="spot-name">西新初喜 くうてん博多店</div>
-                    <div class="spot-desc">博多車站上層的壽喜燒名店，適合逛街日前暖暖吃一鍋。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/西新初喜+くうてん">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 壽喜燒照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 櫛田神社 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?shrine,japan" alt="櫛田神社" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">景點 · 神社</div>
-                    <div class="spot-name">櫛田神社</div>
-                    <div class="spot-desc">博多祇園山笠的主舞台，可以拍神社、山笠與境內小景。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/櫛田神社">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 神社照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 博多甜點 & 逛街 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?japanese,dessert" alt="甜點" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 甜點</div>
-                    <div class="spot-name">鈴懸 · 博多小吃巡禮</div>
-                    <div class="spot-desc">鈴懸銅鑼燒、草莓大福，搭配車站內各種小吃，是甜點控的天堂。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/鈴懸+博多">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 甜點 / 戰利品</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 天神 & 藥院逛街 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?shopping,street,japan" alt="逛街" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">購物 · 區域</div>
-                    <div class="spot-name">天神・藥院逛街</div>
-                    <div class="spot-desc">天神百貨、Parco、Solaria、藥院選物店等，可慢慢挖寶服飾與生活雜貨。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/天神+福岡">
-                        <span class="icon">📍</span><span>區域地圖</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 逛街照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="advice-card">
-                <div>
-                  <div class="advice-row-title">天氣 & 溫度</div>
-                  <div>預估約 6–14°C，白天逛街走路會有點熱，室內暖氣也偏強。</div>
-                </div>
-                <div>
-                  <div class="advice-row-title">建議穿著</div>
-                  <div>洋蔥式穿搭：薄毛衣＋輕外套，下半身以褲裝或長裙配球鞋最實用。</div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Day 4 -->
-          <div class="day-panel" data-day="d4">
-            <article class="day-card">
-              <div class="day-card-header">
-                <div class="day-info">
-                  <div class="date">DAY 4 · 12/16 (二)</div>
-                  <div class="location">太宰府天滿宮 · 竈門神社</div>
-                </div>
-                <div class="day-tag">神社 · 梅枝餅 · 燒肉</div>
-              </div>
-
-              <div class="spots-list">
-                <!-- 早餐 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?japanese,breakfast" alt="早餐" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 早餐</div>
-                    <div class="spot-name">炉端ノいとおかし</div>
-                    <div class="spot-desc">豐盛日式早餐，先補充體力再出發一整天的神社行程。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/炉端ノいとおかし">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 早餐照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 太宰府天滿宮 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?dazaifu,shrine" alt="太宰府天滿宮" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">景點 · 神社</div>
-                    <div class="spot-name">太宰府天滿宮</div>
-                    <div class="spot-desc">沿著參道前進，邊吃梅枝餅、柚子蜜、和牛明太子飯，一路逛到本殿。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/太宰府天満宮">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 參道 / 梅枝餅</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 竈門神社 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?kamado,shrine" alt="竈門神社" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">景點 · 神社</div>
-                    <div class="spot-name">寶滿宮 竈門神社</div>
-                    <div class="spot-desc">戀愛與良緣著名神社，山腰上的鳥居與石階都很適合拍照留下紀念。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/宝満宮+竈門神社">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 御守 / 階梯照</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 燒肉晚餐 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?yakiniku,japan" alt="燒肉" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 晚餐</div>
-                    <div class="spot-name">燒肉 AGITO / 肉いち</div>
-                    <div class="spot-desc">回到福岡市區後的燒肉晚餐，一邊吃一邊回味滿滿的神社行程。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/福岡+焼肉+AGITO">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 燒肉照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="advice-card">
-                <div>
-                  <div class="advice-row-title">天氣 & 溫度</div>
-                  <div>預估約 6–13°C，山區比市區稍涼，風也比較大。</div>
-                </div>
-                <div>
-                  <div class="advice-row-title">建議穿著</div>
-                  <div>輕羽絨或較厚外套＋好走鞋，神社階梯多，建議避免太厚重的外套包得不舒服。</div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Day 5 -->
-          <div class="day-panel" data-day="d5">
-            <article class="day-card">
-              <div class="day-card-header">
-                <div class="day-info">
-                  <div class="date">DAY 5 · 12/17 (三)</div>
-                  <div class="location">由布院 · 花卉村 · 金鱗湖 · 溫泉</div>
-                </div>
-                <div class="day-tag">溫泉小鎮 · 散步 · 小吃</div>
-              </div>
-
-              <div class="spots-list">
-                <!-- 由布院之森 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?japan,train" alt="由布院之森" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">交通 · 列車</div>
-                    <div class="spot-name">由布院之森</div>
-                    <div class="spot-desc">從博多前往由布院的觀光列車，木質車廂與車窗風景都很值得紀錄。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/博多駅">
-                        <span class="icon">📍</span><span>博多出發</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 列車 / 車票照</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 釜飯 心 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?kamameshi,japan" alt="釜飯" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 午餐</div>
-                    <div class="spot-name">由布院釜飯「心」</div>
-                    <div class="spot-desc">牛肉或雞肉釜飯，抵達小鎮後的第一餐，吃完就能開始慢慢散步。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/由布院+釜飯+心">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 釜飯照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Snoopy 茶屋 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?snoopy,cafe" alt="Snoopy 茶屋" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">咖啡 · 甜點</div>
-                    <div class="spot-name">Snoopy 茶屋 由布院</div>
-                    <div class="spot-desc">Snoopy 主題甜點與飲品，店內裝潢也很可愛，是拍照重點之一。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/Snoopy茶屋+由布院">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 Snoopy 甜點</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 金鱗湖 & 小鎮散步 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?lake,morning,japan" alt="金鱗湖" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">景點 · 湖景</div>
-                    <div class="spot-name">金鱗湖 & 小鎮散步</div>
-                    <div class="spot-desc">沿路可以吃炸雞、布丁、生乳捲等小吃，傍晚前後的湖景最美。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/金鱗湖">
-                        <span class="icon">📍</span><span>金鱗湖地圖</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 湖景 / 小吃照</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 溫泉 & CARNE -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?onsen,japan" alt="溫泉" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">溫泉 · 晚餐</div>
-                    <div class="spot-name">溫泉旅館 & CARNE 雞串燒</div>
-                    <div class="spot-desc">晚上回旅館泡溫泉放鬆，再到 CARNE 吃雞串燒，完整體驗溫泉小鎮的一天。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/由布院+CARNE">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 溫泉 / 串燒照</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="advice-card">
-                <div>
-                  <div class="advice-row-title">天氣 & 溫度</div>
-                  <div>山區預估約 2–10°C，早晚溫差大，遇到好天氣可能會有薄霧。</div>
-                </div>
-                <div>
-                  <div class="advice-row-title">建議穿著</div>
-                  <div>厚外套或羽絨＋圍巾、毛帽，鞋子以防滑、保暖為主，方便在溫泉前後穿脫。</div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Day 6 -->
-          <div class="day-panel" data-day="d6">
-            <article class="day-card">
-              <div class="day-card-header">
-                <div class="day-info">
-                  <div class="date">DAY 6 · 12/18 (四)</div>
-                  <div class="location">金鱗湖晨霧 · 博多伴手禮 · 機場</div>
-                </div>
-                <div class="day-tag">晨景 · 伴手禮 · 回家</div>
-              </div>
-
-              <div class="spots-list">
-                <!-- 晨霧 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?mist,lake,japan" alt="晨霧" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">景點 · 清晨</div>
-                    <div class="spot-name">金鱗湖晨霧</div>
-                    <div class="spot-desc">清晨 6 點左右再訪金鱗湖，如果運氣好可以拍到湖面起霧的夢幻景色。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/金鱗湖">
-                        <span class="icon">📍</span><span>湖邊路線</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 晨霧照</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 兼虎拉麵 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?ramen,japan" alt="拉麵" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 拉麵</div>
-                    <div class="spot-name">麵屋 兼虎 博多DEITOS店</div>
-                    <div class="spot-desc">回到博多後的最後一碗拉麵，辣味沾麵很受歡迎，適合當作收尾的一餐。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/麵屋兼虎+博多">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 拉麵照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 伴手禮 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?souvenir,japan" alt="伴手禮" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">購物 · 伴手禮</div>
-                    <div class="spot-name">博多銘品蔵 & 島本 · Butter & Bee 等</div>
-                    <div class="spot-desc">在博多站把明太子、點心與禮盒一次補齊，適合拍一張戰利品大合照。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/博多銘品蔵">
-                        <span class="icon">📍</span><span>伴手禮區</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 戰利品照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 機場 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="https://source.unsplash.com/featured/?airport,japan" alt="機場" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">交通 · 機場</div>
-                    <div class="spot-name">福岡機場</div>
-                    <div class="spot-desc">整理好行李與戰利品，逛逛免稅店，正式跟福岡說再見。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/福岡空港">
-                        <span class="icon">📍</span><span>機場地圖</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 機場 / 機窗照</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="advice-card">
-                <div>
-                  <div class="advice-row-title">天氣 & 溫度</div>
-                  <div>預估約 6–13°C，回台前可以再看一次當天預報調整穿搭。</div>
-                </div>
-                <div>
-                  <div class="advice-row-title">建議穿著</div>
-                  <div>舒適的機場穿搭，外套不要托運，留在身邊以防台灣與福岡溫差。</div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 必買清單 Tab -->
-      <section id="tab-checklist" class="tab-page">
-        <div class="section-title">必買清單</div>
-
-        <div class="check-switcher">
-          <button class="check-chip active" data-check="food">美食 / 伴手禮</button>
-          <button class="check-chip" data-check="drug">藥妝</button>
-        </div>
-
-        <!-- 美食 / 伴手禮 -->
-        <div class="check-panel active" data-check="food">
-          <article class="checklist-card">
-            <div class="checklist-header">福岡美食 & 伴手禮</div>
-            <div class="checklist-sub">把想買的明太子、甜點、麵包、拉麵包都先列好，現場勾一勾就不會忘。</div>
-            <div class="checklist-items" id="food-list"></div>
-            <button class="btn-add-item" data-target="food-list">
-              <span>＋</span><span>新增美食 / 伴手禮</span>
-            </button>
-          </article>
-        </div>
-
-        <!-- 藥妝 -->
-        <div class="check-panel" data-check="drug">
-          <article class="checklist-card">
-            <div class="checklist-header">藥妝必買清單</div>
-            <div class="checklist-sub">面膜、藥品、保健品、洗護髮…先寫好再逛，買完勾起來確認。</div>
-            <div class="checklist-items" id="drug-list"></div>
-            <button class="btn-add-item" data-target="drug-list">
-              <span>＋</span><span>新增藥妝項目</span>
-            </button>
-          </article>
-        </div>
-      </section>
-
-      <!-- 記帳 Tab -->
-      <section id="tab-expense" class="tab-page">
-        <div class="section-title">記帳</div>
-
-        <!-- 匯率設定 -->
-        <article class="expense-card">
-          <h3>每日匯率設定（¥ → NT$）</h3>
-          <div class="rate-grid">
-            <div class="rate-item">
-              <label for="rate-2025-12-13">12/13</label>
-              <input id="rate-2025-12-13" type="number" step="0.0001" value="0.22" />
-            </div>
-            <div class="rate-item">
-              <label for="rate-2025-12-14">12/14</label>
-              <input id="rate-2025-12-14" type="number" step="0.0001" value="0.22" />
-            </div>
-            <div class="rate-item">
-              <label for="rate-2025-12-15">12/15</label>
-              <input id="rate-2025-12-15" type="number" step="0.0001" value="0.22" />
-            </div>
-            <div class="rate-item">
-              <label for="rate-2025-12-16">12/16</label>
-              <input id="rate-2025-12-16" type="number" step="0.0001" value="0.22" />
-            </div>
-            <div class="rate-item">
-              <label for="rate-2025-12-17">12/17</label>
-              <input id="rate-2025-12-17" type="number" step="0.0001" value="0.22" />
-            </div>
-            <div class="rate-item">
-              <label for="rate-2025-12-18">12/18</label>
-              <input id="rate-2025-12-18" type="number" step="0.0001" value="0.22" />
-            </div>
-          </div>
-          <p style="margin-top:6px;font-size:11px;color:var(--color-text-sub);">
-            ※ 匯率需自行填寫（可依每天查到的實際匯率更新），下方所有記帳將依照日期套用對應匯率。
-          </p>
-        </article>
-
-        <!-- 記帳列表 -->
-        <article class="expense-card">
-          <h3>旅程支出</h3>
-          <div class="expense-list" id="expense-list"></div>
-          <button class="btn-add-item" id="btn-add-expense">
-            <span>＋</span><span>新增一筆支出</span>
-          </button>
-          <div class="expense-summary">
-            <span>合計日幣：<strong id="total-jpy">¥0</strong></span>
-            <span>合計台幣：約 <strong id="total-twd">NT$0</strong></span>
-          </div>
-        </article>
-      </section>
-
-      <!-- 天氣 Tab（簡短提醒） -->
-      <section id="tab-weather" class="tab-page">
-        <div class="section-title">天氣</div>
-        <p class="weather-note">
-          主要的每日溫度與穿搭建議已經寫在各日行程卡片裡。這一頁可以當成出發前的總整理：
-        </p>
-        <article class="weather-tip-card">
-          <ul style="margin:0;padding-left:18px;">
-            <li>12 月的福岡市區大約 6–15°C，偶有小雨，建議帶一把折疊傘。</li>
-            <li>由布院早晚最冷，約 2–10°C，建議準備一件厚外套或羽絨衣。</li>
-            <li>室內暖氣偏強，記得用洋蔥式穿搭，方便進出室內調整衣物。</li>
-          </ul>
-        </article>
-      </section>
-    </main>
-
-    <!-- 底部 Tabs -->
-    <nav class="bottom-nav">
-      <div class="bottom-nav-inner">
-        <button class="nav-btn nav-active" data-tab="itinerary">
-          <span class="icon">🗓</span>
-          <span>行程</span>
-        </button>
-        <button class="nav-btn" data-tab="checklist">
-          <span class="icon">🧾</span>
-          <span>必買清單</span>
-        </button>
-        <button class="nav-btn" data-tab="expense">
-          <span class="icon">💰</span>
-          <span>記帳</span>
-        </button>
-        <button class="nav-btn" data-tab="weather">
-          <span class="icon">☁️</span>
-          <span>天氣</span>
-        </button>
-      </div>
-    </nav>
-  </div>
-
-  <script>
-    /* Tabs 切換 */
-    const navButtons = document.querySelectorAll(".nav-btn");
-    const tabPages = {
-      itinerary: document.getElementById("tab-itinerary"),
-      checklist: document.getElementById("tab-checklist"),
-      expense: document.getElementById("tab-expense"),
-      weather: document.getElementById("tab-weather"),
-    };
-
-    navButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const tab = btn.dataset.tab;
-        navButtons.forEach(b => b.classList.remove("nav-active"));
-        btn.classList.add("nav-active");
-        Object.values(tabPages).forEach(p => p.classList.remove("active"));
-        tabPages[tab].classList.add("active");
-      });
-    });
-
-    /* 行程每日切換 */
-    const dayChips = document.querySelectorAll(".day-chip");
-    const dayPanels = document.querySelectorAll(".day-panel");
-
-    dayChips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        const targetDay = chip.dataset.day;
-        dayChips.forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        dayPanels.forEach(panel => {
-          panel.classList.toggle("active", panel.dataset.day === targetDay);
-        });
-      });
-    });
-
-    /* 景點照片上傳：覆蓋原本示意照片 */
-    function bindSpotUploads() {
-      const inputs = document.querySelectorAll(".js-spot-upload");
-      inputs.forEach(input => {
-        if (input._bound) return;
-        input._bound = true;
-        input.addEventListener("change", () => {
-          const file = input.files && input.files[0];
-          if (!file) return;
-          const card = input.closest(".spot-card");
-          if (!card) return;
-          const img = card.querySelector(".spot-photo");
-          const reader = new FileReader();
-          reader.onload = e => {
-            img.src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        });
-      });
-    }
-
-    /* 必買清單：卡片產生 */
-    function createChecklistItem(placeholderText) {
-      const wrapper = document.createElement("div");
-      wrapper.className = "check-card";
-      wrapper.innerHTML = `
-        <div class="check-left">
-          <input type="checkbox" />
-        </div>
-        <div class="check-main">
-          <input type="text" placeholder="${placeholderText}" />
-          <div class="check-label">勾選代表已購入 / 打包完成</div>
-          <label class="input-file">
-            <span>🖼 上傳照片</span>
-            <input type="file" accept="image/*" class="js-check-upload" />
-          </label>
-        </div>
-        <div class="check-photo-box">
-          <img class="check-photo" alt="戰利品照片" />
-          <div class="check-photo-placeholder">📷 戰利品 / 包裝照</div>
-        </div>
-      `;
-      return wrapper;
-    }
-
-    function initChecklist(listId, placeholders) {
-      const el = document.getElementById(listId);
-      if (!el) return;
-      placeholders.forEach(text => {
-        el.appendChild(createChecklistItem(text));
-      });
-    }
-
-    function bindChecklistUploads() {
-      const inputs = document.querySelectorAll(".js-check-upload");
-      inputs.forEach(input => {
-        if (input._bound) return;
-        input._bound = true;
-        input.addEventListener("change", () => {
-          const file = input.files && input.files[0];
-          if (!file) return;
-          const card = input.closest(".check-card");
-          const img = card.querySelector(".check-photo");
-          const placeholder = card.querySelector(".check-photo-placeholder");
-          const reader = new FileReader();
-          reader.onload = e => {
-            img.src = e.target.result;
-            img.style.display = "block";
-            if (placeholder) placeholder.style.display = "none";
-          };
-          reader.readAsDataURL(file);
-        });
-      });
-    }
-
-    initChecklist("food-list", ["明太子土產", "甜點 / 生乳捲", "拉麵包 / 泡麵", "麵包 / 烘焙"]);
-    initChecklist("drug-list", ["感冒藥 / 常備藥", "面膜 / 護膚品", "保健食品 / 維他命", "洗髮護髮 / 身體用品"]);
-    bindChecklistUploads();
-
-    // 必買清單 Tab 切換
-    const checkChips = document.querySelectorAll(".check-chip");
-    const checkPanels = document.querySelectorAll(".check-panel");
-    checkChips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        const target = chip.dataset.check;
-        checkChips.forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        checkPanels.forEach(p => {
-          p.classList.toggle("active", p.dataset.check === target);
-        });
-      });
-    });
-
-    // checklist 新增按鈕
-    document.querySelectorAll(".btn-add-item").forEach(btn => {
-      const targetId = btn.dataset.target;
-      if (!targetId) return;
-      btn.addEventListener("click", () => {
-        const listEl = document.getElementById(targetId);
-        if (!listEl) return;
-        const placeholder = targetId === "food-list" ? "輸入美食 / 伴手禮名稱" : "輸入藥妝名稱";
-        listEl.appendChild(createChecklistItem(placeholder));
-        bindChecklistUploads();
-      });
-    });
-
-    /* 記帳：LightSplit 風格簡易版 */
-
-    const rateInputs = {
-      "2025-12-13": document.getElementById("rate-2025-12-13"),
-      "2025-12-14": document.getElementById("rate-2025-12-14"),
-      "2025-12-15": document.getElementById("rate-2025-12-15"),
-      "2025-12-16": document.getElementById("rate-2025-12-16"),
-      "2025-12-17": document.getElementById("rate-2025-12-17"),
-      "2025-12-18": document.getElementById("rate-2025-12-18"),
-    };
-
-    function getRateForDate(dateStr) {
-      const input = rateInputs[dateStr];
-      if (!input) return 0;
-      const v = parseFloat(input.value);
-      return isNaN(v) ? 0 : v;
-    }
-
-    const expenseListEl = document.getElementById("expense-list");
-    const btnAddExpense = document.getElementById("btn-add-expense");
-    const totalJpyEl = document.getElementById("total-jpy");
-    const totalTwdEl = document.getElementById("total-twd");
-
-    function createExpenseRow() {
-      const row = document.createElement("div");
-      row.className = "expense-row";
-      row.innerHTML = `
-        <select class="exp-date">
-          <option value="2025-12-13">12/13</option>
-          <option value="2025-12-14">12/14</option>
-          <option value="2025-12-15">12/15</option>
-          <option value="2025-12-16">12/16</option>
-          <option value="2025-12-17">12/17</option>
-          <option value="2025-12-18">12/18</option>
-        </select>
-        <select class="exp-cat">
-          <option value="食物">食物</option>
-          <option value="交通">交通</option>
-          <option value="住宿">住宿</option>
-          <option value="購物">購物</option>
-          <option value="其他">其他</option>
-        </select>
-        <input type="text" class="exp-note" placeholder="說明（例如：前田屋、藥妝…）" />
-        <input type="number" class="exp-jpy" min="0" step="1" placeholder="¥" />
-        <div class="exp-twd">NT$0</div>
-        <button class="btn-del" title="刪除">×</button>
-      `;
-      return row;
-    }
-
-    function recalcRow(row) {
-      const dateSel = row.querySelector(".exp-date");
-      const jpyInput = row.querySelector(".exp-jpy");
-      const twdEl = row.querySelector(".exp-twd");
-
-      const date = dateSel.value;
-      const rate = getRateForDate(date);
-      const jpy = parseFloat(jpyInput.value || "0");
-      const twd = Math.round(jpy * rate);
-
-      twdEl.textContent = `NT$${twd.toLocaleString("zh-TW")}`;
-      updateTotals();
-    }
-
-    function updateTotals() {
-      const rows = expenseListEl.querySelectorAll(".expense-row");
-      let totalJpy = 0;
-      let totalTwd = 0;
-      rows.forEach(row => {
-        const dateSel = row.querySelector(".exp-date");
-        const jpyInput = row.querySelector(".exp-jpy");
-        const twdEl = row.querySelector(".exp-twd");
-
-        const jpy = parseFloat(jpyInput.value || "0");
-        const date = dateSel.value;
-        const rate = getRateForDate(date);
-        const twd = Math.round(jpy * rate);
-
-        if (!isNaN(jpy)) totalJpy += jpy;
-        if (!isNaN(twd)) totalTwd += twd;
-      });
-      totalJpyEl.textContent = `¥${totalJpy.toLocaleString("zh-TW")}`;
-      totalTwdEl.textContent = `NT$${totalTwd.toLocaleString("zh-TW")}`;
-    }
-
-    btnAddExpense.addEventListener("click", () => {
-      const row = createExpenseRow();
-      expenseListEl.appendChild(row);
-
-      const jpyInput = row.querySelector(".exp-jpy");
-      const dateSel = row.querySelector(".exp-date");
-      const delBtn = row.querySelector(".btn-del");
-
-      jpyInput.addEventListener("input", () => recalcRow(row));
-      dateSel.addEventListener("change", () => recalcRow(row));
-      delBtn.addEventListener("click", () => {
-        row.remove();
-        updateTotals();
-      });
-    });
-
-    // 匯率輸入變動時重算全部
-    Object.values(rateInputs).forEach(input => {
-      input.addEventListener("input", updateTotals);
-    });
-
-    // 初始化：先給一筆空行
-    btnAddExpense.click();
-
-    // 最後綁定上傳
-    bindSpotUploads();
-  </script>
-</body>
-</html>
+                    <img class="spot-photo" src="pain-stock.png" alt="Pain stock 麵包" />
+                  </
