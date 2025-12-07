@@ -44,31 +44,20 @@
     overflow: hidden;
     box-shadow: var(--shadow-soft);
     margin-bottom: 16px;
-    background: #000;
-    min-height: 190px;
+    background: #f6f6f6;
+    min-height: 280px; /* 封面拉高一點 */
   }
 
-  /* 封面用你的插畫 images/cover.png */
+  /* 封面用你的插畫 images/cover.png，整張圖盡量露出 */
   header.trip-header::before {
     content: "";
     position: absolute;
     inset: 0;
     background-image: url("images/cover.png");
-    background-size: cover;
+    background-size: contain;        /* 顯示整張圖 */
     background-position: center;
-    opacity: 1;
-  }
-
-  /* 上面一層藍色漸層，讓字清楚 */
-  header.trip-header::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      150deg,
-      rgba(16, 52, 120, 0.70),
-      rgba(16, 52, 120, 0.30)
-    );
+    background-repeat: no-repeat;
+    background-color: #f6f6f6;       /* 圖外補淡灰底 */
   }
 
   header.trip-header > * {
@@ -89,12 +78,14 @@
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 4px;
+    text-shadow: 0 0 4px rgba(0,0,0,0.25);
   }
 
   .trip-subtitle {
     font-size: 0.9rem;
     color: #f3f6ff;
     margin-bottom: 10px;
+    text-shadow: 0 0 4px rgba(0,0,0,0.25);
   }
 
   .trip-meta {
@@ -107,10 +98,11 @@
   .chip {
     padding: 3px 9px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(0, 0, 0, 0.35);
     color: #fdfdff;
     font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
   }
 
   .tabs-wrapper {
@@ -214,7 +206,6 @@
     line-height: 1.5;
   }
 
-  /* 天氣卡片 */
   .weather-card {
     margin: 6px 0 8px;
     padding: 8px 10px;
@@ -392,7 +383,6 @@
     color: var(--muted);
   }
 
-  /* 清單區塊 */
   .extra-section {
     margin-top: 18px;
   }
@@ -680,7 +670,7 @@
 
         <div class="section-block section-spot">
           <div class="section-title">
-            <span>逛街：博多 AMU PLAZA・天神・藥院</span>
+            <span>逛街：AMU PLAZA・天神・藥院</span>
           </div>
 
           <div class="timeline-item">
@@ -689,7 +679,7 @@
             <div class="details">
               <div class="place">AMU PLAZA 博多</div>
               <div class="detail-note">
-                freak’s store、Ungrid、Urban Research、AUX PARADIS 等品牌，集中在車站大樓內方便逛街。
+                freak’s store、Ungrid、Urban Research、AUX PARADIS 等品牌。
               </div>
             </div>
           </div>
@@ -701,8 +691,7 @@
               <div class="place">天神車站・藥院一帶</div>
               <div class="detail-note">
                 福岡 mina：GU、LOFT、UNIQLO、北村相機店。<br />
-                Solaria 廣場：Moussy、EMODA、Kastane、Beauty &amp; Youth、KBF
-                等。<br />
+                Solaria 廣場：Moussy、EMODA、Kastane、Beauty &amp; Youth、KBF 等。<br />
                 Parco：BEAMS 選物店。<br />
                 地下街：Sense of place、靴下屋 等。
               </div>
@@ -713,9 +702,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">—</div>
             <div class="details">
-              <div class="place">藥院一帶小店</div>
+              <div class="place">藥院小店</div>
               <div class="detail-note">
-                例如 none too soon（AFTR 香薰）、BBB porters 等店鋪。
+                如 none too soon（AFTR 香薰）、BBB porters 等店鋪。
               </div>
             </div>
           </div>
@@ -1317,7 +1306,7 @@
       </div>
     </section>
 
-    <!-- 額外清單區：想買清單 + 遺憾清單 -->
+    <!-- 額外清單區 -->
     <section class="extra-section">
       <div class="extra-card">
         <div class="extra-title">想買清單</div>
@@ -1381,7 +1370,7 @@
       });
     });
 
-    // Google Maps 連結：自動幫每個 place 生「地圖」按鈕
+    // 自動加 Google Maps 連結
     document.querySelectorAll(".timeline-item").forEach((item) => {
       const placeEl = item.querySelector(".place");
       const details = item.querySelector(".details");
@@ -1403,7 +1392,7 @@
       details.appendChild(tools);
     });
 
-    // 天氣：Open-Meteo API（無需金鑰）
+    // 天氣：Open-Meteo API
     const locationConfig = {
       fukuoka: { lat: 33.59, lon: 130.40 },
       dazaifu: { lat: 33.52, lon: 130.53 },
