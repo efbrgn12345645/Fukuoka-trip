@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>12/13-12/18 福岡旅遊</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+  :root {
+    --blue: #2a6fe8;
+    --blue-dark: #174a9b;
+    --blue-soft: #f1f6ff;
+    --bg: #e6f1ff;
+    --card-bg: #ffffff;
+    --border: #dde3f0;
+    --text: #1f2430;
+    --muted: #6f7685;
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --shadow-soft: 0 10px 30px rgba(9, 30, 66, 0.12);
+    --shadow-light: 0 4px 12px rgba(15, 35, 80, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      "Noto Sans TC", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 12px 12px 40px;
+  }
+
+  header.trip-header {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #cfe2ff, #eaf3ff);
+    min-height: 170px;
+  }
+
+  header.trip-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,#cfe2ff,#eaf3ff);
+    opacity: 0.9;
+  }
+
+  header.trip-header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      150deg,
+      rgba(16, 52, 120, 0.55),
+      rgba(16, 52, 120, 0.2)
+    );
+  }
+
+  header.trip-header > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .trip-header-inner {
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .trip-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .trip-subtitle {
+    font-size: 0.9rem;
+    color: #f3f6ff;
+    margin-bottom: 10px;
+  }
+
+  .trip-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.8rem;
+  }
+
+  .chip {
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fdfdff;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .tabs-wrapper {
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .tabs::-webkit-scrollbar {
+    height: 4px;
+  }
+  .tabs::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 999px;
+  }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    min-width: 72px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: #fdfdff;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    box-shadow: 0 2px 5px rgba(9, 30, 66, 0.06);
+    transition: all 0.15s ease;
+  }
+
+  .tab-btn span.day {
+    font-weight: 700;
+    font-size: 0.78rem;
+  }
+  .tab-btn span.date {
+    font-size: 0.72rem;
+  }
+
+  .tab-btn.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(42, 111, 232, 0.4);
+  }
+
+  .day-content {
+    display: none;
+    margin-top: 6px;
+  }
+
+  .day-content.active {
+    display: block;
+  }
+
+  .day-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 14px 14px 16px;
+    box-shadow: var(--shadow-light);
+  }
+
+  .day-header {
+    margin-bottom: 8px;
+  }
+
+  .day-label {
+    font-weight: 700;
+    color: var(--blue-dark);
+    font-size: 0.98rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .day-date {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .day-route {
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: var(--radius-md);
+    background: var(--blue-soft);
+    border: 1px dashed rgba(23, 74, 155, 0.25);
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .section-block {
+    margin-top: 10px;
+    padding: 9px 10px 8px;
+    background: #fdfdff;
+    border-radius: 16px;
+    border: 1px solid #e2e7f3;
+  }
+
+  .section-title {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  .section-note {
+    font-size: 0.74rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 7px 0;
+    border-top: 1px solid #f0f2f8;
+  }
+
+  .timeline-item:first-of-type {
+    border-top: none;
+  }
+
+  .checkbox {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--blue);
+  }
+
+  .time {
+    min-width: 64px;
+    font-size: 0.76rem;
+    color: var(--muted);
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .details {
+    flex: 1;
+    font-size: 0.86rem;
+  }
+
+  .place {
+    font-weight: 600;
+    margin-bottom: 1px;
+  }
+
+  .detail-note {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .photo-section {
+    margin-top: 10px;
+    padding: 9px 10px 10px;
+    background: #fdfdff;
+    border-radius: 16px;
+    border: 1px dashed #cfd6eb;
+  }
+
+  .photo-title {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 4px;
+  }
+
+  .photo-note {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+    gap: 6px;
+  }
+
+  .photo-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .small {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 768px) {
+    .main {
+      max-width: 540px;
+      padding: 18px 18px 48px;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <header class="trip-header">
+      <div class="trip-header-inner">
+        <div>
+          <div class="trip-title">2025 福岡之旅</div>
+          <div class="trip-subtitle">12/13（六）– 12/18（四）｜博多・天神・小倉・太宰府・由布院</div>
+        </div>
+        <div class="trip-meta">
+          <span class="chip">十字生活博多柳橋飯店</span>
+          <span class="chip">由布院 Lamp no Yado</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="tabs-wrapper">
+      <nav class="tabs">
+        <button class="tab-btn active" data-day="day1">
+          <span class="day">六</span>
+          <span class="date">12/13</span>
+        </button>
+        <button class="tab-btn" data-day="day2">
+          <span class="day">日</span>
+          <span class="date">12/14</span>
+        </button>
+        <button class="tab-btn" data-day="day3">
+          <span class="day">一</span>
+          <span class="date">12/15</span>
+        </button>
+        <button class="tab-btn" data-day="day4">
+          <span class="day">二</span>
+          <span class="date">12/16</span>
+        </button>
+        <button class="tab-btn" data-day="day5">
+          <span class="day">三</span>
+          <span class="date">12/17</span>
+        </button>
+        <button class="tab-btn" data-day="day6">
+          <span class="day">四</span>
+          <span class="date">12/18</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Day 1 -->
+    <section id="day1" class="day-content active">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-label">
+            <span>Day 1｜抵達福岡・天神地下街</span>
+          </div>
+          <div class="day-date">12/13（六）</div>
+          <div class="day-route">
+            搭飛機 → 福岡機場 → 搭計程車到飯店 → 天神地下街逛街 →
+            博多もつ鍋前田屋 今泉店晚餐 → BOUL'ANGE 買麵包 → 回飯店
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>交通與入住</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">搭乘班機抵達福岡機場</div>
+              <div class="detail-note">
+                抵達後辦理入境、領行李，建議順便購買交通卡（Suica / 其他 IC 卡）。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">搭計程車前往飯店</div>
+              <div class="detail-note">
+                目的地：十字生活博多柳橋飯店（Cross Life Hakata Yanagibashi）。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>天神地下街 & 晚餐</span>
+            <span class="section-note">搭地鐵至天神站，開始逛街行程</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">下午</div>
+            <div class="details">
+              <div class="place">天神地下街逛街</div>
+              <div class="detail-note">先簡單逛逛，熟悉周邊環境與店家分布。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">17:00–</div>
+            <div class="details">
+              <div class="place">博多もつ鍋 前田屋 今泉店（牛腸鍋）</div>
+              <div class="detail-note">
+                營業時間 17:00–00:00，推薦味噌口味，可視狀況排隊或事先訂位。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">晚間</div>
+            <div class="details">
+              <div class="place">BOUL'ANGE 天神地下街店</div>
+              <div class="detail-note">
+                推薦奶油捲、甜甜圈，可順便買隔天早餐或宵夜麵包。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-title">Day 1 照片</div>
+          <div class="photo-note">
+            之後可以把這裡的圖片路徑改成自己的照片，例如
+            <span class="small">images/day1-1.jpg</span>。
+          </div>
+          <div class="photo-grid">
+            <img src="images/day1-1.jpg" alt="Day 1 - 福岡機場或飯店" />
+            <img src="images/day1-2.jpg" alt="Day 1 - 天神地下街" />
+            <img src="images/day1-3.jpg" alt="Day 1 - 牛腸鍋晚餐" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 2 -->
+    <section id="day2" class="day-content">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-label">
+            <span>Day 2｜博多車站 & 天神・藥院逛街日</span>
+          </div>
+          <div class="day-date">12/14（日）</div>
+          <div class="day-route">
+            飯店 → 博多車站周邊散步・美食 → 櫛田神社 → 天神 & 藥院逛街 →
+            明太子麵包 Full Full / Pain Stock → 爐端 百式 晚餐
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>白天行程：博多周邊</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">11:00–15:00</div>
+            <div class="details">
+              <div class="place">西新初喜 くうてん博多店（壽喜燒）</div>
+              <div class="detail-note">可安排午餐時段享用壽喜燒。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">櫛田神社</div>
+              <div class="detail-note">
+                交通方便的市區神社，可簡單參拜、拍照。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">11:00–19:00</div>
+            <div class="details">
+              <div class="place">鈴懸</div>
+              <div class="detail-note">推薦銅鑼燒、草莓大福。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">09:00–17:00</div>
+            <div class="details">
+              <div class="place">博多車站內小吃</div>
+              <div class="detail-note">
+                如：稻荷麻糬、如水庵草莓大福等，可當點心與伴手禮。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>逛街：博多 AMU PLAZA・天神・藥院</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">下午</div>
+            <div class="details">
+              <div class="place">AMU PLAZA 博多</div>
+              <div class="detail-note">
+                freak’s store、Ungrid、Urban Research、AUX PARADIS 等品牌，集中在車站大樓內方便逛街。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">下午〜傍晚</div>
+            <div class="details">
+              <div class="place">天神車站・藥院一帶</div>
+              <div class="detail-note">
+                福岡 mina：GU、LOFT、UNIQLO、北村相機店。<br />
+                Solaria 廣場：Moussy、EMODA、Kastane、Beauty &amp; Youth、KBF
+                等。<br />
+                Parco：beams 選物店。<br />
+                地下街：Sense of place、靴下屋 等。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">藥院逛街</div>
+              <div class="detail-note">
+                none too soon（AFTR 香薰）與 BBB porters 等店鋪。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>點心 & 晚餐</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:00–20:00</div>
+            <div class="details">
+              <div class="place">明太子麵包 Full Full or Pain Stock</div>
+              <div class="detail-note">
+                超人氣明太子麵包。注意：Pain Stock 週一公休。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">13:00–23:00</div>
+            <div class="details">
+              <div class="place">爐端 百式（居酒屋）</div>
+              <div class="detail-note">作為今日晚餐或宵夜的選擇。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-title">Day 2 照片</div>
+          <div class="photo-note">
+            替換下方圖片路徑為自己的博多・天神逛街照片。
+          </div>
+          <div class="photo-grid">
+            <img src="images/day2-1.jpg" alt="Day 2 - 博多車站" />
+            <img src="images/day2-2.jpg" alt="Day 2 - 天神逛街" />
+            <img src="images/day2-3.jpg" alt="Day 2 - 美食" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 3 -->
+    <section id="day3" class="day-content">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-label">
+            <span>Day 3｜太宰府 & 竈門神社・燒肉晚餐</span>
+          </div>
+          <div class="day-date">12/15（一）</div>
+          <div class="day-route">
+            飯店 → 六本松車站 → 吃鮭魚早餐 → 太宰府天滿宮 →
+            太宰府市寶滿宮竈門神社 → 天神・藥院逛街 → 燒肉晚餐
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>早餐 & 太宰府天滿宮</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">早上</div>
+            <div class="details">
+              <div class="place">炉端ノいとおかし（早餐）</div>
+              <div class="detail-note">
+                位於六本松一帶的早餐店，鮭魚套餐或鰻魚套餐可選。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">白天</div>
+            <div class="details">
+              <div class="place">太宰府天滿宮</div>
+              <div class="detail-note">
+                可考慮購買觀光套票前往。<br />
+                小吃：松屋 梅枝餅、杉養蜂園柚子蜜（柚子口味飲品）、上岡屋
+                和牛明太子飯等。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>太宰府市寶滿宮竈門神社</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">午後</div>
+            <div class="details">
+              <div class="place">寶滿宮 竈門神社</div>
+              <div class="detail-note">
+                以良緣、緣結聞名的神社，可安排上山參拜與散步。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>逛街 & 燒肉晚餐</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">傍晚</div>
+            <div class="details">
+              <div class="place">天神・藥院逛街</div>
+              <div class="detail-note">
+                可與前一日未逛完的百貨、選物店搭配，補齊清單。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">晚餐</div>
+            <div class="details">
+              <div class="place">Yakiniku AGITO HIRAO 或 Nikuichi（肉いち）</div>
+              <div class="detail-note">
+                安排一餐燒肉作為太宰府行程的收尾，建議事先查詢是否需訂位。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-title">Day 3 照片</div>
+          <div class="photo-note">太宰府天滿宮、竈門神社與燒肉晚餐的照片可放這裡。</div>
+          <div class="photo-grid">
+            <img src="images/day3-1.jpg" alt="Day 3 - 太宰府天滿宮" />
+            <img src="images/day3-2.jpg" alt="Day 3 - 竈門神社" />
+            <img src="images/day3-3.jpg" alt="Day 3 - 燒肉晚餐" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 4 -->
+    <section id="day4" class="day-content">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-label">
+            <span>Day 4｜小倉城 & 皿倉山夜景</span>
+          </div>
+          <div class="day-date">12/16（二）</div>
+          <div class="day-route">
+            飯店 → 買附近豆皮壽司 → 博多車站 → 吃天婦羅午餐 →
+            新幹線到小倉 → 小倉城 → 新幹線到八幡 → 搭接駁車上皿倉山看夜景 →
+            回博多 → 吃鰻魚飯晚餐 → 回飯店
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>出發前 & 午餐</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">早上</div>
+            <div class="details">
+              <div class="place">海木 豆皮壽司（飯店附近名店）</div>
+              <div class="detail-note">可買來當今日路上點心或午餐搭配。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:30–20:00</div>
+            <div class="details">
+              <div class="place">天婦羅ひらお 大名店</div>
+              <div class="detail-note">
+                炸物新鮮、CP 值高的人氣天婦羅店，可於近午餐時段前往。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>小倉城 & 皿倉山</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">搭乘新幹線至小倉（約 15 分）</div>
+              <div class="detail-note">
+                抵達後步行前往小倉城周邊散步與參觀。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">09:00–20:00</div>
+            <div class="details">
+              <div class="place">小倉城</div>
+              <div class="detail-note">可進入城內與庭院參觀、拍照。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">搭新幹線至八幡 → 免費接駁車上山</div>
+              <div class="detail-note">預留交通時間前往皿倉山。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:00–20:00</div>
+            <div class="details">
+              <div class="place">皿倉山展望台</div>
+              <div class="detail-note">
+                可眺望日落與福岡、北九州一帶夜景，是今日重點行程。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>晚餐：鰻魚飯</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">17:00–22:00</div>
+            <div class="details">
+              <div class="place">うなぎ四代目菊川 中洲春吉店</div>
+              <div class="detail-note">
+                福岡限定有明太子版本的鰻魚飯，可作為回到博多後的晚餐行程。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-title">Day 4 照片</div>
+          <div class="photo-note">小倉城與皿倉山夜景照片可放在這裡。</div>
+          <div class="photo-grid">
+            <img src="images/day4-1.jpg" alt="Day 4 - 小倉城" />
+            <img src="images/day4-2.jpg" alt="Day 4 - 皿倉山夜景" />
+            <img src="images/day4-3.jpg" alt="Day 4 - 鰻魚晚餐" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 5 -->
+    <section id="day5" class="day-content">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-label">
+            <span>Day 5｜由布院一日：花卉村・金鱗湖・溫泉</span>
+          </div>
+          <div class="day-date">12/17（三）</div>
+          <div class="day-route">
+            博多車站 → 搭車前往由布院（推薦由布院之森 CD 座位） →
+            釜飯午餐 → Snoopy 茶屋 → 湯布院花卉村 → 金鱗湖 → 飯店泡溫泉 →
+            雞串燒晚餐
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>前往由布院 & 午餐</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">早上</div>
+            <div class="details">
+              <div class="place">博多車站 → 由布院</div>
+              <div class="detail-note">
+                建議搭乘「由布院之森」列車，若能選 CD 座位視野較佳。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">11:00–22:00</div>
+            <div class="details">
+              <div class="place">由布院釜飯「心」</div>
+              <div class="detail-note">招牌牛肉、雞肉釜飯，是今日午餐首選。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>散步：Snoopy 茶屋 & 湯布院花卉村</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">09:30–17:30</div>
+            <div class="details">
+              <div class="place">Snoopy 茶屋</div>
+              <div class="detail-note">以史努比主題為特色的茶屋，可喝飲品拍照留念。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">湯布院花卉村</div>
+              <div class="detail-note">
+                結合貓頭鷹之森與宮崎駿童話小鎮風格的小村落，適合散步拍照。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>金鱗湖 & 溫泉・晚餐</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">傍晚</div>
+            <div class="details">
+              <div class="place">金鱗湖</div>
+              <div class="detail-note">
+                期望能看到楓葉。可至「茶房 天井棧敷」咖啡廳，邊喝飲品邊看風景。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">17:30–22:00</div>
+            <div class="details">
+              <div class="place">飯店泡溫泉（Yufuin Lamp no Yado）</div>
+              <div class="detail-note">回飯店享受溫泉設施，好好放鬆。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">晚餐</div>
+            <div class="details">
+              <div class="place">CARNE （雞串燒）</div>
+              <div class="detail-note">作為今日由布院行程的收尾晚餐。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>由布院小吃清單</span>
+            <span class="section-note">視情況彈性安排</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:00–17:30</div>
+            <div class="details">
+              <div class="place">Mana Mana 可麗露</div>
+              <div class="detail-note">由布院人氣甜點店。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:30–16:45</div>
+            <div class="details">
+              <div class="place">中津炸雞 吉吾</div>
+              <div class="detail-note">
+                推薦口味：柚子胡椒炸雞（胸肉）。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:00–17:00</div>
+            <div class="details">
+              <div class="place">鞠智銅鑼燒 & 金賞可樂餅</div>
+              <div class="detail-note">
+                銅鑼燒與可樂餅皆為熱門小吃，可依行程順路購買。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:30–17:30</div>
+            <div class="details">
+              <div class="place">Milch</div>
+              <div class="detail-note">主打布丁與半熟起司蛋糕。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:00–17:00</div>
+            <div class="details">
+              <div class="place">B-speak 生乳蛋糕捲</div>
+              <div class="detail-note">很熱門的生乳卷，建議先確認販售情況。</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">10:00–17:00</div>
+            <div class="details">
+              <div class="place">湯布咖啡</div>
+              <div class="detail-note">抹茶與布丁聽說很推。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-title">Day 5 照片</div>
+          <div class="photo-note">
+            由布院街景、金鱗湖與溫泉旅館的照片可以統一放在這裡。
+          </div>
+          <div class="photo-grid">
+            <img src="images/day5-1.jpg" alt="Day 5 - 由布院街道" />
+            <img src="images/day5-2.jpg" alt="Day 5 - 金鱗湖" />
+            <img src="images/day5-3.jpg" alt="Day 5 - 溫泉旅館" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day 6 -->
+    <section id="day6" class="day-content">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-label">
+            <span>Day 6｜金鱗湖晨霧・博多伴手禮・回程</span>
+          </div>
+          <div class="day-date">12/18（四）</div>
+          <div class="day-route">
+          跟飯店租腳踏車 → 早上看金鱗湖晨霧 → 搭車回博多車站（約 2
+          小時） → 麵屋兼虎午餐 → 博多車站買伴手禮 → 前往機場逛街 →
+          搭機返程
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>清晨金鱗湖 & 返回博多</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">06:00</div>
+            <div class="details">
+              <div class="place">金鱗湖晨霧</div>
+              <div class="detail-note">
+                可向飯店租腳踏車前往，清晨可以看到湖面晨霧，是很夢幻的景色。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">早上</div>
+            <div class="details">
+              <div class="place">退房 → 搭車返回博多（約 2 小時）</div>
+              <div class="detail-note">
+                回程時間依實際車班而定，請預留足夠空檔以免壓縮購物時間。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>博多午餐 & 逛街</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">09:45–22:00</div>
+            <div class="details">
+              <div class="place">麵屋兼虎 博多 DEITOS 店</div>
+              <div class="detail-note">
+                以帶辣味的拉麵著名，適合安排為回程前的午餐。
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">午後</div>
+            <div class="details">
+              <div class="place">博多車站購買伴手禮・逛街</div>
+              <div class="detail-note">
+                推薦：島本（明太子相關商品）、博多銘品藏（九州限定伴手禮集合）、Butter &amp;
+                bee 等。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">
+            <span>機場 & 搭機返程</span>
+          </div>
+
+          <div class="timeline-item">
+            <input type="checkbox" class="checkbox" />
+            <div class="time">—</div>
+            <div class="details">
+              <div class="place">前往福岡機場</div>
+              <div class="detail-note">
+                抵達機場後仍可視時間在免稅店或餐廳稍作停留，再搭機返回。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-title">Day 6 照片</div>
+          <div class="photo-note">
+            金鱗湖晨霧、最後的拉麵午餐與伴手禮戰利品照片可以放在這一格。
+          </div>
+          <div class="photo-grid">
+            <img src="images/day6-1.jpg" alt="Day 6 - 金鱗湖晨霧" />
+            <img src="images/day6-2.jpg" alt="Day 6 - 麵屋兼虎" />
+            <img src="images/day6-3.jpg" alt="Day 6 - 伴手禮" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const daySections = document.querySelectorAll(".day-content");
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach((b) => b.classList.remove("active"));
+        daySections.forEach((sec) => sec.classList.remove("active"));
+
+        btn.classList.add("active");
+        const targetId = btn.dataset.day;
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.classList.add("active");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
