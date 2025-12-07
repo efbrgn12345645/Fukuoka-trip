@@ -1,671 +1,323 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>福岡 6 日 5 夜</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>12/13–12/18 福岡旅行</title>
 
-  <!-- 字體 -->
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+/* === Font === */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Zen Maru Gothic',sans-serif;}
 
-  <style>
-    :root {
-      --color-koyo: #e29d44;
-      --color-snow: #ffffff;
-      --color-warmgray: #e8e6e3;
-      --color-bg-soft: #f7f4f0;
-      --color-text-main: #333333;
-      --color-text-sub: #777777;
-      --radius-card: 18px;
-      --radius-pill: 999px;
-      --shadow-soft: 0 8px 18px rgba(0, 0, 0, 0.06);
-    }
+/* === Base === */
+body{
+background:#f7f4ef;
+color:#3b3b3b;
+padding-bottom:70px;
+}
 
-    * { box-sizing: border-box; }
+/* === Header === */
+header{
+padding:18px;
+text-align:center;
+font-size:20px;
+font-weight:600;
+background:#fff;
+box-shadow:0 1px 4px rgba(0,0,0,0.05);
+position:sticky;top:0;z-index:999;
+}
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Zen Maru Gothic", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #fff7ea 0, #f7f4f0 50%, #f1efec 100%);
-      color: var(--color-text-main);
-    }
+/* === Tabs === */
+.tab-bar{
+position:fixed;bottom:0;left:0;width:100%;
+background:rgba(255,255,255,0.9);
+backdrop-filter:blur(10px);
+display:flex;justify-content:space-around;padding:10px 0;
+box-shadow:0 -2px 6px rgba(0,0,0,0.05);
+}
+.tab-bar button{
+background:transparent;border:none;font-size:15px;padding:8px 15px;
+border-radius:12px;color:#666;transition:0.2s;
+}
+.tab-bar button.active{background:#ffedd1;color:#b45a3c;font-weight:600;}
 
-    .app-shell {
-      max-width: 480px;
-      margin: 0 auto;
-      min-height: 100vh;
-      padding-bottom: 90px;
-    }
+/* === Section Pages === */
+.page{display:none;padding:18px;}
+.page.active{display:block;}
 
-    /* Header */
-    header.app-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 10px 16px 6px;
-      backdrop-filter: blur(12px);
-      background: rgba(247, 244, 240, 0.9);
-    }
+/* === Day Title === */
+.day-title{
+margin:10px 0 6px;
+font-weight:600;
+color:#b35426;
+font-size:18px;
+}
 
-    .trip-title {
-      font-size: 20px;
-      font-weight: 700;
-    }
+/* === Card === */
+.card{
+background:#fff;border-radius:14px;padding:12px;margin-bottom:14px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+display:flex;flex-direction:column;gap:10px;
+}
 
-    .trip-subtitle {
-      margin-top: 2px;
-      font-size: 13px;
-      color: var(--color-text-sub);
-    }
+/* === Media + Text === */
+.card-content{display:flex;gap:10px;}
+.card img{
+width:50%;height:95px;border-radius:12px;object-fit:cover;
+}
 
-    /* 封面 4:3 */
-    .hero-cover {
-      margin: 8px 16px 8px;
-      border-radius: 28px;
-      overflow: hidden;
-      position: relative;
-      aspect-ratio: 4 / 3;
-      background: #d0d8e5;
-      box-shadow: var(--shadow-soft);
-    }
+/* === Category Tag === */
+.tag{
+display:inline-block;padding:3px 8px;font-size:12px;
+background:#ffe0b8;color:#8a4a2e;border-radius:10px;margin-bottom:4px;
+}
 
-    .hero-cover img.hero-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
+/* === Yellow Sticker === */
+.sticker{
+background:#fff5c7;
+display:inline-block;
+padding:4px 8px;
+font-size:12px;
+border-radius:6px;
+transform:rotate(-1.5deg);
+position:relative;
+color:#8a4a2e;
+font-weight:600;
+margin-top:4px;
+}
+.sticker:before{
+content:"";
+position:absolute;top:-6px;left:5px;
+width:22px;height:11px;
+background:url('stickertape.png');background-size:cover;
+opacity:0.75;
+}
 
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.2), transparent 55%);
-    }
+/* === Weather === */
+.weather-box{
+background:#fff5dc;
+border-radius:12px;padding:10px;margin-bottom:6px;
+font-size:13px;color:#8a4a2e;font-weight:600;
+}
 
-    .hero-text {
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 14px;
-      color: #ffffff;
-      text-shadow: 0 3px 8px rgba(0,0,0,0.4);
-    }
+/* === Checklist === */
+.check-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.check-item input{transform:scale(1.3);}
+.check-item label{flex:1;}
+.upload-btn{
+font-size:12px;color:#b45a3c;border:1px dashed #b45a3c;
+background:#fff;padding:3px 6px;border-radius:6px;
+}
 
-    .hero-text-main {
-      font-size: 24px;
-      font-weight: 700;
-      margin: 0;
-    }
+/* === Small Note === */
+.note{font-size:12px;color:#8a4a2e;margin-top:-4px;margin-bottom:6px;}
+</style>
 
-    .hero-text-sub {
-      margin-top: 4px;
-      font-size: 13px;
-    }
-
-    main {
-      padding: 8px 12px 18px;
-    }
-
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin: 4px 4px 6px;
-    }
-
-    /* Tabs 底部導覽列 */
-    .bottom-nav {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 12px;
-      width: 100%;
-      max-width: 480px;
-      padding: 0 12px;
-      z-index: 20;
-    }
-
-    .bottom-nav-inner {
-      background: rgba(255, 255, 255, 0.97);
-      border-radius: 18px;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.18);
-      display: flex;
-      padding: 6px;
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-btn {
-      flex: 1;
-      border: none;
-      background: transparent;
-      padding: 6px 4px;
-      border-radius: var(--radius-pill);
-      font-size: 11px;
-      color: var(--color-text-sub);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      cursor: pointer;
-    }
-    .nav-btn span.icon { font-size: 17px; }
-    .nav-btn.nav-active {
-      background: linear-gradient(135deg, #ffe9c6, #f3c07a);
-      color: #7a4304;
-      font-weight: 600;
-    }
-
-    .tab-page {
-      display: none;
-      animation: fadeIn 0.25s ease-out;
-    }
-    .tab-page.active { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 行程頁：日期切換 chips */
-    .day-switcher {
-      position: sticky;
-      top: 70px;
-      z-index: 5;
-      margin: 0 -12px 6px;
-      padding: 8px 0 6px;
-      background: linear-gradient(to bottom, rgba(247,244,240,0.96), rgba(247,244,240,0.9), transparent);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .day-chip-row {
-      display: flex;
-      gap: 8px;
-      padding: 0 16px;
-    }
-    .day-chip {
-      padding: 6px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid transparent;
-      background: rgba(255,255,255,0.9);
-      font-size: 11px;
-      white-space: nowrap;
-      color: var(--color-text-sub);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .day-chip span.date { font-weight: 600; }
-    .day-chip span.label { font-size: 11px; }
-    .day-chip.active {
-      border-color: #e29d44;
-      background: linear-gradient(135deg, #ffe9c6, #f3c07a);
-      color: #7a4304;
-    }
-
-    .day-panel { display: none; }
-    .day-panel.active { display: block; }
-
-    .day-card {
-      background: rgba(255,255,255,0.97);
-      border-radius: 22px;
-      padding: 14px;
-      margin-top: 6px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .day-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .day-info .date {
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .day-info .location {
-      font-size: 12px;
-      color: var(--color-text-sub);
-      margin-top: 2px;
-    }
-    .day-tag {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(226,157,68,0.12);
-      color: #8a520f;
-    }
-
-    /* 天氣條 + 建議穿著（卡片第二個區塊） */
-    .weather-strip {
-      margin-top: 6px;
-      padding: 6px 8px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #fdf3e2, #f1ebe5);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
-      font-size: 11px;
-      color: #5f4d38;
-    }
-    .weather-strip-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-    .weather-strip-main {
-      display: flex;
-      overflow-x: auto;
-      gap: 4px;
-      padding-bottom: 2px;
-      -webkit-overflow-scrolling: touch;
-    }
-    .weather-hour {
-      min-width: 54px;
-      padding: 4px 4px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.7);
-      text-align: center;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-    }
-    .weather-hour-time {
-      font-size: 10px;
-      color: #a27d4c;
-    }
-    .weather-hour-temp {
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .advice-card {
-      margin-top: 8px;
-      padding: 10px 12px;
-      background: #f6f2ec;
-      border-radius: 16px;
-      font-size: 11px;
-      color: #5f4d38;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
-    .advice-row-title {
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .spots-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .spot-card {
-      background: #fdfbf8;
-      border-radius: 16px;
-      padding: 8px;
-      display: grid;
-      grid-template-columns: 96px 1fr;
-      gap: 8px;
-    }
-
-    .spot-photo-wrapper {
-      border-radius: 14px;
-      overflow: hidden;
-      background: #f0ede9;
-    }
-    .spot-photo {
-      width: 100%;
-      height: 78px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .spot-content {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .spot-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 10px;
-      padding: 2px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(226,157,68,0.08);
-      color: #8a520f;
-    }
-    .spot-name {
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .spot-desc {
-      font-size: 11px;
-      color: var(--color-text-sub);
-    }
-    .spot-actions {
-      margin-top: 4px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .spot-note {
-      font-size: 11px;
-      color: #c0582b;
-      font-weight: 700;
-    }
-    .btn-ghost {
-      border-radius: var(--radius-pill);
-      border: 1px solid #e0d7cc;
-      font-size: 11px;
-      padding: 4px 10px;
-      background: #fffaf4;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .btn-ghost span.icon { font-size: 13px; }
-    .input-file {
-      font-size: 11px;
-      border-radius: var(--radius-pill);
-      border: 1px dashed #d3c7bb;
-      padding: 4px 8px;
-      background: #fffdf8;
-      cursor: pointer;
-    }
-    .input-file input { display: none; }
-
-    /* 必買清單 Tab */
-    .check-switcher {
-      display: flex;
-      gap: 8px;
-      margin: 6px 4px 8px;
-    }
-    .check-chip {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      border: 1px solid #e0d7cc;
-      background: rgba(255,255,255,0.95);
-      font-size: 12px;
-      padding: 6px 8px;
-      cursor: pointer;
-      text-align: center;
-      color: var(--color-text-sub);
-    }
-    .check-chip.active {
-      border-color: #e29d44;
-      background: linear-gradient(135deg, #ffe9c6, #f3c07a);
-      color: #7a4304;
-      font-weight: 600;
-    }
-
-    .check-panel { display: none; }
-    .check-panel.active { display: block; }
-
-    .checklist-card {
-      background: rgba(255,255,255,0.97);
-      border-radius: 20px;
-      padding: 12px;
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 10px;
-    }
-    .checklist-header {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .checklist-sub {
-      font-size: 11px;
-      color: var(--color-text-sub);
-      margin-bottom: 8px;
-    }
-    .checklist-items {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .check-card {
-      background: #fdfbf8;
-      border-radius: 16px;
-      padding: 8px 10px;
-      display: grid;
-      grid-template-columns: 26px 1fr 80px;
-      gap: 6px;
-      align-items: center;
-    }
-    .check-left {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .check-left input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      accent-color: #e29d44;
-    }
-    .check-main {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .check-main input[type="text"] {
-      border: none;
-      outline: none;
-      background: transparent;
-      font-size: 12px;
-      border-bottom: 1px dashed #e0d4c6;
-      padding-bottom: 2px;
-    }
-    .check-main input[type="text"]::placeholder {
-      color: #b5a99a;
-    }
-    .check-label {
-      font-size: 11px;
-      color: var(--color-text-sub);
-    }
-    .check-main-title {
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .check-main-sub {
-      font-size: 11px;
-      color: var(--color-text-sub);
-    }
-    .check-photo-box {
-      border-radius: 12px;
-      background: #f0ede9;
-      position: relative;
-      overflow: hidden;
-      height: 60px;
-    }
-    .check-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
-    .check-photo-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: var(--color-text-sub);
-      text-align: center;
-      padding: 2px;
-    }
-    .btn-add-item {
-      margin-top: 10px;
-      font-size: 12px;
-      border-radius: var(--radius-pill);
-      border: 1px dashed #d3c7bb;
-      padding: 6px 10px;
-      background: #fffaf4;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    @media (min-width: 420px) {
-      .hero-cover { margin: 10px 18px 8px; }
-    }
-  </style>
 </head>
 <body>
-  <div class="app-shell">
-    <!-- Header -->
-    <header class="app-header">
-      <div class="trip-title">福岡 6 日 5 夜</div>
-      <div class="trip-subtitle">12/13(六) – 12/18(四) · 福岡 · 博多 · 由布院</div>
-    </header>
 
-    <!-- 封面 4:3 -->
-    <section class="hero-cover">
-      <img src="cover.png" alt="福岡旅程封面" class="hero-img" />
-      <div class="hero-overlay"></div>
-      <div class="hero-text">
-        <p class="hero-text-main">福岡 6 日 5 夜</p>
-        <p class="hero-text-sub">把每天的美食、風景、藥妝戰利品都記錄下來</p>
-      </div>
-    </section>
+<header>12/13–12/18 福岡旅行</header>
 
-    <main>
-      <!-- 行程 Tab -->
-      <section id="tab-itinerary" class="tab-page active">
-        <!-- 日期切換 -->
-        <div class="day-switcher">
-          <div class="day-chip-row">
-            <button class="day-chip active" data-day="d1">
-              <span class="date">12/13 六</span>
-              <span class="label">抵達福岡 · 天神 · 牛腸鍋</span>
-            </button>
-            <button class="day-chip" data-day="d2">
-              <span class="date">12/14 日</span>
-              <span class="label">Pain stock · 小倉 · 皿倉山</span>
-            </button>
-            <button class="day-chip" data-day="d3">
-              <span class="date">12/15 一</span>
-              <span class="label">櫛田神社 · 壽喜燒 · 明太子麵包</span>
-            </button>
-            <button class="day-chip" data-day="d4">
-              <span class="date">12/16 二</span>
-              <span class="label">太宰府 · 竈門神社 · 燒肉</span>
-            </button>
-            <button class="day-chip" data-day="d5">
-              <span class="date">12/17 三</span>
-              <span class="label">由布院 · 金鱗湖 · 溫泉</span>
-            </button>
-            <button class="day-chip" data-day="d6">
-              <span class="date">12/18 四</span>
-              <span class="label">金鱗湖晨霧 · 伴手禮 · 回程</span>
-            </button>
-          </div>
-        </div>
+<!-- === Tabs === -->
+<div class="tab-bar">
+<button class="active" onclick="switchTab('itinerary')">行程</button>
+<button onclick="switchTab('mustbuy')">必買清單</button>
+<button onclick="switchTab('yufuin')">由布院美食</button>
+</div>
 
-        <div id="day-panels">
-          <!-- Day 1 -->
-          <div class="day-panel active" data-day="d1">
-            <article class="day-card">
-              <div class="day-card-header">
-                <div class="day-info">
-                  <div class="date">DAY 1 · 12/13 (六)</div>
-                  <div class="location">抵達福岡 · 天神地下街 · 今泉</div>
-                </div>
-                <div class="day-tag">飛機 · 逛街 · 牛腸鍋</div>
-              </div>
+<!-- ================= ITINERARY =================== -->
+<div class="page active" id="itinerary">
 
-              <!-- 天氣＋建議穿著（第二個區塊） -->
-              <div class="weather-strip" data-weather-day="d1"></div>
-              <div class="advice-card">
-                <div>
-                  <div class="advice-row-title">天氣 & 溫度</div>
-                  <div>預估約 8–15°C，多雲為主，日夜溫差不算大。</div>
-                </div>
-                <div>
-                  <div class="advice-row-title">建議穿著</div>
-                  <div>長袖上衣＋薄外套即可，飛機與機場冷氣較強，鞋子以好走為主。</div>
-                </div>
-              </div>
+<!-- ===== 12/14 ===== -->
+<div class="day-title">📍 12/14（六）</div>
 
-              <div class="spots-list">
-                <!-- BOUL'ANGE -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="boulange.png" alt="BOUL'ANGE 麵包" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 麵包</div>
-                    <div class="spot-name">BOUL'ANGE 天神地下街店</div>
-                    <div class="spot-desc">天神地下街人氣麵包店，奶油捲和可頌很有名，抵達福岡後可以當第一個小點心。</div>
-                    <div class="spot-actions">
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/BOULANGE+天神地下街">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 上傳旅記照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
+<div class="weather-box">⛅ 每小時天氣 + 穿著建議（自動顯示）</div>
 
-                <!-- 前田屋 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="maedaya.png" alt="前田屋 牛腸鍋" />
-                  </div>
-                  <div class="spot-content">
-                    <div class="spot-tag">食物 · 晚餐</div>
-                    <div class="spot-name">博多もつ鍋 前田屋 今泉店</div>
-                    <div class="spot-desc">味噌口味牛腸鍋是招牌，第一晚的重點晚餐，適合拍一張「旅程開局」照片。</div>
-                    <div class="spot-actions">
-                      <div class="spot-note">★ 建議提早抵達附近排隊</div>
-                      <button class="btn-ghost" data-map-url="https://www.google.com/maps/search/博多もつ鍋+前田屋+今泉">
-                        <span class="icon">📍</span><span>Google Maps</span>
-                      </button>
-                      <label class="input-file">
-                        <span>🖼 牛腸鍋照片</span>
-                        <input type="file" accept="image/*" class="js-spot-upload" />
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
+<!-- Breakfast Pain Stock -->
+<div class="card">
+<div class="tag">食物</div>
+<div class="card-content">
+<img src="img/painstock.png" />
+<div>
+<b>Pain Stock 麵包店</b>
+<p class="note">人氣麵包・早餐推薦</p>
+</div>
+</div>
+</div>
 
-          <!-- Day 2 -->
-          <div class="day-panel" data-day="d2">
-            <article class="day-card">
-              <div class="day-card-header">
-                <div class="day-info">
-                  <div class="date">DAY 2 · 12/14 (日)</div>
-                  <div class="location">Pain stock · 小倉 · 皿倉山</div>
-                </div>
-                <div class="day-tag">麵包 · 城鎮散步 · 夜景</div>
-              </div>
+<!-- Hakata/Tenjin -->
+<div class="card">
+<div class="tag">逛街</div>
+<div class="card-content">
+<img src="img/tenjin.png" />
+<div>
+<b>博多 / 天神逛街</b>
+</div>
+</div>
+</div>
 
-              <div class="weather-strip" data-weather-day="d2"></div>
-              <div class="advice-card">
-                <div>
-                  <div class="advice-row-title">天氣 & 溫度</div>
-                  <div>預估約 7–13°C，可能有小雨，山上比市區再冷一點。</div>
-                </div>
-                <div>
-                  <div class="advice-row-title">建議穿著</div>
-                  <div>好走的球鞋＋防風外套，山上看夜景時可加圍巾或毛帽。</div>
-                </div>
-              </div>
+<!-- 山景 -->
+<div class="card">
+<div class="tag">景點</div>
+<div class="card-content">
+<img src="img/sarakurayama.png" />
+<div>
+<b>皿倉山夜景</b><br><span class="sticker">🌅 日落 16:29</span>
+</div>
+</div>
+</div>
 
-              <div class="spots-list">
-                <!-- Pain stock 早餐 -->
-                <div class="spot-card">
-                  <div class="spot-photo-wrapper">
-                    <img class="spot-photo" src="pain-stock.png" alt="Pain stock 麵包" />
-                  </
+<!-- ===== 12/15 ===== -->
+<div class="day-title">📍 12/15（日）</div>
+<div class="weather-box">⛅ 每小時天氣 + 穿著建議（自動顯示）</div>
+
+<!-- Kusida -->
+<div class="card">
+<div class="tag">景點</div>
+<div class="card-content">
+<img src="img/kusida.png" />
+<div>
+<b>櫛田神社</b>
+</div>
+</div>
+</div>
+
+<!-- Sukiyaki -->
+<div class="card">
+<div class="tag">食物</div>
+<div class="card-content">
+<img src="img/nisin.png" />
+<div>
+<b>西新初喜 くうてん（壽喜燒）</b><br><span class="sticker">⏰ 11:00 訂位 四位</span>
+</div>
+</div>
+</div>
+
+<!-- FullFull -->
+<div class="card">
+<div class="tag">點心</div>
+<div class="card-content">
+<img src="img/fullfull.png" />
+<div>
+<b>Full Full 明太子麵包</b>
+</div>
+</div>
+</div>
+
+<!-- Koyama -->
+<div class="card">
+<div class="tag">晚餐</div>
+<div class="card-content">
+<img src="img/koyama.png" />
+<div>
+<b>Koyama Parking 晚餐</b><br><span class="sticker">⏰ 20:00 訂位 四位</span>
+</div>
+</div>
+</div>
+
+<!-- ===== 12/16 ===== -->
+<div class="day-title">📍 12/16（一）</div>
+<div class="weather-box">⛅ 每小時天氣 + 穿著建議（自動顯示）</div>
+
+<div class="card">
+<div class="tag">早餐</div>
+<div class="card-content">
+<img src="img/robata.png" />
+<div>
+<b>炉端ノいとおかし</b><br><span class="sticker">⏰ 9:00 訂位 四位</span>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="tag">景點</div>
+<div class="card-content">
+<img src="img/tenmangu.png" />
+<div>
+<b>太宰府天滿宮</b>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="tag">景點</div>
+<div class="card-content">
+<img src="img/kamado.png" />
+<div>
+<b>寶滿宮 竈門神社</b>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="tag">逛街</div>
+<div class="card-content">
+<img src="img/tenjin.png" />
+<div>
+<b>博多 / 天神逛街</b>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="tag">晚餐</div>
+<div class="card-content">
+<img src="img/nikuichi.png" />
+<div>
+<b>Nikuichi 肉いち</b><br><span class="sticker">⏰ 22:00 訂位 四位</span>
+</div>
+</div>
+</div>
+
+</div><!-- End itinerary -->
+
+<!-- ================= MUST BUY =================== -->
+<div class="page" id="mustbuy">
+<h3>🛍 福岡必買清單</h3><br>
+
+<div class="check-item">
+<input type="checkbox"><label>明太子（辣度可選）</label>
+<button class="upload-btn">📷 上傳</button>
+</div>
+
+<div class="check-item">
+<input type="checkbox"><label>福砂屋 長崎蛋糕</label>
+<button class="upload-btn">📷 上傳</button>
+</div>
+
+<div class="check-item">
+<input type="checkbox"><label>博多通りもん</label>
+<button class="upload-btn">📷 上傳</button>
+</div>
+
+<div class="check-item">
+<input type="checkbox"><label>梅ヶ枝餅</label>
+<button class="upload-btn">📷 上傳</button>
+</div>
+
+</div>
+
+<!-- ================= YUFUIN =================== -->
+<div class="page" id="yufuin">
+<h3>🍡 由布院美食清單</h3><br>
+
+<div class="check-item"><input type="checkbox"><label>MILCH 布丁</label><button class="upload-btn">📷 上傳</button></div>
+<div class="check-item"><input type="checkbox"><label>B-Speak 生乳捲</label><button class="upload-btn">📷 上傳</button></div>
+<div class="check-item"><input type="checkbox"><label>金賞可樂餅</label><button class="upload-btn">📷 上傳</button></div>
+<div class="check-item"><input type="checkbox"><label>唐揚げ（中津/柚子胡椒）</label><button class="upload-btn">📷 上傳</button></div>
+<div class="check-item"><input type="checkbox"><label>Snoopy茶屋甜點</label><button class="upload-btn">📷 上傳</button></div>
+
+</div>
+
+<script>
+function switchTab(tab){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(tab).classList.add('active');
+document.querySelectorAll('.tab-bar button').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
