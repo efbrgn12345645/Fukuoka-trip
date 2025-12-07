@@ -2,267 +2,1293 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>12/13-12/18 福岡旅遊</title>
+  <title>福岡旅行 12/13–12/18</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#E29D44" />
+
+  <!-- Zen Maru Gothic 字體 -->
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet" />
+
   <style>
-  :root {
-    --blue: #2a6fe8;
-    --blue-dark: #174a9b;
-    --blue-soft: #f1f6ff;
-    --bg: #e6f1ff;
-    --card-bg: #ffffff;
-    --border: #dde3f0;
-    --text: #1f2430;
-    --muted: #6f7685;
-    --radius-lg: 22px;
-    --radius-md: 14px;
-    --shadow-soft: 0 10px 30px rgba(9, 30, 66, 0.12);
-    --shadow-light: 0 4px 12px rgba(15, 35, 80, 0.12);
-  }
+    :root {
+      --color-koyo: #e29d44;     /* 楓葉菊 */
+      --color-snow: #ffffff;     /* 雪白 */
+      --color-warmgray: #e8e6e3; /* 暖灰 */
+      --color-bg-soft: #f7f4f0;
+      --color-text-main: #333333;
+      --color-text-sub: #777777;
+      --color-accent: #f3c07a;
+      --radius-card: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 8px 18px rgba(0, 0, 0, 0.06);
+    }
 
-  * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-      "Noto Sans TC", system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-  }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Zen Maru Gothic", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #fff7ea 0, #f7f4f0 45%, #f1efec 100%);
+      color: var(--color-text-main);
+    }
 
-  .main {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 12px 12px 40px;
-  }
+    .app-shell {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-bottom: 80px; /* 預留底部導覽列空間 */
+      position: relative;
+    }
 
-  /* ===== 封面：整張圖、原本顏色 ===== */
-  header.trip-header {
-    margin: 0 -8px 8px;        /* 稍微拉到左右邊界，看起來像滿版 */
-    overflow: hidden;
-  }
+    /* Header */
+    header.app-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(
+        to bottom,
+        rgba(247, 244, 240, 0.98),
+        rgba(247, 244, 240, 0.9),
+        transparent
+      );
+      padding: 10px 16px 4px;
+    }
 
-  .trip-cover-img {
-    width: 100%;
-    display: block;
-    height: auto;             /* 讓整張圖按比例完整顯示 */
-    background: #f6f6f6;      /* 如果比例不一，周圍的底色是淡灰色，不是藍色 */
-  }
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
 
-  /* ===== 封面下方：行程標題卡片 ===== */
-  .trip-info-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-lg);
-    padding: 14px 14px 12px;
-    box-shadow: var(--shadow-soft);
-    margin-bottom: 12px;
-  }
+    .trip-title {
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-  .trip-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--blue-dark);
-    margin-bottom: 4px;
-  }
+    .trip-title-badge {
+      font-size: 12px;
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(226, 157, 68, 0.15);
+      color: #8a520f;
+    }
 
-  .trip-subtitle {
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
+    .trip-dates {
+      margin-top: 2px;
+      font-size: 13px;
+      color: var(--color-text-sub);
+    }
 
-  .trip-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 0.8rem;
-  }
+    .hero-chip {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    }
 
-  .chip {
-    padding: 3px 9px;
-    border-radius: 999px;
-    background: #f3f5ff;
-    color: var(--blue-dark);
-    font-weight: 500;
-    border: 1px solid rgba(23, 74, 155, 0.2);
-  }
+    main {
+      padding: 8px 12px 16px;
+    }
 
-  /* ===== Tabs ===== */
-  .tabs-wrapper {
-    margin-top: 12px;
-    margin-bottom: 8px;
-  }
+    /* 封面 hero */
+    .hero-cover {
+      margin: 0 0 8px;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      background: #d0d8e5;
+      height: 190px;
+    }
 
-  .tabs {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-  }
+    .hero-cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("cover.jpg"); /* 改成你的封面圖檔名 */
+      background-size: cover;
+      background-position: center center;
+      filter: brightness(1.02);
+    }
 
-  .tabs::-webkit-scrollbar { height: 4px; }
-  .tabs::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.18);
-    border-radius: 999px;
-  }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent 45%);
+    }
 
-  .tab-btn {
-    flex: 0 0 auto;
-    min-width: 72px;
-    border-radius: 18px;
-    border: 1px solid var(--border);
-    background: #fdfdff;
-    padding: 6px 10px;
-    font-size: 0.8rem;
-    color: var(--muted);
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    box-shadow: 0 2px 5px rgba(9, 30, 66, 0.06);
-    transition: all 0.15s ease;
-  }
+    .hero-text {
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
+      color: #ffffff;
+    }
 
-  .tab-btn span.day {
-    font-weight: 700;
-    font-size: 0.78rem;
-  }
-  .tab-btn span.date {
-    font-size: 0.72rem;
-  }
+    .hero-text-main {
+      font-size: 18px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
 
-  .tab-btn.active {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #ffffff;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(42, 111, 232, 0.4);
-  }
+    .hero-text-sub {
+      margin-top: 2px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
 
-  .day-content { display: none; margin-top: 6px; }
-  .day-content.active { display: block; }
+    /* Tabs: bottom nav */
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 12px;
+      width: 100%;
+      max-width: 480px;
+      padding: 6px 10px;
+      z-index: 20;
+    }
 
-  .day-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-lg);
-    padding: 14px 14px 16px;
-    box-shadow: var(--shadow-light);
-  }
+    .bottom-nav-inner {
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+      border-radius: 18px;
+      padding: 6px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
 
-  .day-header { margin-bottom: 8px; }
+    .nav-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 6px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: var(--color-text-sub);
+      cursor: pointer;
+    }
 
-  .day-label {
-    font-weight: 700;
-    color: var(--blue-dark);
-    font-size: 0.98rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-  }
+    .nav-btn span.icon {
+      font-size: 16px;
+    }
 
-  .day-date {
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+    .nav-btn.nav-active {
+      background: linear-gradient(135deg, #fbe0b9, #f3c07a);
+      color: #7a4304;
+      font-weight: 600;
+    }
 
-  .day-route {
-    margin-top: 8px;
-    padding: 8px 10px;
-    border-radius: var(--radius-md);
-    background: var(--blue-soft);
-    border: 1px dashed rgba(23, 74, 155, 0.25);
-    font-size: 0.78rem;
-    color: var(--muted);
-    line-height: 1.5;
-  }
+    /* Tab pages */
+    .tab-page {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
 
-  /* ===== 天氣卡 ===== */
-  .weather-card {
-    margin: 6px 0 8px;
-    padding: 8px 10px;
-    border-radius: 16px;
-    background: #fdf8ff;
-    border: 1px solid #e5dbff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.8rem;
-  }
+    .tab-page.active {
+      display: block;
+    }
 
-  .weather-left {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-  .weather-temp {
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
+    /* 行程頁：日期切換 chips */
+    .day-switcher {
+      position: sticky;
+      top: 72px;
+      z-index: 5;
+      padding: 8px 0 10px;
+      margin: 0 -12px 4px;
+      background: linear-gradient(to bottom, rgba(247, 244, 240, 0.96), rgba(247, 244, 240, 0.9), transparent);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
 
-  .weather-desc {
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
+    .day-chip-row {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px;
+    }
 
-  .weather-meta { text-align: right; }
-  .weather-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
+    .day-chip {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--color-text-sub);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.3;
+    }
 
-  .weather-range {
-    font-size: 0.78rem;
-    margin-top: 2px;
-  }
+    .day-chip span.date {
+      font-weight: 600;
+      font-size: 11px;
+    }
 
-  /* ===== 行程區塊 ===== */
-  .section-block {
-    margin-top: 10px;
-    padding: 9px 10px 8px;
-    background: #fdfdff;
-    border-radius: 16px;
-    border: 1px solid #e2e7f3;
-  }
+    .day-chip span.label {
+      font-size: 11px;
+    }
 
-  /* 餐廳：灰色 */
-  .section-block.section-restaurant {
-    background: #f4f4f6;
-    border-color: #d0d2dc;
-  }
+    .day-chip.extra {
+      font-weight: 600;
+    }
 
-  /* 逛街 / 景點：深藍系 */
-  .section-block.section-spot {
-    background: #dde7ff;
-    border-color: rgba(23, 74, 155, 0.6);
-  }
+    .day-chip.active {
+      border-color: #e29d44;
+      background: linear-gradient(135deg, #ffe9c6, #f3c07a);
+      color: #7a4304;
+    }
 
-  .section-title {
-    font-size: 0.86rem;
-    font-weight: 700;
-    color: var(--blue-dark);
-    margin-bottom: 4px;
-    display: flex;
-    justify-content: space-between;
-    gap: 4px;
-  }
+    /* 每日行程卡片 */
+    .day-panel {
+      display: none;
+    }
 
-  .section-note {
-    font-size: 0.74rem;
-    color: var(--muted);
-    font-weight: 400;
-  }
+    .day-panel.active {
+      display: block;
+    }
 
-  .timeline-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 7px 0;
-    border-top: 1px solid #f0f2f8;
-  }
+    .day-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 22px;
+      padding: 14px;
+      margin-top: 8px;
+      box-shadow: var(--shadow-soft);
+    }
 
-  .timeline-item:first-of-type { border-top
+    .day-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .day-info {
+      font-size: 13px;
+    }
+
+    .day-info .date {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .day-info .location {
+      color: var(--color-text-sub);
+      margin-top: 2px;
+      font-size: 12px;
+    }
+
+    .day-tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(226, 157, 68, 0.12);
+      color: #8a520f;
+    }
+
+    .spots-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .spot-card {
+      background: #fdfbf8;
+      border-radius: 16px;
+      padding: 8px;
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 8px;
+    }
+
+    .spot-photo-wrapper {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #f0ede9;
+      position: relative;
+    }
+
+    .spot-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--color-text-sub);
+      padding: 4px;
+      text-align: center;
+    }
+
+    .spot-photo-placeholder span {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+
+    .spot-photo {
+      width: 100%;
+      height: 76px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .spot-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spot-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(226, 157, 68, 0.08);
+      color: #8a520f;
+    }
+
+    .spot-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .spot-desc {
+      font-size: 11px;
+      color: var(--color-text-sub);
+    }
+
+    .spot-actions {
+      margin-top: 4px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-ghost, .btn-outline {
+      border-radius: var(--radius-pill);
+      border: 1px solid #e0d7cc;
+      font-size: 11px;
+      padding: 4px 10px;
+      background: #fffaf4;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-outline {
+      background: transparent;
+    }
+
+    .btn-ghost span.icon,
+    .btn-outline span.icon {
+      font-size: 13px;
+    }
+
+    .input-file {
+      font-size: 11px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed #d3c7bb;
+      padding: 4px 8px;
+      background: #fffdf8;
+      cursor: pointer;
+    }
+
+    .input-file input {
+      display: none;
+    }
+
+    .input-file-label {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* 每日穿著/天氣 */
+    .advice-card {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: #f6f2ec;
+      font-size: 11px;
+      color: #5f4d38;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .advice-row-title {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .advice-row-sub {
+      font-size: 11px;
+    }
+
+    /* 美食 / 藥妝 必買清單 */
+    .checklist-header {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .checklist-sub {
+      font-size: 11px;
+      color: var(--color-text-sub);
+      margin-bottom: 8px;
+    }
+
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .check-card {
+      background: #fdfbf8;
+      border-radius: 16px;
+      padding: 9px 10px;
+      display: grid;
+      grid-template-columns: 26px 1fr 80px;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .check-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .check-main input[type="text"] {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 12px;
+      border-bottom: 1px dashed #e0d4c6;
+      padding-bottom: 2px;
+    }
+
+    .check-main input[type="text"]::placeholder {
+      color: #b5a99a;
+    }
+
+    .check-label {
+      font-size: 11px;
+      color: var(--color-text-sub);
+    }
+
+    .check-photo-box {
+      border-radius: 12px;
+      background: #f0ede9;
+      position: relative;
+      overflow: hidden;
+      height: 60px;
+    }
+
+    .check-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      font-size: 10px;
+      color: var(--color-text-sub);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2px;
+    }
+
+    .check-photo-placeholder span {
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .check-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .check-left {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .check-left input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #e29d44;
+    }
+
+    .btn-add-item {
+      margin-top: 10px;
+      font-size: 12px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed #d3c7bb;
+      padding: 6px 10px;
+      background: #fffaf4;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* 指南頁 */
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 4px 0 6px;
+    }
+
+    .guide-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 18px;
+      padding: 10px 12px;
+      margin-top: 8px;
+      box-shadow: var(--shadow-soft);
+      font-size: 12px;
+    }
+
+    .guide-card h3 {
+      margin: 0 0 4px;
+      font-size: 13px;
+    }
+
+    .guide-list {
+      padding-left: 18px;
+      margin: 4px 0;
+    }
+
+    .guide-list li {
+      margin-bottom: 3px;
+    }
+
+    /* 天氣頁 */
+    .weather-note {
+      font-size: 11px;
+      color: var(--color-text-sub);
+      margin-bottom: 8px;
+    }
+
+    .weather-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .weather-day-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 18px;
+      padding: 8px 10px;
+      box-shadow: var(--shadow-soft);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .weather-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .weather-date {
+      font-weight: 600;
+    }
+
+    .weather-desc {
+      font-size: 11px;
+      color: var(--color-text-sub);
+    }
+
+    .weather-right {
+      text-align: right;
+      font-size: 12px;
+    }
+
+    .weather-temp {
+      font-weight: 600;
+    }
+
+    .weather-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(226, 157, 68, 0.12);
+      color: #8a520f;
+      display: inline-block;
+      margin-top: 2px;
+    }
+
+    @media (min-width: 420px) {
+      .hero-cover {
+        height: 210px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="title-row">
+        <div>
+          <div class="trip-title">
+            福岡旅行
+            <span class="trip-title-badge">12/13–12/18</span>
+          </div>
+          <div class="trip-dates">Fukuoka · Hakata · Yufuin</div>
+        </div>
+      </div>
+      <div class="hero-chip">
+        <span>🍁</span>
+        <span>楓葉 · 美食 · 溫泉小旅行紀錄</span>
+      </div>
+    </header>
+
+    <!-- 封面區：把 cover.jpg 換成你的封面照片檔名 -->
+    <section class="hero-cover">
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        <div class="hero-text-main">福岡 6 日 5 夜</div>
+        <div class="hero-text-sub">把每一天的美食、風景、藥妝戰利品都記錄下來</div>
+      </div>
+    </section>
+
+    <main>
+      <!-- 行程 Tab -->
+      <section id="tab-itinerary" class="tab-page active">
+        <!-- 日期 / 額外頁切換 -->
+        <div class="day-switcher">
+          <div class="day-chip-row">
+            <button class="day-chip active" data-day="d1">
+              <span class="date">12/13 FRI</span>
+              <span class="label">抵達福岡 · 博多</span>
+            </button>
+            <button class="day-chip" data-day="d2">
+              <span class="date">12/14 SAT</span>
+              <span class="label">太宰府 · 天神</span>
+            </button>
+            <button class="day-chip" data-day="d3">
+              <span class="date">12/15 SUN</span>
+              <span class="label">由布院 · 金麟湖</span>
+            </button>
+            <button class="day-chip" data-day="d4">
+              <span class="date">12/16 MON</span>
+              <span class="label">博多周邊</span>
+            </button>
+            <button class="day-chip" data-day="d5">
+              <span class="date">12/17 TUE</span>
+              <span class="label">購物 · 美食</span>
+            </button>
+            <button class="day-chip" data-day="d6">
+              <span class="date">12/18 WED</span>
+              <span class="label">回程 · 機場</span>
+            </button>
+            <button class="day-chip extra" data-day="food">
+              <span class="date">美食</span>
+              <span class="label">福岡必吃清單</span>
+            </button>
+            <button class="day-chip extra" data-day="drug">
+              <span class="date">藥妝</span>
+              <span class="label">必買清單</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="day-panels">
+          <!-- Day 1 -->
+          <div class="day-panel active" data-day="d1">
+            <article class="day-card">
+              <div class="day-card-header">
+                <div class="day-info">
+                  <div class="date">DAY 1 · 12/13 (五)</div>
+                  <div class="location">抵達福岡 · 博多車站附近</div>
+                </div>
+                <div class="day-tag">Check-in & 初訪</div>
+              </div>
+
+              <div class="spots-list">
+                <!-- 景點卡片範例：飯店 -->
+                <div class="spot-card">
+                  <div class="spot-photo-wrapper">
+                    <img class="spot-photo" alt="照片預覽" />
+                    <div class="spot-photo-placeholder">
+                      <span>📷</span>
+                      <div>上傳飯店照片</div>
+                    </div>
+                  </div>
+                  <div class="spot-content">
+                    <div class="spot-tag">酒店 · HOTEL</div>
+                    <div class="spot-name">入住飯店（博多周邊）</div>
+                    <div class="spot-desc">放行李、稍作休息，準備晚上逛街＋吃宵夜。</div>
+                    <div class="spot-actions">
+                      <button class="btn-ghost" data-map-url="https://maps.google.com">
+                        <span class="icon">📍</span><span>Google Maps</span>
+                      </button>
+                      <label class="input-file">
+                        <span class="input-file-label">
+                          <span class="icon">🖼</span><span>旅記照片</span>
+                        </span>
+                        <input type="file" accept="image/*" class="js-spot-upload" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 景點卡片範例：晚餐 -->
+                <div class="spot-card">
+                  <div class="spot-photo-wrapper">
+                    <img class="spot-photo" alt="照片預覽" />
+                    <div class="spot-photo-placeholder">
+                      <span>🍜</span>
+                      <div>上傳拉麵 / 屋台照片</div>
+                    </div>
+                  </div>
+                  <div class="spot-content">
+                    <div class="spot-tag">食物 · DINNER</div>
+                    <div class="spot-name">博多拉麵 / 屋台</div>
+                    <div class="spot-desc">第一晚的福岡味道，熱熱的湯＋替玉，拍一張當作開旅合照。</div>
+                    <div class="spot-actions">
+                      <button class="btn-ghost" data-map-url="https://maps.google.com">
+                        <span class="icon">📍</span><span>Google Maps</span>
+                      </button>
+                      <label class="input-file">
+                        <span class="input-file-label">
+                          <span class="icon">🖼</span><span>旅記照片</span>
+                        </span>
+                        <input type="file" accept="image/*" class="js-spot-upload" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="advice-card">
+                <div>
+                  <div class="advice-row-title">建議穿著</div>
+                  <div class="advice-row-sub">長袖上衣＋薄外套，飛機上下注意溫差，可備圍巾。</div>
+                </div>
+                <div>
+                  <div class="advice-row-title">天氣 / 雪況小提醒</div>
+                  <div class="advice-row-sub">福岡市區較少下雪，晚上氣溫偏涼，記得查看當日氣象。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Day 2～6：先放結構，你之後可以照 Day1 複製改內容 -->
+          <div class="day-panel" data-day="d2">
+            <article class="day-card">
+              <div class="day-card-header">
+                <div class="day-info">
+                  <div class="date">DAY 2 · 12/14 (六)</div>
+                  <div class="location">太宰府 · 天神</div>
+                </div>
+                <div class="day-tag">神社 · 逛街 · 美食</div>
+              </div>
+
+              <div class="spots-list">
+                <div class="spot-card">
+                  <div class="spot-photo-wrapper">
+                    <img class="spot-photo" alt="照片預覽" />
+                    <div class="spot-photo-placeholder">
+                      <span>⛩</span>
+                      <div>上傳太宰府 / 楓葉照片</div>
+                    </div>
+                  </div>
+                  <div class="spot-content">
+                    <div class="spot-tag">景點 · SHRINE</div>
+                    <div class="spot-name">太宰府天滿宮</div>
+                    <div class="spot-desc">走在參道上吃梅枝餅，順便幫自己和同行的人求個好運。</div>
+                    <div class="spot-actions">
+                      <button class="btn-ghost" data-map-url="https://maps.google.com">
+                        <span class="icon">📍</span><span>Google Maps</span>
+                      </button>
+                      <label class="input-file">
+                        <span class="input-file-label">
+                          <span class="icon">🖼</span><span>旅記照片</span>
+                        </span>
+                        <input type="file" accept="image/*" class="js-spot-upload" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="advice-card">
+                <div>
+                  <div class="advice-row-title">建議穿著</div>
+                  <div class="advice-row-sub">好走的鞋＋長裙 / 褲子，階梯多，建議輕便舒適。</div>
+                </div>
+                <div>
+                  <div class="advice-row-title">天氣 / 雪況小提醒</div>
+                  <div class="advice-row-sub">若遇到陰雨天，參道地面較滑，雨具和防水鞋會更安心。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="day-panel" data-day="d3">
+            <article class="day-card">
+              <div class="day-card-header">
+                <div class="day-info">
+                  <div class="date">DAY 3 · 12/15 (日)</div>
+                  <div class="location">由布院 · 金麟湖</div>
+                </div>
+                <div class="day-tag">溫泉小鎮 · 散步</div>
+              </div>
+
+              <div class="spots-list">
+                <div class="spot-card">
+                  <div class="spot-photo-wrapper">
+                    <img class="spot-photo" alt="照片預覽" />
+                    <div class="spot-photo-placeholder">
+                      <span>🏞</span>
+                      <div>上傳金麟湖 / 小路照片</div>
+                    </div>
+                  </div>
+                  <div class="spot-content">
+                    <div class="spot-tag">景點 · WALK</div>
+                    <div class="spot-name">金麟湖散步</div>
+                    <div class="spot-desc">早晨或黃昏散步，拍下霧氣＋湖面的光，當作這趟旅程的小封面。</div>
+                    <div class="spot-actions">
+                      <button class="btn-ghost" data-map-url="https://maps.google.com">
+                        <span class="icon">📍</span><span>Google Maps</span>
+                      </button>
+                      <label class="input-file">
+                        <span class="input-file-label">
+                          <span class="icon">🖼</span><span>旅記照片</span>
+                        </span>
+                        <input type="file" accept="image/*" class="js-spot-upload" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="advice-card">
+                <div>
+                  <div class="advice-row-title">建議穿著</div>
+                  <div class="advice-row-sub">保暖外套＋毛衣，早晚溫差大，可準備帽子或手套。</div>
+                </div>
+                <div>
+                  <div class="advice-row-title">天氣 / 雪況小提醒</div>
+                  <div class="advice-row-sub">若遇下雪或結霜，路面濕滑，走路放慢步調，拍照時注意腳邊。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="day-panel" data-day="d4">
+            <article class="day-card">
+              <div class="day-card-header">
+                <div class="day-info">
+                  <div class="date">DAY 4 · 12/16 (一)</div>
+                  <div class="location">博多周邊</div>
+                </div>
+                <div class="day-tag">市區 · 咖啡 · 逛街</div>
+              </div>
+              <div class="spots-list">
+                <!-- 之後自己補景點卡片 -->
+              </div>
+              <div class="advice-card">
+                <div>
+                  <div class="advice-row-title">建議穿著</div>
+                  <div class="advice-row-sub">休閒好走的穿搭，方便逛街和移動。</div>
+                </div>
+                <div>
+                  <div class="advice-row-title">天氣 / 雪況小提醒</div>
+                  <div class="advice-row-sub">室內暖氣充足，穿搭建議洋蔥式，方便穿脫。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="day-panel" data-day="d5">
+            <article class="day-card">
+              <div class="day-card-header">
+                <div class="day-info">
+                  <div class="date">DAY 5 · 12/17 (二)</div>
+                  <div class="location">購物 · 美食日</div>
+                </div>
+                <div class="day-tag">戰利品 · 最後補貨</div>
+              </div>
+              <div class="spots-list"></div>
+              <div class="advice-card">
+                <div>
+                  <div class="advice-row-title">建議穿著</div>
+                  <div class="advice-row-sub">輕便為主，可留出空間背戰利品回家。</div>
+                </div>
+                <div>
+                  <div class="advice-row-title">天氣 / 雪況小提醒</div>
+                  <div class="advice-row-sub">留意隔天回程時間，若遇天候不佳可提前調整行程。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="day-panel" data-day="d6">
+            <article class="day-card">
+              <div class="day-card-header">
+                <div class="day-info">
+                  <div class="date">DAY 6 · 12/18 (三)</div>
+                  <div class="location">回程 · 福岡機場</div>
+                </div>
+                <div class="day-tag">打包 · 道別</div>
+              </div>
+              <div class="spots-list"></div>
+              <div class="advice-card">
+                <div>
+                  <div class="advice-row-title">建議穿著</div>
+                  <div class="advice-row-sub">以舒適為主，適合坐飛機的長時間穿搭。</div>
+                </div>
+                <div>
+                  <div class="advice-row-title">天氣 / 雪況小提醒</div>
+                  <div class="advice-row-sub">注意台灣與福岡的溫差，外套先準備好在身邊。</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- 福岡美食必買 -->
+          <div class="day-panel" data-day="food">
+            <article class="day-card">
+              <div class="checklist-header">
+                <span>福岡美食必買清單</span>
+              </div>
+              <div class="checklist-sub">用勾選記錄已買 & 可幫每一樣拍照留念。</div>
+              <div class="checklist-items" id="food-list">
+                <!-- 預設三項 -->
+              </div>
+              <button class="btn-add-item" data-target="food-list">
+                <span>＋</span><span>新增美食項目</span>
+              </button>
+            </article>
+          </div>
+
+          <!-- 福岡藥妝必買 -->
+          <div class="day-panel" data-day="drug">
+            <article class="day-card">
+              <div class="checklist-header">
+                <span>福岡藥妝必買清單</span>
+              </div>
+              <div class="checklist-sub">面膜、感冒藥、保健品…都用勾的，不怕漏買。</div>
+              <div class="checklist-items" id="drug-list">
+                <!-- 預設三項 -->
+              </div>
+              <button class="btn-add-item" data-target="drug-list">
+                <span>＋</span><span>新增藥妝項目</span>
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 指南 Tab -->
+      <section id="tab-guide" class="tab-page">
+        <div class="section-title">旅行小指南</div>
+
+        <article class="guide-card">
+          <h3>交通建議</h3>
+          <ul class="guide-list">
+            <li>福岡市區以地鐵＋巴士為主，博多－天神間移動很方便。</li>
+            <li>若有前往由布院、太宰府，可事先查好 JR / 私鐵時刻。</li>
+            <li>可將常用路線先加到 Google Maps 收藏夾。</li>
+          </ul>
+        </article>
+
+        <article class="guide-card">
+          <h3>付款方式</h3>
+          <ul class="guide-list">
+            <li>大多數店家可刷信用卡，建議準備一張免手續費或回饋較高的卡。</li>
+            <li>小吃店、屋台、鄉下地區仍建議準備部分現金。</li>
+            <li>交通可考慮 Suica / ICOCA 等交通卡，手機綁定更方便。</li>
+          </ul>
+        </article>
+
+        <article class="guide-card">
+          <h3>其他小提醒</h3>
+          <ul class="guide-list">
+            <li>飯店 check-in / check-out 時間確認好，避免行李卡在路上。</li>
+            <li>藥妝＆美食清單可以先在「美食 / 藥妝必買」頁預填好。</li>
+            <li>每天睡前整理 2–3 張照片，當天就把旅記補齊最輕鬆。</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- 天氣 Tab -->
+      <section id="tab-weather" class="tab-page">
+        <div class="section-title">天氣 & 穿搭參考</div>
+        <p class="weather-note">
+          建議出發前再看一次福岡最近一週預報，把白天 / 夜晚溫差、是否下雨記起來，
+          這樣每天要穿什麼就不會慌。
+        </p>
+
+        <div class="weather-grid">
+          <!-- 這裡先放示意，可依實際預報改文字 -->
+          <div class="weather-day-card">
+            <div class="weather-left">
+              <div class="weather-date">12/13 (五)</div>
+              <div class="weather-desc">多雲，偶有陽光</div>
+            </div>
+            <div class="weather-right">
+              <div class="weather-temp">約 8–15°C</div>
+              <div class="weather-tag">薄大衣＋長袖</div>
+            </div>
+          </div>
+
+          <div class="weather-day-card">
+            <div class="weather-left">
+              <div class="weather-date">12/14 (六)</div>
+              <div class="weather-desc">可能有小雨</div>
+            </div>
+            <div class="weather-right">
+              <div class="weather-temp">約 7–13°C</div>
+              <div class="weather-tag">防水鞋＋折傘</div>
+            </div>
+          </div>
+
+          <div class="weather-day-card">
+            <div class="weather-left">
+              <div class="weather-date">12/15 (日)</div>
+              <div class="weather-desc">山區較冷</div>
+            </div>
+            <div class="weather-right">
+              <div class="weather-temp">約 2–10°C</div>
+              <div class="weather-tag">羽絨外套＋圍巾</div>
+            </div>
+          </div>
+
+          <div class="weather-day-card">
+            <div class="weather-left">
+              <div class="weather-date">12/16–18</div>
+              <div class="weather-desc">依實際預報調整</div>
+            </div>
+            <div class="weather-right">
+              <div class="weather-temp">約 6–14°C</div>
+              <div class="weather-tag">洋蔥式穿搭</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 底部導覽 -->
+    <nav class="bottom-nav">
+      <div class="bottom-nav-inner">
+        <button class="nav-btn nav-active" data-tab="itinerary">
+          <span class="icon">🗓</span>
+          <span>行程</span>
+        </button>
+        <button class="nav-btn" data-tab="guide">
+          <span class="icon">📖</span>
+          <span>指南</span>
+        </button>
+        <button class="nav-btn" data-tab="weather">
+          <span class="icon">☁️</span>
+          <span>天氣</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    // 底部 Tab 切換
+    const navButtons = document.querySelectorAll(".nav-btn");
+    const tabPages = {
+      itinerary: document.getElementById("tab-itinerary"),
+      guide: document.getElementById("tab-guide"),
+      weather: document.getElementById("tab-weather"),
+    };
+
+    navButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tab = btn.dataset.tab;
+        navButtons.forEach(b => b.classList.remove("nav-active"));
+        btn.classList.add("nav-active");
+        Object.values(tabPages).forEach(page => page.classList.remove("active"));
+        tabPages[tab].classList.add("active");
+      });
+    });
+
+    // 行程每日切換（含美食/藥妝頁）
+    const dayChips = document.querySelectorAll(".day-chip");
+    const dayPanels = document.querySelectorAll(".day-panel");
+
+    dayChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        const targetDay = chip.dataset.day;
+        dayChips.forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        dayPanels.forEach(panel => {
+          panel.classList.toggle("active", panel.dataset.day === targetDay);
+        });
+      });
+    });
+
+    // 景點照片上傳預覽
+    function bindSpotUploads() {
+      const inputs = document.querySelectorAll(".js-spot-upload");
+      inputs.forEach(input => {
+        input.addEventListener("change", () => {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          const card = input.closest(".spot-card");
+          if (!card) return;
+          const img = card.querySelector(".spot-photo");
+          const placeholder = card.querySelector(".spot-photo-placeholder");
+
+          const reader = new FileReader();
+          reader.onload = e => {
+            img.src = e.target.result;
+            img.style.display = "block";
+            if (placeholder) placeholder.style.display = "none";
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+    }
+
+    // Google Maps 按鈕（目前直接開連結；之後可替換成實際地點）
+    document.querySelectorAll(".btn-ghost[data-map-url]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const url = btn.getAttribute("data-map-url");
+        if (url) window.open(url, "_blank");
+      });
+    });
+
+    // 美食 / 藥妝 checklist 動態產生
+    function createChecklistItem(placeholderText) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "check-card";
+      wrapper.innerHTML = `
+        <div class="check-left">
+          <input type="checkbox" />
+        </div>
+        <div class="check-main">
+          <input type="text" placeholder="${placeholderText}" />
+          <div class="check-label">勾選代表已買入 / 已完成</div>
+          <label class="input-file">
+            <span class="input-file-label">
+              <span class="icon">🖼</span><span>上傳照片</span>
+            </span>
+            <input type="file" accept="image/*" class="js-check-upload" />
+          </label>
+        </div>
+        <div class="check-photo-box">
+          <img class="check-photo" alt="照片預覽" />
+          <div class="check-photo-placeholder">
+            <span>📷</span>
+            <div>戰利品照片</div>
+          </div>
+        </div>
+      `;
+      return wrapper;
+    }
+
+    function initChecklist(listId, defaultPlaceholders) {
+      const listEl = document.getElementById(listId);
+      if (!listEl) return;
+      defaultPlaceholders.forEach(text => {
+        const item = createChecklistItem(text);
+        listEl.appendChild(item);
+      });
+    }
+
+    initChecklist("food-list", ["明太子土產", "拉麵包 / 燒菓子", "車站便當 / 甜點"]);
+    initChecklist("drug-list", ["感冒藥 / 常備藥", "面膜 / 護膚品", "保健食品 / 維他命"]);
+
+    // checklist 新增按鈕
+    document.querySelectorAll(".btn-add-item").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.dataset.target;
+        const listEl = document.getElementById(targetId);
+        if (!listEl) return;
+        const placeholder =
+          targetId === "food-list" ? "輸入美食名稱" : "輸入藥妝名稱";
+        listEl.appendChild(createChecklistItem(placeholder));
+        bindChecklistUploads();
+      });
+    });
+
+    // checklist 照片上傳預覽
+    function bindChecklistUploads() {
+      const inputs = document.querySelectorAll(".js-check-upload");
+      inputs.forEach(input => {
+        if (input._bound) return;
+        input._bound = true;
+        input.addEventListener("change", () => {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          const card = input.closest(".check-card");
+          if (!card) return;
+          const img = card.querySelector(".check-photo");
+          const placeholder = card.querySelector(".check-photo-placeholder");
+          const reader = new FileReader();
+          reader.onload = e => {
+            img.src = e.target.result;
+            img.style.display = "block";
+            if (placeholder) placeholder.style.display = "none";
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+    }
+
+    // 初始綁定
+    bindSpotUploads();
+    bindChecklistUploads();
+
+    // PWA：註冊 Service Worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("./sw.js")
+          .catch(err => console.log("SW registration failed", err));
+      });
+    }
+  </script>
+</body>
+</html>
