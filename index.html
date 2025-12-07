@@ -210,6 +210,50 @@
     line-height: 1.5;
   }
 
+  /* 天氣卡片 */
+  .weather-card {
+    margin: 6px 0 8px;
+    padding: 8px 10px;
+    border-radius: 16px;
+    background: #fdf8ff;
+    border: 1px solid #e5dbff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+  }
+
+  .weather-left {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .weather-temp {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .weather-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .weather-meta {
+    text-align: right;
+  }
+
+  .weather-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .weather-range {
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+
   .section-block {
     margin-top: 10px;
     padding: 9px 10px 8px;
@@ -278,6 +322,20 @@
     line-height: 1.5;
   }
 
+  .item-tools {
+    margin-top: 3px;
+    font-size: 0.74rem;
+  }
+
+  .item-tools a {
+    text-decoration: none;
+    color: var(--blue);
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(42, 111, 232, 0.25);
+    background: rgba(42, 111, 232, 0.04);
+  }
+
   .photo-section {
     margin-top: 10px;
     padding: 9px 10px 10px;
@@ -316,6 +374,57 @@
   .small {
     font-size: 0.72rem;
     color: var(--muted);
+  }
+
+  /* 清單區塊 */
+  .extra-section {
+    margin-top: 18px;
+  }
+
+  .extra-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 14px 14px 12px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 12px;
+  }
+
+  .extra-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+  }
+
+  .extra-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 5px 0;
+    border-top: 1px solid #f0f2f8;
+    font-size: 0.84rem;
+  }
+
+  .checklist-item:first-of-type {
+    border-top: none;
+  }
+
+  .checklist-item input {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--blue);
+    flex-shrink: 0;
+  }
+
+  .checklist-label {
+    flex: 1;
   }
 
   @media (min-width: 768px) {
@@ -378,6 +487,20 @@
             <span>Day 1｜抵達福岡・天神地下街</span>
           </div>
           <div class="day-date">12/13（六）</div>
+
+          <div class="weather-card"
+               data-location="fukuoka"
+               data-date="2025-12-13">
+            <div class="weather-left">
+              <div class="weather-temp" data-role="temp">--°</div>
+              <div class="weather-desc" data-role="desc">載入天氣中…</div>
+            </div>
+            <div class="weather-meta">
+              <div class="weather-label">福岡市・最高 / 最低</div>
+              <div class="weather-range" data-role="range">-- / --</div>
+            </div>
+          </div>
+
           <div class="day-route">
             搭飛機 → 福岡機場 → 搭計程車到飯店 → 天神地下街逛街 →
             博多もつ鍋前田屋 今泉店晚餐 → BOUL'ANGE 買麵包 → 回飯店
@@ -393,7 +516,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">—</div>
             <div class="details">
-              <div class="place">搭乘班機抵達福岡機場</div>
+              <div class="place">福岡機場抵達</div>
               <div class="detail-note">
                 抵達後辦理入境、領行李，建議順便購買交通卡（Suica / 其他 IC 卡）。
               </div>
@@ -404,9 +527,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">—</div>
             <div class="details">
-              <div class="place">搭計程車前往飯店</div>
+              <div class="place">十字生活博多柳橋飯店</div>
               <div class="detail-note">
-                目的地：十字生活博多柳橋飯店（Cross Life Hakata Yanagibashi）。
+                搭計程車前往飯店，放行李、稍作休息。
               </div>
             </div>
           </div>
@@ -422,7 +545,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">下午</div>
             <div class="details">
-              <div class="place">天神地下街逛街</div>
+              <div class="place">天神地下街</div>
               <div class="detail-note">先簡單逛逛，熟悉周邊環境與店家分布。</div>
             </div>
           </div>
@@ -431,9 +554,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">17:00–</div>
             <div class="details">
-              <div class="place">博多もつ鍋 前田屋 今泉店（牛腸鍋）</div>
+              <div class="place">博多もつ鍋 前田屋 今泉店</div>
               <div class="detail-note">
-                營業時間 17:00–00:00，推薦味噌口味，可視狀況排隊或事先訂位。
+                營業時間 17:00–00:00，推薦味噌牛腸鍋，可視狀況排隊或事先訂位。
               </div>
             </div>
           </div>
@@ -473,6 +596,20 @@
             <span>Day 2｜博多車站 & 天神・藥院逛街日</span>
           </div>
           <div class="day-date">12/14（日）</div>
+
+          <div class="weather-card"
+               data-location="fukuoka"
+               data-date="2025-12-14">
+            <div class="weather-left">
+              <div class="weather-temp" data-role="temp">--°</div>
+              <div class="weather-desc" data-role="desc">載入天氣中…</div>
+            </div>
+            <div class="weather-meta">
+              <div class="weather-label">福岡市・最高 / 最低</div>
+              <div class="weather-range" data-role="range">-- / --</div>
+            </div>
+          </div>
+
           <div class="day-route">
             飯店 → 博多車站周邊散步・美食 → 櫛田神社 → 天神 & 藥院逛街 →
             明太子麵包 Full Full / Pain Stock → 爐端 百式 晚餐
@@ -488,7 +625,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">11:00–15:00</div>
             <div class="details">
-              <div class="place">西新初喜 くうてん博多店（壽喜燒）</div>
+              <div class="place">西新初喜 くうてん博多店</div>
               <div class="detail-note">可安排午餐時段享用壽喜燒。</div>
             </div>
           </div>
@@ -519,7 +656,7 @@
             <div class="details">
               <div class="place">博多車站內小吃</div>
               <div class="detail-note">
-                如：稻荷麻糬、如水庵草莓大福等，可當點心與伴手禮。
+                如稻荷麻糬、如水庵草莓大福等，可當點心與伴手禮。
               </div>
             </div>
           </div>
@@ -550,7 +687,7 @@
                 福岡 mina：GU、LOFT、UNIQLO、北村相機店。<br />
                 Solaria 廣場：Moussy、EMODA、Kastane、Beauty &amp; Youth、KBF
                 等。<br />
-                Parco：beams 選物店。<br />
+                Parco：BEAMS 選物店。<br />
                 地下街：Sense of place、靴下屋 等。
               </div>
             </div>
@@ -560,9 +697,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">—</div>
             <div class="details">
-              <div class="place">藥院逛街</div>
+              <div class="place">藥院一帶小店</div>
               <div class="detail-note">
-                none too soon（AFTR 香薰）與 BBB porters 等店鋪。
+                例如 none too soon（AFTR 香薰）、BBB porters 等店鋪。
               </div>
             </div>
           </div>
@@ -577,7 +714,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">10:00–20:00</div>
             <div class="details">
-              <div class="place">明太子麵包 Full Full or Pain Stock</div>
+              <div class="place">明太子麵包 Full Full / Pain Stock</div>
               <div class="detail-note">
                 超人氣明太子麵包。注意：Pain Stock 週一公休。
               </div>
@@ -588,8 +725,8 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">13:00–23:00</div>
             <div class="details">
-              <div class="place">爐端 百式（居酒屋）</div>
-              <div class="detail-note">作為今日晚餐或宵夜的選擇。</div>
+              <div class="place">爐端 百式</div>
+              <div class="detail-note">可作為今日晚餐或宵夜的選擇。</div>
             </div>
           </div>
         </div>
@@ -616,6 +753,20 @@
             <span>Day 3｜太宰府 & 竈門神社・燒肉晚餐</span>
           </div>
           <div class="day-date">12/15（一）</div>
+
+          <div class="weather-card"
+               data-location="dazaifu"
+               data-date="2025-12-15">
+            <div class="weather-left">
+              <div class="weather-temp" data-role="temp">--°</div>
+              <div class="weather-desc" data-role="desc">載入天氣中…</div>
+            </div>
+            <div class="weather-meta">
+              <div class="weather-label">太宰府・最高 / 最低</div>
+              <div class="weather-range" data-role="range">-- / --</div>
+            </div>
+          </div>
+
           <div class="day-route">
             飯店 → 六本松車站 → 吃鮭魚早餐 → 太宰府天滿宮 →
             太宰府市寶滿宮竈門神社 → 天神・藥院逛街 → 燒肉晚餐
@@ -631,7 +782,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">早上</div>
             <div class="details">
-              <div class="place">炉端ノいとおかし（早餐）</div>
+              <div class="place">炉端ノいとおかし</div>
               <div class="detail-note">
                 位於六本松一帶的早餐店，鮭魚套餐或鰻魚套餐可選。
               </div>
@@ -644,9 +795,7 @@
             <div class="details">
               <div class="place">太宰府天滿宮</div>
               <div class="detail-note">
-                可考慮購買觀光套票前往。<br />
-                小吃：松屋 梅枝餅、杉養蜂園柚子蜜（柚子口味飲品）、上岡屋
-                和牛明太子飯等。
+                可考慮購買觀光套票前往。小吃：松屋 梅枝餅、杉養蜂園柚子蜜、上岡屋和牛明太子飯等。
               </div>
             </div>
           </div>
@@ -654,16 +803,16 @@
 
         <div class="section-block">
           <div class="section-title">
-            <span>太宰府市寶滿宮竈門神社</span>
+            <span>寶滿宮 竈門神社</span>
           </div>
 
           <div class="timeline-item">
             <input type="checkbox" class="checkbox" />
             <div class="time">午後</div>
             <div class="details">
-              <div class="place">寶滿宮 竈門神社</div>
+              <div class="place">太宰府市寶滿宮竈門神社</div>
               <div class="detail-note">
-                以良緣、緣結聞名的神社，可安排上山參拜與散步。
+                以緣結聞名的神社，可安排上山參拜與散步。
               </div>
             </div>
           </div>
@@ -678,7 +827,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">傍晚</div>
             <div class="details">
-              <div class="place">天神・藥院逛街</div>
+              <div class="place">天神・藥院逛街（補貨）</div>
               <div class="detail-note">
                 可與前一日未逛完的百貨、選物店搭配，補齊清單。
               </div>
@@ -689,9 +838,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">晚餐</div>
             <div class="details">
-              <div class="place">Yakiniku AGITO HIRAO 或 Nikuichi（肉いち）</div>
+              <div class="place">Yakiniku AGITO HIRAO / 肉いち</div>
               <div class="detail-note">
-                安排一餐燒肉作為太宰府行程的收尾，建議事先查詢是否需訂位。
+                安排一餐燒肉作為太宰府行程收尾，建議事先查詢是否需訂位。
               </div>
             </div>
           </div>
@@ -717,6 +866,20 @@
             <span>Day 4｜小倉城 & 皿倉山夜景</span>
           </div>
           <div class="day-date">12/16（二）</div>
+
+          <div class="weather-card"
+               data-location="kokura"
+               data-date="2025-12-16">
+            <div class="weather-left">
+              <div class="weather-temp" data-role="temp">--°</div>
+              <div class="weather-desc" data-role="desc">載入天氣中…</div>
+            </div>
+            <div class="weather-meta">
+              <div class="weather-label">北九州・最高 / 最低</div>
+              <div class="weather-range" data-role="range">-- / --</div>
+            </div>
+          </div>
+
           <div class="day-route">
             飯店 → 買附近豆皮壽司 → 博多車站 → 吃天婦羅午餐 →
             新幹線到小倉 → 小倉城 → 新幹線到八幡 → 搭接駁車上皿倉山看夜景 →
@@ -733,8 +896,8 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">早上</div>
             <div class="details">
-              <div class="place">海木 豆皮壽司（飯店附近名店）</div>
-              <div class="detail-note">可買來當今日路上點心或午餐搭配。</div>
+              <div class="place">海木 豆皮壽司</div>
+              <div class="detail-note">飯店附近名店，可買來當路上點心或午餐搭配。</div>
             </div>
           </div>
 
@@ -759,9 +922,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">—</div>
             <div class="details">
-              <div class="place">搭乘新幹線至小倉（約 15 分）</div>
+              <div class="place">新幹線：博多 → 小倉</div>
               <div class="detail-note">
-                抵達後步行前往小倉城周邊散步與參觀。
+                約 15 分鐘車程，抵達後步行前往小倉城周邊散步。
               </div>
             </div>
           </div>
@@ -779,8 +942,10 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">—</div>
             <div class="details">
-              <div class="place">搭新幹線至八幡 → 免費接駁車上山</div>
-              <div class="detail-note">預留交通時間前往皿倉山。</div>
+              <div class="place">新幹線：小倉 → 八幡</div>
+              <div class="detail-note">
+                轉乘免費接駁車上皿倉山，預留交通與排隊時間。
+              </div>
             </div>
           </div>
 
@@ -790,7 +955,7 @@
             <div class="details">
               <div class="place">皿倉山展望台</div>
               <div class="detail-note">
-                可眺望日落與福岡、北九州一帶夜景，是今日重點行程。
+                可眺望日落與北九州一帶夜景，是今日重點行程。
               </div>
             </div>
           </div>
@@ -833,6 +998,20 @@
             <span>Day 5｜由布院一日：花卉村・金鱗湖・溫泉</span>
           </div>
           <div class="day-date">12/17（三）</div>
+
+          <div class="weather-card"
+               data-location="yufuin"
+               data-date="2025-12-17">
+            <div class="weather-left">
+              <div class="weather-temp" data-role="temp">--°</div>
+              <div class="weather-desc" data-role="desc">載入天氣中…</div>
+            </div>
+            <div class="weather-meta">
+              <div class="weather-label">由布院・最高 / 最低</div>
+              <div class="weather-range" data-role="range">-- / --</div>
+            </div>
+          </div>
+
           <div class="day-route">
             博多車站 → 搭車前往由布院（推薦由布院之森 CD 座位） →
             釜飯午餐 → Snoopy 茶屋 → 湯布院花卉村 → 金鱗湖 → 飯店泡溫泉 →
@@ -849,9 +1028,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">早上</div>
             <div class="details">
-              <div class="place">博多車站 → 由布院</div>
+              <div class="place">由布院之森 列車</div>
               <div class="detail-note">
-                建議搭乘「由布院之森」列車，若能選 CD 座位視野較佳。
+                從博多車站出發，若能選 CD 座位視野較佳。
               </div>
             </div>
           </div>
@@ -860,7 +1039,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">11:00–22:00</div>
             <div class="details">
-              <div class="place">由布院釜飯「心」</div>
+              <div class="place">由布院釜飯 心</div>
               <div class="detail-note">招牌牛肉、雞肉釜飯，是今日午餐首選。</div>
             </div>
           </div>
@@ -868,15 +1047,15 @@
 
         <div class="section-block">
           <div class="section-title">
-            <span>散步：Snoopy 茶屋 & 湯布院花卉村</span>
+            <span>Snoopy 茶屋 & 湯布院花卉村</span>
           </div>
 
           <div class="timeline-item">
             <input type="checkbox" class="checkbox" />
             <div class="time">09:30–17:30</div>
             <div class="details">
-              <div class="place">Snoopy 茶屋</div>
-              <div class="detail-note">以史努比主題為特色的茶屋，可喝飲品拍照留念。</div>
+              <div class="place">Snoopy 茶屋 由布院</div>
+              <div class="detail-note">史努比主題茶屋，可喝飲品拍照留念。</div>
             </div>
           </div>
 
@@ -886,7 +1065,7 @@
             <div class="details">
               <div class="place">湯布院花卉村</div>
               <div class="detail-note">
-                結合貓頭鷹之森與宮崎駿童話小鎮風格的小村落，適合散步拍照。
+                結合貓頭鷹之森與童話小鎮風格的小村落，適合散步拍照。
               </div>
             </div>
           </div>
@@ -912,7 +1091,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">17:30–22:00</div>
             <div class="details">
-              <div class="place">飯店泡溫泉（Yufuin Lamp no Yado）</div>
+              <div class="place">Yufuin Lamp no Yado 溫泉</div>
               <div class="detail-note">回飯店享受溫泉設施，好好放鬆。</div>
             </div>
           </div>
@@ -921,7 +1100,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">晚餐</div>
             <div class="details">
-              <div class="place">CARNE （雞串燒）</div>
+              <div class="place">CARNE 雞串燒</div>
               <div class="detail-note">作為今日由布院行程的收尾晚餐。</div>
             </div>
           </div>
@@ -948,7 +1127,7 @@
             <div class="details">
               <div class="place">中津炸雞 吉吾</div>
               <div class="detail-note">
-                推薦口味：柚子胡椒炸雞（胸肉）。
+                推薦：柚子胡椒口味炸雞（胸肉）。
               </div>
             </div>
           </div>
@@ -957,7 +1136,7 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">10:00–17:00</div>
             <div class="details">
-              <div class="place">鞠智銅鑼燒 & 金賞可樂餅</div>
+              <div class="place">鞠智銅鑼燒 / 金賞可樂餅</div>
               <div class="detail-note">
                 銅鑼燒與可樂餅皆為熱門小吃，可依行程順路購買。
               </div>
@@ -1014,6 +1193,20 @@
             <span>Day 6｜金鱗湖晨霧・博多伴手禮・回程</span>
           </div>
           <div class="day-date">12/18（四）</div>
+
+          <div class="weather-card"
+               data-location="yufuin"
+               data-date="2025-12-18">
+            <div class="weather-left">
+              <div class="weather-temp" data-role="temp">--°</div>
+              <div class="weather-desc" data-role="desc">載入天氣中…</div>
+            </div>
+            <div class="weather-meta">
+              <div class="weather-label">由布院 / 福岡・最高 / 最低</div>
+              <div class="weather-range" data-role="range">-- / --</div>
+            </div>
+          </div>
+
           <div class="day-route">
           跟飯店租腳踏車 → 早上看金鱗湖晨霧 → 搭車回博多車站（約 2
           小時） → 麵屋兼虎午餐 → 博多車站買伴手禮 → 前往機場逛街 →
@@ -1041,9 +1234,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">早上</div>
             <div class="details">
-              <div class="place">退房 → 搭車返回博多（約 2 小時）</div>
+              <div class="place">由布院 → 博多車站</div>
               <div class="detail-note">
-                回程時間依實際車班而定，請預留足夠空檔以免壓縮購物時間。
+                搭車約兩小時，回程時間依實際車班而定，預留購物空檔。
               </div>
             </div>
           </div>
@@ -1069,10 +1262,9 @@
             <input type="checkbox" class="checkbox" />
             <div class="time">午後</div>
             <div class="details">
-              <div class="place">博多車站購買伴手禮・逛街</div>
+              <div class="place">博多車站伴手禮</div>
               <div class="detail-note">
-                推薦：島本（明太子相關商品）、博多銘品藏（九州限定伴手禮集合）、Butter &amp;
-                bee 等。
+                推薦：島本、博多銘品藏、Butter &amp; bee 等九州限定伴手禮。
               </div>
             </div>
           </div>
@@ -1108,9 +1300,53 @@
         </div>
       </div>
     </section>
+
+    <!-- 額外清單區：想買清單 + 遺憾清單 -->
+    <section class="extra-section">
+      <div class="extra-card">
+        <div class="extra-title">想買清單</div>
+        <div class="extra-note">這裡可以當成「購物雷達」，把 PPT 裡面想買的東西整理進來，邊逛邊打勾。</div>
+
+        <div class="checklist-item">
+          <input type="checkbox">
+          <div class="checklist-label">AUX PARADIS 香水（具體香味可自己填）</div>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox">
+          <div class="checklist-label">AFTR / none too soon 香氛單品</div>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox">
+          <div class="checklist-label">博多車站預定入手的衣服、鞋子或包包（可自行改成品牌名稱）</div>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox">
+          <div class="checklist-label">由布院甜點：Mana Mana 可麗露、B-speak 生乳捲、Milch 布丁</div>
+        </div>
+      </div>
+
+      <div class="extra-card">
+        <div class="extra-title">遺憾清單 / 下次再去</div>
+        <div class="extra-note">這裡可以記錄這次沒排到、或臨時取消的點，下次再訪福岡或九州時用。</div>
+
+        <div class="checklist-item">
+          <input type="checkbox">
+          <div class="checklist-label">這次沒吃到的名店（可以改成店名，例如：一蘭總本店、某家燒肉等）</div>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox">
+          <div class="checklist-label">沒時間去的小景點／咖啡廳（例如：警固公園聖誕燈飾等）</div>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox">
+          <div class="checklist-label">其他城市：例如長崎、熊本或別府（如果之後想排更大圈的行程）</div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
+    // Tab 切換
     const tabButtons = document.querySelectorAll(".tab-btn");
     const daySections = document.querySelectorAll(".day-content");
 
@@ -1127,6 +1363,83 @@
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
       });
+    });
+
+    // Google Maps 連結：自動幫每個 place 生成「地圖」按鈕
+    document.querySelectorAll(".timeline-item").forEach((item) => {
+      const placeEl = item.querySelector(".place");
+      const details = item.querySelector(".details");
+      if (!placeEl || !details) return;
+      const name = placeEl.textContent.trim();
+      if (!name) return;
+
+      const tools = document.createElement("div");
+      tools.className = "item-tools";
+
+      const link = document.createElement("a");
+      const query = encodeURIComponent("福岡 " + name);
+      link.href = "https://www.google.com/maps/search/?api=1&query=" + query;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "地圖";
+
+      tools.appendChild(link);
+      details.appendChild(tools);
+    });
+
+    // 天氣：使用 Open-Meteo API（無需金鑰）
+    const locationConfig = {
+      fukuoka: { lat: 33.59, lon: 130.40 },
+      dazaifu: { lat: 33.52, lon: 130.53 },
+      kokura:  { lat: 33.88, lon: 130.88 },
+      yufuin:  { lat: 33.27, lon: 131.35 }
+    };
+
+    function weatherText(code) {
+      // 簡化版 weathercode 對應
+      if (code === 0) return "晴朗";
+      if (code === 1 || code === 2) return "多雲";
+      if (code === 3) return "陰天";
+      if (code === 45 || code === 48) return "霧 / 霧凇";
+      if ([51,53,55,56,57].includes(code)) return "毛毛雨";
+      if ([61,63,65].includes(code)) return "陣雨";
+      if ([71,73,75,77].includes(code)) return "降雪";
+      if ([80,81,82].includes(code)) return "短暫陣雨";
+      if ([85,86].includes(code)) return "短暫雪陣";
+      if ([95,96,99].includes(code)) return "雷雨";
+      return "多變天氣";
+    }
+
+    async function loadWeatherForCard(card) {
+      const locKey = card.dataset.location;
+      const dateStr = card.dataset.date; // yyyy-mm-dd
+      const cfg = locationConfig[locKey];
+      const tempEl = card.querySelector("[data-role='temp']");
+      const descEl = card.querySelector("[data-role='desc']");
+      const rangeEl = card.querySelector("[data-role='range']");
+
+      if (!cfg || !tempEl || !descEl || !rangeEl) return;
+
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${cfg.lat}&longitude=${cfg.lon}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Asia%2FTokyo&start_date=${dateStr}&end_date=${dateStr}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("weather error");
+        const data = await res.json();
+        const daily = data.daily;
+        const tMax = Math.round(daily.temperature_2m_max[0]);
+        const tMin = Math.round(daily.temperature_2m_min[0]);
+        const code = daily.weathercode[0];
+
+        tempEl.textContent = `${tMax}°`;
+        rangeEl.textContent = `${tMax}° / ${tMin}°`;
+        descEl.textContent = weatherText(code);
+      } catch (e) {
+        descEl.textContent = "無法取得天氣";
+      }
+    }
+
+    document.querySelectorAll(".weather-card").forEach((card) => {
+      loadWeatherForCard(card);
     });
   </script>
 </body>
