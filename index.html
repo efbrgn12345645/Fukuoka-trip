@@ -263,6 +263,12 @@
       color: #b35426;
       margin: 12px 0 10px;
     }
+    .section-subtitle {
+      font-size: 14px;
+      font-weight: 600;
+      color: #7a5a3a;
+      margin: 8px 0 6px;
+    }
     .check-item {
       display: flex;
       align-items: center;
@@ -280,12 +286,32 @@
       flex: 1;
       font-size: 13px;
     }
+    .check-item input[type="text"] {
+      flex: 1;
+      font-size: 13px;
+      border: none;
+      border-bottom: 1px solid #e0cbb0;
+      padding: 2px 0;
+      outline: none;
+      background: transparent;
+    }
     .check-item .upload-btn {
       font-size: 11px;
       padding-inline: 8px;
     }
     .check-item input[type="file"] {
       display: none;
+    }
+
+    .add-btn {
+      margin: 4px 0 10px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px dashed #d7b898;
+      background: #fff7e6;
+      padding: 5px 10px;
+      color: #b45a3c;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -300,7 +326,7 @@
   <!-- Hero 封面 -->
   <section class="hero">
     <div class="hero-img-wrap">
-      <!-- 請準備一張 4:3 的封面圖，檔名：cover.png -->
+      <!-- 請準備一張 4:3 的封面圖，檔名：cover.png，放在跟 index.html 同一層 -->
       <img src="cover.png" alt="福岡旅行封面">
     </div>
   </section>
@@ -326,7 +352,7 @@
 
     <!-- ===== 12/13 ===== -->
     <section class="day-block active" id="d13">
-      <div class="day-title">📍 12/13（六） 抵達福岡</div>
+      <div class="day-title">📍 12/13（六） 抵達福岡・BOUL’ANGE・前田屋</div>
 
       <div class="weather-box">
         <div class="weather-top">
@@ -343,6 +369,7 @@
         </div>
       </div>
 
+      <!-- 抵達福岡 -->
       <div class="card">
         <div class="card-header-line">
           <span class="tag">交通</span>
@@ -351,7 +378,7 @@
           <img src="img/airport.png" alt="機場">
           <div class="card-main-text">
             <b>抵達福岡機場 & 進市區</b>
-            <p>抵達後前往飯店 Check-in，熟悉周邊環境，調整一下步調。</p>
+            <p>從機場搭計程車前往飯店，先放行李、稍微休息，準備開始福岡行程。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Fukuoka+Airport" target="_blank">📍 Google Maps</a>
               <button class="upload-btn" type="button">📷 上傳旅拍</button>
@@ -360,17 +387,37 @@
         </div>
       </div>
 
+      <!-- BOUL’ANGE -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">麵包</span>
+        </div>
+        <div class="card-main">
+          <img src="img/boulange.png" alt="BOUL'ANGE 天神地下街店">
+          <div class="card-main-text">
+            <b>BOUL’ANGE 天神地下街店</b>
+            <p>可以先到天神地下街逛逛，順便買奶油捲、甜甜圈等人氣麵包，當作點心或隔天早餐。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=BOULANGE+Tenjin+Chikagai" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 前田屋 -->
       <div class="card">
         <div class="card-header-line">
           <span class="tag">晚餐</span>
         </div>
         <div class="card-main">
-          <img src="img/hakata_dinner.png" alt="博多晚餐">
+          <img src="img/maedaya.png" alt="博多もつ鍋 前田屋 今泉店">
           <div class="card-main-text">
-            <b>博多晚餐 & 屋台散步</b>
-            <p>簡單吃一餐，順便在博多附近散步，感受第一天的福岡氛圍。</p>
+            <b>博多もつ鍋 前田屋 今泉店</b>
+            <p>著名的牛腸鍋名店，以味噌湯底為主，適合第一天好好暖身的晚餐。</p>
+            <span class="sticker">⏰ 17:00–00:00 · 味噌口味牛腸鍋</span>
             <div class="card-actions">
-              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Hakata+Yatai" target="_blank">📍 Google Maps</a>
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Maedaya+Imaizumi" target="_blank">📍 Google Maps</a>
               <button class="upload-btn" type="button">📷 上傳旅拍</button>
             </div>
           </div>
@@ -406,7 +453,7 @@
           <img src="img/painstock.png" alt="Pain Stock">
           <div class="card-main-text">
             <b>Pain Stock 麵包店</b>
-            <p>福岡超人氣麵包店，酥脆外皮與香氣十足的麵包，非常適合當旅行第一天的慢早餐。</p>
+            <p>福岡超人氣麵包店，酥脆外皮與香氣十足的麵包，非常適合當旅行的慢早餐。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Pain+Stock+Fukuoka" target="_blank">📍 Google Maps</a>
               <button class="upload-btn" type="button">📷 上傳旅拍</button>
@@ -455,7 +502,7 @@
 
     <!-- ===== 12/15 ===== -->
     <section class="day-block" id="d15">
-      <div class="day-title">📍 12/15（一） 櫛田神社・西新初喜・Full Full・Koyama</div>
+      <div class="day-title">📍 12/15（一） 櫛田神社・鈴懸・西新初喜・博多車站小吃</div>
 
       <div class="weather-box">
         <div class="weather-top">
@@ -490,6 +537,24 @@
         </div>
       </div>
 
+      <!-- 鈴懸 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">甜點</span>
+        </div>
+        <div class="card-main">
+          <img src="img/suzukake.png" alt="鈴懸">
+          <div class="card-main-text">
+            <b>鈴懸</b>
+            <p>以銅鑼燒、草莓大福等和菓子聞名，可以內用或外帶，是這天很重要的一站。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Suzukake+Fukuoka" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- 西新初喜 くうてん -->
       <div class="card">
         <div class="card-header-line">
@@ -503,6 +568,24 @@
             <span class="sticker">⏰ 11:00 訂位 · 四位</span>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Nishin+Hatsuki+Hakata" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 博多車站小吃類 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">小吃</span>
+        </div>
+        <div class="card-main">
+          <img src="img/hakata_snacks.png" alt="博多車站小吃">
+          <div class="card-main-text">
+            <b>博多車站小吃類</b>
+            <p>稻荷麻糬、如水庵草莓大福等，可以在車站一口氣吃好幾攤，當作下午點心時間。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Hakata+Station+Snacks" target="_blank">📍 Google Maps</a>
               <button class="upload-btn" type="button">📷 上傳旅拍</button>
             </div>
           </div>
@@ -527,7 +610,7 @@
         </div>
       </div>
 
-      <!-- Koyama Parking -->
+      <!-- Koyama -->
       <div class="card">
         <div class="card-header-line">
           <span class="tag">晚餐</span>
@@ -722,7 +805,7 @@
           <img src="img/train_airport.png" alt="返回福岡機場">
           <div class="card-main-text">
             <b>由布院 → 福岡機場</b>
-            <p>整理行李、準備回程，可以在機場再買最後一輪伴手禮。</p>
+            <p>整理行李、準備回程，可以在博多車站與機場再買最後一輪伴手禮。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Fukuoka+Airport" target="_blank">📍 Google Maps</a>
               <button class="upload-btn" type="button">📷 上傳旅拍</button>
@@ -737,40 +820,78 @@
   <section class="page" id="mustbuy">
     <div class="section-title">🛍 福岡必買清單</div>
 
-    <div class="check-item">
-      <input type="checkbox" id="mb1">
-      <label for="mb1">明太子（可常溫 / 冷藏）</label>
-      <input type="file" class="photo-input" accept="image/*">
-      <button class="upload-btn" type="button">📷 上傳</button>
-    </div>
+    <!-- 美食 / 伴手禮 -->
+    <div class="section-subtitle">🍱 美食 / 伴手禮</div>
+    <div id="food-list">
+      <div class="check-item">
+        <input type="checkbox" id="mb1">
+        <label for="mb1">明太子（可常溫 / 冷藏）</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
 
-    <div class="check-item">
-      <input type="checkbox" id="mb2">
-      <label for="mb2">博多通りもん</label>
-      <input type="file" class="photo-input" accept="image/*">
-      <button class="upload-btn" type="button">📷 上傳</button>
-    </div>
+      <div class="check-item">
+        <input type="checkbox" id="mb2">
+        <label for="mb2">博多通りもん</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
 
-    <div class="check-item">
-      <input type="checkbox" id="mb3">
-      <label for="mb3">福砂屋 長崎蛋糕</label>
-      <input type="file" class="photo-input" accept="image/*">
-      <button class="upload-btn" type="button">📷 上傳</button>
-    </div>
+      <div class="check-item">
+        <input type="checkbox" id="mb3">
+        <label for="mb3">福砂屋 長崎蛋糕</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
 
-    <div class="check-item">
-      <input type="checkbox" id="mb4">
-      <label for="mb4">梅ヶ枝餅（冷凍帶回）</label>
-      <input type="file" class="photo-input" accept="image/*">
-      <button class="upload-btn" type="button">📷 上傳</button>
-    </div>
+      <div class="check-item">
+        <input type="checkbox" id="mb4">
+        <label for="mb4">梅ヶ枝餅（冷凍帶回）</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
 
-    <div class="check-item">
-      <input type="checkbox" id="mb5">
-      <label for="mb5">一蘭拉麵禮盒 / 泡麵</label>
-      <input type="file" class="photo-input" accept="image/*">
-      <button class="upload-btn" type="button">📷 上傳</button>
+      <div class="check-item">
+        <input type="checkbox" id="mb5">
+        <label for="mb5">一蘭拉麵禮盒 / 泡麵</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
     </div>
+    <button class="add-btn" data-target="food-list">＋ 新增一項（美食 / 伴手禮）</button>
+
+    <!-- 藥妝清單 -->
+    <div class="section-subtitle">💊 藥妝清單</div>
+    <div id="drug-list">
+      <div class="check-item">
+        <input type="checkbox" id="dr1">
+        <label for="dr1">感冒藥 / 止痛藥（如 Eve 等）</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" id="dr2">
+        <label for="dr2">眼藥水（ROHTO、獅王等）</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" id="dr3">
+        <label for="dr3">貼布 / 肩頸痠痛貼</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" id="dr4">
+        <label for="dr4">保養品補貨（卸妝、化妝水等）</label>
+        <input type="file" class="photo-input" accept="image/*">
+        <button class="upload-btn" type="button">📷 上傳</button>
+      </div>
+    </div>
+    <button class="add-btn" data-target="drug-list">＋ 新增一項（藥妝）</button>
   </section>
 
   <!-- ================= 由布院美食 ================= -->
@@ -814,7 +935,7 @@
 
     <div class="check-item">
       <input type="checkbox" id="yf6">
-      <label for="yf6">湯布院咖啡 / 抹茶甜點</label>
+      <label for="yf6">湯布咖啡 / 抹茶甜點</label>
       <input type="file" class="photo-input" accept="image/*">
       <button class="upload-btn" type="button">📷 上傳</button>
     </div>
@@ -851,22 +972,50 @@
       });
     });
 
-    // 必買 & 由布院清單：上傳按鈕觸發檔案選擇
-    document.querySelectorAll(".check-item").forEach(item => {
+    // 給單一 .check-item 設定上傳邏輯
+    function setupUploadItem(item) {
       const fileInput = item.querySelector(".photo-input");
       const uploadBtn = item.querySelector(".upload-btn");
-      if (fileInput && uploadBtn) {
-        uploadBtn.addEventListener("click", () => {
-          fileInput.click();
-        });
-        fileInput.addEventListener("change", () => {
-          if (fileInput.files && fileInput.files.length > 0) {
-            uploadBtn.textContent = "✅ 已選照片";
-          } else {
-            uploadBtn.textContent = "📷 上傳";
-          }
-        });
-      }
+      if (!fileInput || !uploadBtn) return;
+
+      uploadBtn.addEventListener("click", () => {
+        fileInput.click();
+      });
+      fileInput.addEventListener("change", () => {
+        if (fileInput.files && fileInput.files.length > 0) {
+          uploadBtn.textContent = "✅ 已選照片";
+        } else {
+          uploadBtn.textContent = "📷 上傳";
+        }
+      });
+    }
+
+    // 初始化現有所有 check-item 的上傳功能
+    document.querySelectorAll(".check-item").forEach(setupUploadItem);
+
+    // 「新增一項」按鈕（美食 / 藥妝）
+    document.querySelectorAll(".add-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.getAttribute("data-target");
+        const list = document.getElementById(targetId);
+        if (!list) return;
+
+        const index = list.querySelectorAll(".check-item").length + 1;
+        const wrapper = document.createElement("div");
+        wrapper.className = "check-item";
+
+        const checkboxId = targetId + "_dynamic_" + index;
+
+        wrapper.innerHTML = `
+          <input type="checkbox" id="${checkboxId}">
+          <input type="text" placeholder="在這裡輸入品項名稱" />
+          <input type="file" class="photo-input" accept="image/*">
+          <button class="upload-btn" type="button">📷 上傳</button>
+        `;
+
+        list.appendChild(wrapper);
+        setupUploadItem(wrapper);
+      });
     });
   </script>
 
