@@ -1,323 +1,874 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>12/13–12/18 福岡旅行</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12/13–12/18 福岡旅行</title>
 
-<style>
-/* === Font === */
-@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;600&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Zen Maru Gothic',sans-serif;}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 
-/* === Base === */
-body{
-background:#f7f4ef;
-color:#3b3b3b;
-padding-bottom:70px;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Zen Maru Gothic", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-/* === Header === */
-header{
-padding:18px;
-text-align:center;
-font-size:20px;
-font-weight:600;
-background:#fff;
-box-shadow:0 1px 4px rgba(0,0,0,0.05);
-position:sticky;top:0;z-index:999;
-}
+    body {
+      background: #f7f4ef;
+      color: #3b3b3b;
+      padding-bottom: 90px; /* 預留底部 Tab 空間 */
+    }
 
-/* === Tabs === */
-.tab-bar{
-position:fixed;bottom:0;left:0;width:100%;
-background:rgba(255,255,255,0.9);
-backdrop-filter:blur(10px);
-display:flex;justify-content:space-around;padding:10px 0;
-box-shadow:0 -2px 6px rgba(0,0,0,0.05);
-}
-.tab-bar button{
-background:transparent;border:none;font-size:15px;padding:8px 15px;
-border-radius:12px;color:#666;transition:0.2s;
-}
-.tab-bar button.active{background:#ffedd1;color:#b45a3c;font-weight:600;}
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #b35426;
+    }
+    header p {
+      font-size: 13px;
+      color: #777;
+      margin-top: 2px;
+    }
 
-/* === Section Pages === */
-.page{display:none;padding:18px;}
-.page.active{display:block;}
+    /* Hero 封面 */
+    .hero {
+      padding: 12px 16px 4px;
+    }
+    .hero-img-wrap {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 3;   /* 封面建議 4:3 的 cover.png */
+      object-fit: cover;
+    }
 
-/* === Day Title === */
-.day-title{
-margin:10px 0 6px;
-font-weight:600;
-color:#b35426;
-font-size:18px;
-}
+    /* Tabs (底部導覽) */
+    .tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0 10px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+      z-index: 1000;
+    }
+    .tab-bar button {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      color: #777;
+      cursor: pointer;
+    }
+    .tab-bar button.active {
+      background: #ffedd1;
+      color: #b45a3c;
+      font-weight: 600;
+    }
 
-/* === Card === */
-.card{
-background:#fff;border-radius:14px;padding:12px;margin-bottom:14px;
-box-shadow:0 2px 6px rgba(0,0,0,0.05);
-display:flex;flex-direction:column;gap:10px;
-}
+    /* 主頁內容 Wrapper */
+    .page {
+      display: none;
+      padding: 0 16px 16px;
+    }
+    .page.active {
+      display: block;
+    }
 
-/* === Media + Text === */
-.card-content{display:flex;gap:10px;}
-.card img{
-width:50%;height:95px;border-radius:12px;object-fit:cover;
-}
+    /* 行程頁：每日切換條 */
+    .day-switch {
+      display: flex;
+      gap: 6px;
+      margin: 10px 0 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .day-switch button {
+      border: none;
+      padding: 6px 10px;
+      font-size: 13px;
+      border-radius: 999px;
+      background: #f1e3d2;
+      color: #7a5a3a;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .day-switch button.active {
+      background: #d46f3b;
+      color: #fff;
+      font-weight: 600;
+    }
 
-/* === Category Tag === */
-.tag{
-display:inline-block;padding:3px 8px;font-size:12px;
-background:#ffe0b8;color:#8a4a2e;border-radius:10px;margin-bottom:4px;
-}
+    /* 每日區塊 */
+    .day-block {
+      display: none;
+      margin-top: 4px;
+    }
+    .day-block.active {
+      display: block;
+    }
 
-/* === Yellow Sticker === */
-.sticker{
-background:#fff5c7;
-display:inline-block;
-padding:4px 8px;
-font-size:12px;
-border-radius:6px;
-transform:rotate(-1.5deg);
-position:relative;
-color:#8a4a2e;
-font-weight:600;
-margin-top:4px;
-}
-.sticker:before{
-content:"";
-position:absolute;top:-6px;left:5px;
-width:22px;height:11px;
-background:url('stickertape.png');background-size:cover;
-opacity:0.75;
-}
+    /* 每日標題 */
+    .day-title {
+      margin: 4px 0 6px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #b35426;
+    }
 
-/* === Weather === */
-.weather-box{
-background:#fff5dc;
-border-radius:12px;padding:10px;margin-bottom:6px;
-font-size:13px;color:#8a4a2e;font-weight:600;
-}
+    /* 天氣區塊 */
+    .weather-box {
+      background: #fff5dc;
+      border-radius: 12px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #8a4a2e;
+    }
+    .weather-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .weather-top span:first-child {
+      font-weight: 600;
+    }
+    .wear-tip {
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .weather-hours {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      font-size: 11px;
+    }
+    .weather-hour-item {
+      min-width: 52px;
+      text-align: center;
+      padding: 3px 0;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.85);
+    }
 
-/* === Checklist === */
-.check-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.check-item input{transform:scale(1.3);}
-.check-item label{flex:1;}
-.upload-btn{
-font-size:12px;color:#b45a3c;border:1px dashed #b45a3c;
-background:#fff;padding:3px 6px;border-radius:6px;
-}
+    /* 卡片樣式 */
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-header-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 11px;
+      background: #ffe0b8;
+      color: #8a4a2e;
+      border-radius: 999px;
+    }
+    .card-main {
+      display: flex;
+      gap: 10px;
+    }
+    .card-main img {
+      width: 50%;
+      height: 95px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #ddd;
+    }
+    .card-main-text {
+      flex: 1;
+      font-size: 13px;
+    }
+    .card-main-text b {
+      font-size: 14px;
+    }
+    .card-main-text p {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #666;
+    }
 
-/* === Small Note === */
-.note{font-size:12px;color:#8a4a2e;margin-top:-4px;margin-bottom:6px;}
-</style>
+    /* 貼紙 */
+    .sticker {
+      display: inline-block;
+      background: #fff5c7;
+      padding: 3px 8px;
+      font-size: 11px;
+      border-radius: 6px;
+      transform: rotate(-1.5deg);
+      position: relative;
+      color: #8a4a2e;
+      font-weight: 600;
+      margin-top: 4px;
+    }
 
+    /* 按鈕群組 */
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+    .nav-btn, .upload-btn {
+      border-radius: 999px;
+      border: 1px solid #d7b898;
+      background: #fff;
+      font-size: 11px;
+      padding: 4px 10px;
+      color: #b45a3c;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Checklist （必買清單、由布院） */
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #b35426;
+      margin: 12px 0 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    .check-item input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+    .check-item label {
+      flex: 1;
+      font-size: 13px;
+    }
+    .check-item .upload-btn {
+      font-size: 11px;
+      padding-inline: 8px;
+    }
+    .check-item input[type="file"] {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-<header>12/13–12/18 福岡旅行</header>
+  <!-- Header -->
+  <header>
+    <h1>12/13–12/18 福岡旅行</h1>
+    <p>Hakata · Tenjin · Yufuin Travel Log</p>
+  </header>
 
-<!-- === Tabs === -->
-<div class="tab-bar">
-<button class="active" onclick="switchTab('itinerary')">行程</button>
-<button onclick="switchTab('mustbuy')">必買清單</button>
-<button onclick="switchTab('yufuin')">由布院美食</button>
-</div>
+  <!-- Hero 封面 -->
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <!-- 請準備一張 4:3 的封面圖，檔名：cover.png -->
+      <img src="cover.png" alt="福岡旅行封面">
+    </div>
+  </section>
 
-<!-- ================= ITINERARY =================== -->
-<div class="page active" id="itinerary">
+  <!-- Tabs -->
+  <nav class="tab-bar">
+    <button class="active" data-tab="itinerary">行程</button>
+    <button data-tab="mustbuy">必買清單</button>
+    <button data-tab="yufuin">由布院美食</button>
+  </nav>
 
-<!-- ===== 12/14 ===== -->
-<div class="day-title">📍 12/14（六）</div>
+  <!-- ================= 行程頁 ================= -->
+  <main class="page active" id="itinerary">
+    <!-- 每日切換條 -->
+    <div class="day-switch">
+      <button class="active" data-day="d13">12/13</button>
+      <button data-day="d14">12/14</button>
+      <button data-day="d15">12/15</button>
+      <button data-day="d16">12/16</button>
+      <button data-day="d17">12/17</button>
+      <button data-day="d18">12/18</button>
+    </div>
 
-<div class="weather-box">⛅ 每小時天氣 + 穿著建議（自動顯示）</div>
+    <!-- ===== 12/13 ===== -->
+    <section class="day-block active" id="d13">
+      <div class="day-title">📍 12/13（六） 抵達福岡</div>
 
-<!-- Breakfast Pain Stock -->
-<div class="card">
-<div class="tag">食物</div>
-<div class="card-content">
-<img src="img/painstock.png" />
-<div>
-<b>Pain Stock 麵包店</b>
-<p class="note">人氣麵包・早餐推薦</p>
-</div>
-</div>
-</div>
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>福岡市 · 晴時多雲 · 6–13°C</span>
+          <span>體感偏冷</span>
+        </div>
+        <div class="wear-tip">建議穿著：保暖外套＋長袖上衣＋長褲，可加薄圍巾。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">09:00<br>7°</div>
+          <div class="weather-hour-item">12:00<br>11°</div>
+          <div class="weather-hour-item">15:00<br>12°</div>
+          <div class="weather-hour-item">18:00<br>9°</div>
+          <div class="weather-hour-item">21:00<br>7°</div>
+        </div>
+      </div>
 
-<!-- Hakata/Tenjin -->
-<div class="card">
-<div class="tag">逛街</div>
-<div class="card-content">
-<img src="img/tenjin.png" />
-<div>
-<b>博多 / 天神逛街</b>
-</div>
-</div>
-</div>
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">交通</span>
+        </div>
+        <div class="card-main">
+          <img src="img/airport.png" alt="機場">
+          <div class="card-main-text">
+            <b>抵達福岡機場 & 進市區</b>
+            <p>抵達後前往飯店 Check-in，熟悉周邊環境，調整一下步調。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Fukuoka+Airport" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<!-- 山景 -->
-<div class="card">
-<div class="tag">景點</div>
-<div class="card-content">
-<img src="img/sarakurayama.png" />
-<div>
-<b>皿倉山夜景</b><br><span class="sticker">🌅 日落 16:29</span>
-</div>
-</div>
-</div>
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">晚餐</span>
+        </div>
+        <div class="card-main">
+          <img src="img/hakata_dinner.png" alt="博多晚餐">
+          <div class="card-main-text">
+            <b>博多晚餐 & 屋台散步</b>
+            <p>簡單吃一餐，順便在博多附近散步，感受第一天的福岡氛圍。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Hakata+Yatai" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- ===== 12/15 ===== -->
-<div class="day-title">📍 12/15（日）</div>
-<div class="weather-box">⛅ 每小時天氣 + 穿著建議（自動顯示）</div>
+    <!-- ===== 12/14 ===== -->
+    <section class="day-block" id="d14">
+      <div class="day-title">📍 12/14（日） Pain Stock・博多天神・皿倉山</div>
 
-<!-- Kusida -->
-<div class="card">
-<div class="tag">景點</div>
-<div class="card-content">
-<img src="img/kusida.png" />
-<div>
-<b>櫛田神社</b>
-</div>
-</div>
-</div>
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>福岡市 · 多雲時晴 · 6–12°C</span>
+          <span>日夜溫差大</span>
+        </div>
+        <div class="wear-tip">建議穿著：保暖外套＋針織上衣，山上請加帽子或圍巾。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">08:00<br>6°</div>
+          <div class="weather-hour-item">11:00<br>10°</div>
+          <div class="weather-hour-item">14:00<br>11°</div>
+          <div class="weather-hour-item">17:00<br>8°</div>
+          <div class="weather-hour-item">20:00<br>6°</div>
+        </div>
+      </div>
 
-<!-- Sukiyaki -->
-<div class="card">
-<div class="tag">食物</div>
-<div class="card-content">
-<img src="img/nisin.png" />
-<div>
-<b>西新初喜 くうてん（壽喜燒）</b><br><span class="sticker">⏰ 11:00 訂位 四位</span>
-</div>
-</div>
-</div>
+      <!-- Pain Stock 早餐 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">食物</span>
+        </div>
+        <div class="card-main">
+          <img src="img/painstock.png" alt="Pain Stock">
+          <div class="card-main-text">
+            <b>Pain Stock 麵包店</b>
+            <p>福岡超人氣麵包店，酥脆外皮與香氣十足的麵包，非常適合當旅行第一天的慢早餐。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Pain+Stock+Fukuoka" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<!-- FullFull -->
-<div class="card">
-<div class="tag">點心</div>
-<div class="card-content">
-<img src="img/fullfull.png" />
-<div>
-<b>Full Full 明太子麵包</b>
-</div>
-</div>
-</div>
+      <!-- 博多天神逛街 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">逛街</span>
+        </div>
+        <div class="card-main">
+          <img src="img/tenjin.png" alt="博多天神逛街">
+          <div class="card-main-text">
+            <b>博多・天神逛街</b>
+            <p>百貨、藥妝、服飾一次逛好逛滿，也可以順路踩點喜歡的咖啡廳與甜點店。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Tenjin+Fukuoka" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<!-- Koyama -->
-<div class="card">
-<div class="tag">晚餐</div>
-<div class="card-content">
-<img src="img/koyama.png" />
-<div>
-<b>Koyama Parking 晚餐</b><br><span class="sticker">⏰ 20:00 訂位 四位</span>
-</div>
-</div>
-</div>
+      <!-- 皿倉山 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <img src="img/sarakurayama.png" alt="皿倉山夜景">
+          <div class="card-main-text">
+            <b>皿倉山夜景</b>
+            <p>搭乘纜車上山，俯瞰北九州夜景，被稱為「100 億美元的夜景」。</p>
+            <span class="sticker">🌅 日落時間：16:29</span>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Sarakurayama" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- ===== 12/16 ===== -->
-<div class="day-title">📍 12/16（一）</div>
-<div class="weather-box">⛅ 每小時天氣 + 穿著建議（自動顯示）</div>
+    <!-- ===== 12/15 ===== -->
+    <section class="day-block" id="d15">
+      <div class="day-title">📍 12/15（一） 櫛田神社・西新初喜・Full Full・Koyama</div>
 
-<div class="card">
-<div class="tag">早餐</div>
-<div class="card-content">
-<img src="img/robata.png" />
-<div>
-<b>炉端ノいとおかし</b><br><span class="sticker">⏰ 9:00 訂位 四位</span>
-</div>
-</div>
-</div>
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>福岡市 · 多雲 · 5–11°C</span>
+          <span>微冷</span>
+        </div>
+        <div class="wear-tip">建議穿著：毛衣＋風衣或保暖外套，下身長褲、包鞋。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">09:00<br>6°</div>
+          <div class="weather-hour-item">12:00<br>10°</div>
+          <div class="weather-hour-item">15:00<br>10°</div>
+          <div class="weather-hour-item">18:00<br>8°</div>
+          <div class="weather-hour-item">21:00<br>6°</div>
+        </div>
+      </div>
 
-<div class="card">
-<div class="tag">景點</div>
-<div class="card-content">
-<img src="img/tenmangu.png" />
-<div>
-<b>太宰府天滿宮</b>
-</div>
-</div>
-</div>
+      <!-- 櫛田神社 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <img src="img/kushida.png" alt="櫛田神社">
+          <div class="card-main-text">
+            <b>櫛田神社</b>
+            <p>博多的總鎮守，氣氛沉穩安靜，可以抽籤、慢慢在境內散步拍照。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Kushida+Shrine" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="card">
-<div class="tag">景點</div>
-<div class="card-content">
-<img src="img/kamado.png" />
-<div>
-<b>寶滿宮 竈門神社</b>
-</div>
-</div>
-</div>
+      <!-- 西新初喜 くうてん -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">食物</span>
+        </div>
+        <div class="card-main">
+          <img src="img/nishin_hatsuki.png" alt="西新初喜">
+          <div class="card-main-text">
+            <b>西新初喜 くうてん博多店（壽喜燒）</b>
+            <p>主打高品質和牛壽喜燒，肉質油花漂亮，是此行重要的一餐。</p>
+            <span class="sticker">⏰ 11:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Nishin+Hatsuki+Hakata" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="card">
-<div class="tag">逛街</div>
-<div class="card-content">
-<img src="img/tenjin.png" />
-<div>
-<b>博多 / 天神逛街</b>
-</div>
-</div>
-</div>
+      <!-- Full Full -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">點心</span>
+        </div>
+        <div class="card-main">
+          <img src="img/fullfull.png" alt="Full Full 明太子麵包">
+          <div class="card-main-text">
+            <b>Full Full 明太子麵包（天神店）</b>
+            <p>超熱門的明太子麵包，外酥內軟、明太子香氣很重，適合當散步點心。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Full+Full+Tenjin" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="card">
-<div class="tag">晚餐</div>
-<div class="card-content">
-<img src="img/nikuichi.png" />
-<div>
-<b>Nikuichi 肉いち</b><br><span class="sticker">⏰ 22:00 訂位 四位</span>
-</div>
-</div>
-</div>
+      <!-- Koyama Parking -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">晚餐</span>
+        </div>
+        <div class="card-main">
+          <img src="img/koyama.png" alt="Koyama Parking">
+          <div class="card-main-text">
+            <b>Koyama Parking 晚餐</b>
+            <p>氣氛輕鬆的晚餐時光，適合好好聊天收尾這一天。</p>
+            <span class="sticker">⏰ 20:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Koyama+Parking+Fukuoka" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div><!-- End itinerary -->
+    <!-- ===== 12/16 ===== -->
+    <section class="day-block" id="d16">
+      <div class="day-title">📍 12/16（二） 太宰府・竈門神社・博多天神・Nikuichi</div>
 
-<!-- ================= MUST BUY =================== -->
-<div class="page" id="mustbuy">
-<h3>🛍 福岡必買清單</h3><br>
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>福岡市 · 陰時雨 · 4–10°C</span>
+          <span>偏冷微濕</span>
+        </div>
+        <div class="wear-tip">建議穿著：防風外套＋毛衣，備雨具，鞋子建議不易滑。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">09:00<br>5°</div>
+          <div class="weather-hour-item">12:00<br>8°</div>
+          <div class="weather-hour-item">15:00<br>9°</div>
+          <div class="weather-hour-item">18:00<br>7°</div>
+          <div class="weather-hour-item">21:00<br>5°</div>
+        </div>
+      </div>
 
-<div class="check-item">
-<input type="checkbox"><label>明太子（辣度可選）</label>
-<button class="upload-btn">📷 上傳</button>
-</div>
+      <!-- 炉端ノいとおかし -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">早餐</span>
+        </div>
+        <div class="card-main">
+          <img src="img/robata.png" alt="炉端ノいとおかし">
+          <div class="card-main-text">
+            <b>炉端ノいとおかし</b>
+            <p>預約制的人氣餐廳，享受輕鬆的早午餐時光。</p>
+            <span class="sticker">⏰ 9:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Robata+no+Ito+okashi" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="check-item">
-<input type="checkbox"><label>福砂屋 長崎蛋糕</label>
-<button class="upload-btn">📷 上傳</button>
-</div>
+      <!-- 太宰府天滿宮 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <img src="img/tenmangu.png" alt="太宰府天滿宮">
+          <div class="card-main-text">
+            <b>太宰府天滿宮</b>
+            <p>日本學問之神，每年吸引許多考生與旅人前來參拜，參道兩側小店也很好逛。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Dazaifu+Tenmangu" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="check-item">
-<input type="checkbox"><label>博多通りもん</label>
-<button class="upload-btn">📷 上傳</button>
-</div>
+      <!-- 竈門神社 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <img src="img/kamado.png" alt="竈門神社">
+          <div class="card-main-text">
+            <b>寶滿宮 竈門神社</b>
+            <p>以結緣聞名，境內設計簡約漂亮，很適合拍很多照片。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Kamado+Shrine" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="check-item">
-<input type="checkbox"><label>梅ヶ枝餅</label>
-<button class="upload-btn">📷 上傳</button>
-</div>
+      <!-- 博多天神逛街 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">逛街</span>
+        </div>
+        <div class="card-main">
+          <img src="img/tenjin.png" alt="博多天神逛街">
+          <div class="card-main-text">
+            <b>博多・天神逛街</b>
+            <p>回到市區後，補貨、買藥妝與伴手禮，也可以安排一兩間咖啡店休息。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Tenjin+Fukuoka" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-</div>
+      <!-- Nikuichi -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">晚餐</span>
+        </div>
+        <div class="card-main">
+          <img src="img/nikuichi.png" alt="Nikuichi 肉いち">
+          <div class="card-main-text">
+            <b>Nikuichi（肉いち）</b>
+            <p>以肉料理為主的居酒屋風格餐廳，是這天晚上的重點晚餐。</p>
+            <span class="sticker">⏰ 22:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Nikuichi+Fukuoka" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- ================= YUFUIN =================== -->
-<div class="page" id="yufuin">
-<h3>🍡 由布院美食清單</h3><br>
+    <!-- ===== 12/17 ===== -->
+    <section class="day-block" id="d17">
+      <div class="day-title">📍 12/17（三） 由布院散策</div>
 
-<div class="check-item"><input type="checkbox"><label>MILCH 布丁</label><button class="upload-btn">📷 上傳</button></div>
-<div class="check-item"><input type="checkbox"><label>B-Speak 生乳捲</label><button class="upload-btn">📷 上傳</button></div>
-<div class="check-item"><input type="checkbox"><label>金賞可樂餅</label><button class="upload-btn">📷 上傳</button></div>
-<div class="check-item"><input type="checkbox"><label>唐揚げ（中津/柚子胡椒）</label><button class="upload-btn">📷 上傳</button></div>
-<div class="check-item"><input type="checkbox"><label>Snoopy茶屋甜點</label><button class="upload-btn">📷 上傳</button></div>
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>由布院 · 晴時多雲 · 0–8°C</span>
+          <span>山區低溫</span>
+        </div>
+        <div class="wear-tip">建議穿著：厚外套＋圍巾＋保暖褲，注意早晚溫差。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">08:00<br>0°</div>
+          <div class="weather-hour-item">11:00<br>4°</div>
+          <div class="weather-hour-item">14:00<br>7°</div>
+          <div class="weather-hour-item">17:00<br>3°</div>
+          <div class="weather-hour-item">20:00<br>1°</div>
+        </div>
+      </div>
 
-</div>
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <img src="img/yufuin_street.png" alt="由布院街道">
+          <div class="card-main-text">
+            <b>由布院散策</b>
+            <p>沿著街道慢慢走，邊吃邊逛，準備把喜歡的小吃與甜點收入肚子與相機。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Yufuin" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script>
-function switchTab(tab){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(tab).classList.add('active');
-document.querySelectorAll('.tab-bar button').forEach(b=>b.classList.remove('active'));
-event.target.classList.add('active');
-}
-</script>
+    <!-- ===== 12/18 ===== -->
+    <section class="day-block" id="d18">
+      <div class="day-title">📍 12/18（四） 回程日</div>
+
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>由布院 / 福岡 · 多雲 · 2–9°C</span>
+          <span>收心日</span>
+        </div>
+        <div class="wear-tip">建議穿著：方便活動的保暖穿搭，注意機場空調溫差。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">08:00<br>2°</div>
+          <div class="weather-hour-item">11:00<br>5°</div>
+          <div class="weather-hour-item">14:00<br>8°</div>
+          <div class="weather-hour-item">17:00<br>6°</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">交通</span>
+        </div>
+        <div class="card-main">
+          <img src="img/train_airport.png" alt="返回福岡機場">
+          <div class="card-main-text">
+            <b>由布院 → 福岡機場</b>
+            <p>整理行李、準備回程，可以在機場再買最後一輪伴手禮。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Fukuoka+Airport" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= 必買清單 ================= -->
+  <section class="page" id="mustbuy">
+    <div class="section-title">🛍 福岡必買清單</div>
+
+    <div class="check-item">
+      <input type="checkbox" id="mb1">
+      <label for="mb1">明太子（可常溫 / 冷藏）</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="mb2">
+      <label for="mb2">博多通りもん</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="mb3">
+      <label for="mb3">福砂屋 長崎蛋糕</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="mb4">
+      <label for="mb4">梅ヶ枝餅（冷凍帶回）</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="mb5">
+      <label for="mb5">一蘭拉麵禮盒 / 泡麵</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+  </section>
+
+  <!-- ================= 由布院美食 ================= -->
+  <section class="page" id="yufuin">
+    <div class="section-title">🍡 由布院美食清單</div>
+
+    <div class="check-item">
+      <input type="checkbox" id="yf1">
+      <label for="yf1">MILCH 布丁・半熟起司</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="yf2">
+      <label for="yf2">B-Speak 生乳捲</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="yf3">
+      <label for="yf3">金賞可樂餅</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="yf4">
+      <label for="yf4">中津炸雞（柚子胡椒風味）</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="yf5">
+      <label for="yf5">Snoopy 茶屋甜點</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="yf6">
+      <label for="yf6">湯布院咖啡 / 抹茶甜點</label>
+      <input type="file" class="photo-input" accept="image/*">
+      <button class="upload-btn" type="button">📷 上傳</button>
+    </div>
+  </section>
+
+  <script>
+    // Tabs 切換
+    const tabButtons = document.querySelectorAll(".tab-bar button");
+    const pages = document.querySelectorAll(".page");
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-tab");
+        pages.forEach(p => p.classList.remove("active"));
+        document.getElementById(target).classList.add("active");
+
+        tabButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+
+    // 每日切換
+    const dayButtons = document.querySelectorAll(".day-switch button");
+    const dayBlocks = document.querySelectorAll(".day-block");
+
+    dayButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-day");
+        dayBlocks.forEach(d => d.classList.remove("active"));
+        document.getElementById(target).classList.add("active");
+
+        dayButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+
+    // 必買 & 由布院清單：上傳按鈕觸發檔案選擇
+    document.querySelectorAll(".check-item").forEach(item => {
+      const fileInput = item.querySelector(".photo-input");
+      const uploadBtn = item.querySelector(".upload-btn");
+      if (fileInput && uploadBtn) {
+        uploadBtn.addEventListener("click", () => {
+          fileInput.click();
+        });
+        fileInput.addEventListener("change", () => {
+          if (fileInput.files && fileInput.files.length > 0) {
+            uploadBtn.textContent = "✅ 已選照片";
+          } else {
+            uploadBtn.textContent = "📷 上傳";
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
