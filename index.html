@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
@@ -188,17 +188,34 @@
       color: #8a4a2e;
       border-radius: 999px;
     }
+
     .card-main {
       display: flex;
       gap: 10px;
     }
-    .card-main img {
+    .card-media {
       width: 50%;
-      height: 95px;
+      max-width: 160px;
       border-radius: 10px;
-      object-fit: cover;
-      background: #ddd;
+      overflow: hidden;
+      background: #d9d9d9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 4 / 3;
+      flex-shrink: 0;
     }
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .emoji-fallback {
+      display: none;
+      font-size: 30px;
+    }
+
     .card-main-text {
       flex: 1;
       font-size: 13px;
@@ -229,7 +246,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 2px;
+      margin-top: 4px;
     }
     .nav-btn, .upload-btn {
       border-radius: 999px;
@@ -303,13 +320,6 @@
       cursor: pointer;
     }
 
-    .sub-list {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #7a5a3a;
-      line-height: 1.6;
-    }
-
     .delete-btn {
       border: none;
       background: transparent;
@@ -369,16 +379,20 @@
         </div>
       </div>
 
-      <!-- 抵達福岡 + 去程航班資訊 -->
+      <!-- 抵達福岡機場 + 去程航班 -->
       <div class="card">
         <div class="card-header-line">
           <span class="tag">交通</span>
         </div>
         <div class="card-main">
-          <img src="img/airport.png" alt="機場">
+          <div class="card-media">
+            <img src="img/airport.png" alt="機場"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">✈️</div>
+          </div>
           <div class="card-main-text">
-            <b>抵達福岡機場 & 進市區</b>
-            <p>從桃園搭機飛往福岡，抵達後前往飯店放行李，準備開始福岡行程。</p>
+            <b>Taoyuan → Fukuoka 抵達福岡機場</b>
+            <p>從桃園搭機飛往福岡，抵達後前往飯店放行李，準備開始六天五夜的行程。</p>
             <span class="sticker">✈ AirAsia AK1510 · 12:40 TPE → 16:00 FUK（直飛 約 2 小時 20 分）</span>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Fukuoka+Airport" target="_blank">📍 福岡機場</a>
@@ -394,13 +408,17 @@
           <span class="tag">麵包</span>
         </div>
         <div class="card-main">
-          <img src="img/boulange.png" alt="BOUL'ANGE 天神地下街店">
+          <div class="card-media">
+            <img src="img/boulange.png" alt="BOUL'ANGE 天神地下街店"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🥐</div>
+          </div>
           <div class="card-main-text">
             <b>BOUL’ANGE 天神地下街店</b>
             <p>到天神地下街逛逛，順便買奶油捲、可頌等人氣麵包，當作點心或隔天早餐。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=BOULANGE+Tenjin+Chikagai" target="_blank">📍 Google Maps</a>
-              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+              <button class="upload-btn" type="button">📷 麵包照片</button>
             </div>
           </div>
         </div>
@@ -412,14 +430,18 @@
           <span class="tag">晚餐</span>
         </div>
         <div class="card-main">
-          <img src="img/maedaya.png" alt="博多もつ鍋 前田屋 今泉店">
+          <div class="card-media">
+            <img src="img/maedaya.png" alt="博多もつ鍋 前田屋 今泉店"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍲</div>
+          </div>
           <div class="card-main-text">
             <b>博多もつ鍋 前田屋 今泉店</b>
-            <p>著名的牛腸鍋名店，以味噌湯底為主，適合第一天好好暖身的晚餐。</p>
+            <p>福岡人氣牛腸鍋名店，以味噌湯底為主，適合第一天好好暖身的晚餐。</p>
             <span class="sticker">⏰ 19:30 訂位 · 四位</span>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Maedaya+Imaizumi" target="_blank">📍 Google Maps</a>
-              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+              <button class="upload-btn" type="button">📷 鍋物照片</button>
             </div>
           </div>
         </div>
@@ -448,34 +470,42 @@
       <!-- Pain Stock -->
       <div class="card">
         <div class="card-header-line">
-          <span class="tag">食物</span>
+          <span class="tag">早餐</span>
         </div>
         <div class="card-main">
-          <img src="img/painstock.png" alt="Pain Stock">
+          <div class="card-media">
+            <img src="img/painstock.png" alt="Pain Stock"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍞</div>
+          </div>
           <div class="card-main-text">
             <b>Pain Stock 麵包店</b>
-            <p>福岡超人氣麵包店，酥脆外皮與香氣十足的麵包，非常適合當旅行的慢早餐。</p>
+            <p>福岡超人氣麵包店，酥脆外皮與香氣十足的麵包，當天慢慢吃的幸福早餐。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Pain+Stock+Fukuoka" target="_blank">📍 Google Maps</a>
-              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+              <button class="upload-btn" type="button">📷 早餐照片</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 天婦羅ひらお 天神アクロス福岡店（新增） -->
+      <!-- 天婦羅ひらお -->
       <div class="card">
         <div class="card-header-line">
           <span class="tag">午餐</span>
         </div>
         <div class="card-main">
-          <img src="img/hirao.png" alt="天婦羅ひらお 天神アクロス福岡店">
+          <div class="card-media">
+            <img src="img/hirao.png" alt="天婦羅ひらお 天神アクロス福岡店"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍤</div>
+          </div>
           <div class="card-main-text">
             <b>天婦羅ひらお 天神アクロス福岡店</b>
             <p>福岡名店，現炸天婦羅酥脆又多汁，定食份量充足，是在地人也會排隊的名店。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Tempura+Hirao+Tenjin+ACROS" target="_blank">📍 Google Maps</a>
-              <button class="upload-btn" type="button">📷 上傳天婦羅照</button>
+              <button class="upload-btn" type="button">📷 天婦羅照片</button>
             </div>
           </div>
         </div>
@@ -487,13 +517,17 @@
           <span class="tag">逛街</span>
         </div>
         <div class="card-main">
-          <img src="img/tenjin.png" alt="博多天神逛街">
+          <div class="card-media">
+            <img src="img/tenjin.png" alt="博多·天神逛街"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🛍️</div>
+          </div>
           <div class="card-main-text">
             <b>博多・天神逛街</b>
             <p>百貨、藥妝、服飾一次逛好逛滿，也可以順路踩點喜歡的咖啡廳與甜點店。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Tenjin+Fukuoka" target="_blank">📍 Google Maps</a>
-              <button class="upload-btn" type="button">📷 上傳旅拍</button>
+              <button class="upload-btn" type="button">📷 逛街照片</button>
             </div>
           </div>
         </div>
@@ -505,45 +539,607 @@
           <span class="tag">景點</span>
         </div>
         <div class="card-main">
-          <img src="img/sarakurayama.png" alt="皿倉山夜景">
+          <div class="card-media">
+            <img src="img/sarakurayama.png" alt="皿倉山夜景"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🌃</div>
+          </div>
           <div class="card-main-text">
             <b>皿倉山夜景</b>
             <p>搭乘纜車上山，俯瞰北九州夜景，被稱為「100 億美元的夜景」。</p>
             <span class="sticker">🌅 日落時間：16:29</span>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Sarakurayama" target="_blank">📍 Google Maps</a>
-              <button class="upload-btn" type="button">📷 上傳夜景照</button>
+              <button class="upload-btn" type="button">📷 夜景照片</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- うなぎ四代目菊川 中洲春吉店（新增） -->
+      <!-- 鰻魚晚餐 菊川 -->
       <div class="card">
         <div class="card-header-line">
           <span class="tag">晚餐</span>
         </div>
         <div class="card-main">
-          <img src="img/kikukawa.png" alt="うなぎ四代目菊川 中洲春吉店">
+          <div class="card-media">
+            <img src="img/kikukawa.png" alt="うなぎ四代目菊川 中洲春吉店"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🐟</div>
+          </div>
           <div class="card-main-text">
             <b>うなぎ四代目菊川 中洲春吉店</b>
-            <p>主打一整尾現烤鰻魚的鰻魚飯專門店，外皮酥香、內裡柔軟，是很有儀式感的一餐。</p>
+            <p>主打一整尾現烤鰻魚的鰻魚飯專門店，外皮酥香、內裡柔軟，很有儀式感的一餐。</p>
             <div class="card-actions">
               <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Unagi+Kikukawa+Nakasu" target="_blank">📍 Google Maps</a>
-              <button class="upload-btn" type="button">📷 上傳鰻魚飯照</button>
+              <button class="upload-btn" type="button">📷 鰻魚飯照片</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 12/15、12/16、12/17、12/18 -->
-    <!-- （以下內容與上一版相同，只保留，不再重複說明） -->
-    <!-- 由於篇幅關係，這裡我不改動原本結構，只在你需求的地方補東西。
-         直接複製我上一版給你的 12/15～12/18 區段貼在這裡即可。 -->
+    <!-- 12/15 -->
+    <section class="day-block" id="d15">
+      <div class="day-title">📍 12/15（一） 櫛田神社・鈴懸・西新初喜・博多小吃・Full Full・Koyama</div>
 
-    <!-- …………… 這裡請直接沿用你手上上一版程式的 d15、d16、d17、d18 內容 …………… -->
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>福岡市 · 晴 · 5–11°C</span>
+          <span>早晚很冷</span>
+        </div>
+        <div class="wear-tip">建議穿著：厚外套＋毛衣，走路多可配運動鞋。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">08:00<br>5°</div>
+          <div class="weather-hour-item">11:00<br>9°</div>
+          <div class="weather-hour-item">14:00<br>11°</div>
+          <div class="weather-hour-item">17:00<br>8°</div>
+          <div class="weather-hour-item">21:00<br>5°</div>
+        </div>
+      </div>
 
+      <!-- 櫛田神社 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/kushida.png" alt="櫛田神社"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">⛩️</div>
+          </div>
+          <div class="card-main-text">
+            <b>櫛田神社</b>
+            <p>博多祇園山笠祭典主會場，早上先來參拜，感受當地人信仰與老街氛圍。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Kushida+Shrine" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 神社照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 鈴懸 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">甜點</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/suzukake.png" alt="鈴懸"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍡</div>
+          </div>
+          <div class="card-main-text">
+            <b>鈴懸（和菓子）</b>
+            <p>福岡知名和菓子品牌，小巧可愛的銅鑼燒與和菓子，適合當下午茶點。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Suzukake+Fukuoka" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 甜點照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 西新初喜 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">午餐</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/nishin_hatsuki.png" alt="西新初喜 くうてん博多店"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🥩</div>
+          </div>
+          <div class="card-main-text">
+            <b>西新初喜 くうてん博多店</b>
+            <p>以和牛壽喜燒與牛肉料理為主的名店，位於博多站頂樓餐廳區。</p>
+            <span class="sticker">⏰ 11:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Nishin+Hatsuki+Hakata" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 午餐照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 博多車站小吃 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">小吃</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/hakata_snacks.png" alt="博多車站小吃"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍢</div>
+          </div>
+          <div class="card-main-text">
+            <b>博多車站小吃巡禮</b>
+            <p>在車站內外小吃街自由探索，蒸餃、可樂餅、甜點等看到喜歡就試。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 小吃照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full Full 明太子麵包 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">點心</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/fullfull.png" alt="Full Full 明太子麵包 天神店"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🥯</div>
+          </div>
+          <div class="card-main-text">
+            <b>Full Full 明太子麵包（天神店）</b>
+            <p>將明太子厚厚抹在法國麵包上的邪惡點心，外脆內軟、鹹香很涮嘴。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Full+Full+Tenjin" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 麵包照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Koyama Parking 晚餐 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">晚餐</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/koyama.png" alt="Koyama Parking"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍷</div>
+          </div>
+          <div class="card-main-text">
+            <b>Koyama Parking</b>
+            <p>氣氛感十足的餐酒館，適合好好吃一頓、配點酒聊聊天。</p>
+            <span class="sticker">⏰ 20:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 晚餐照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12/16 -->
+    <section class="day-block" id="d16">
+      <div class="day-title">📍 12/16（二） 炉端早餐・竈門神社・太宰府・逛街・Nikuichi</div>
+
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>太宰府周邊 · 多雲 · 4–10°C</span>
+          <span>山區更冷</span>
+        </div>
+        <div class="wear-tip">建議穿著：厚外套＋毛衣＋圍巾，山上建議戴帽子。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">08:00<br>4°</div>
+          <div class="weather-hour-item">11:00<br>8°</div>
+          <div class="weather-hour-item">14:00<br>10°</div>
+          <div class="weather-hour-item">17:00<br>6°</div>
+          <div class="weather-hour-item">21:00<br>4°</div>
+        </div>
+      </div>
+
+      <!-- 炉端ノいとおかし -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">早餐</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/robata.png" alt="炉端ノいとおかし"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍳</div>
+          </div>
+          <div class="card-main-text">
+            <b>炉端ノいとおかし</b>
+            <p>人氣早餐店，用炭火烤魚和家常小菜配白飯、味噌湯，日式早晨儀式感滿滿。</p>
+            <span class="sticker">⏰ 9:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 早餐照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 竈門神社 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/kamado.png" alt="寶滿宮 竈門神社"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">⛩️</div>
+          </div>
+          <div class="card-main-text">
+            <b>寶滿宮 竈門神社</b>
+            <p>以結緣聞名，山腰上的神社視野開闊，社務所與御守設計感很高。</p>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Kamado+Shrine" target="_blank">📍 Google Maps</a>
+              <button class="upload-btn" type="button">📷 神社照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 太宰府天滿宮 + 小吃清單 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點 & 小吃</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/tenmangu.png" alt="太宰府天滿宮"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🎐</div>
+          </div>
+          <div class="card-main-text">
+            <b>太宰府天滿宮</b>
+            <p>學問之神加持的代表景點，參拜完沿著表參道一路吃吃逛逛。</p>
+            <div class="sticker">📝 太宰府小吃口袋名單：</div>
+            <ul style="margin-top:4px;font-size:12px;color:#7a5a3a;padding-left:16px;line-height:1.6;">
+              <li>松屋 − 梅枝餅</li>
+              <li>杉養蜂園 − 柚子蜜飲（柚子味好喝）</li>
+              <li>上岡屋 − 和牛明太子飯</li>
+              <li>天山 和菓子 − 草莓麻糬大福</li>
+            </ul>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 太宰府照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 博多天神逛街 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">逛街</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/tenjin.png" alt="博多·天神逛街"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🛍️</div>
+          </div>
+          <div class="card-main-text">
+            <b>博多・天神逛街</b>
+            <p>回市區後繼續補貨、散步，看心情選擇百貨、藥妝或咖啡廳。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 逛街照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nikuichi 晚餐 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">晚餐</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/nikuichi.png" alt="Nikuichi 肉いち"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🥩</div>
+          </div>
+          <div class="card-main-text">
+            <b>Nikuichi（肉いち）</b>
+            <p>以燒肉與肉料理為主，當天最後用滿滿的肉肉好好收尾。</p>
+            <span class="sticker">⏰ 22:00 訂位 · 四位</span>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 晚餐照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12/17 -->
+    <section class="day-block" id="d17">
+      <div class="day-title">📍 12/17（三） 特急到由布院・釜飯心・Snoopy茶屋・花卉村・金鱗湖・CARNE</div>
+
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>由布院 · 晴時多雲 · 0–8°C</span>
+          <span>溫泉小鎮，空氣冷</span>
+        </div>
+        <div class="wear-tip">建議穿著：發熱衣＋毛衣＋厚外套，手套圍巾可準備。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">06:00<br>0°</div>
+          <div class="weather-hour-item">09:00<br>3°</div>
+          <div class="weather-hour-item">12:00<br>7°</div>
+          <div class="weather-hour-item">15:00<br>8°</div>
+          <div class="weather-hour-item">18:00<br>3°</div>
+        </div>
+      </div>
+
+      <!-- 特急電車 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">交通</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/train_yufuin.png" alt="特急ゆふ73號"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🚃</div>
+          </div>
+          <div class="card-main-text">
+            <b>特急ゆふ 73 號 · 博多 → 由布院</b>
+            <p>從博多搭乘特急前往由布院，一路看窗外山景與河谷景色。</p>
+            <span class="sticker">🪑 1 號車 · 9、10 號座位（CD）</span>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 車窗風景</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 由布院釜飯 心 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">午餐</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/hanamura.png" alt="由布院釜飯 心（暫借花卉村圖當示意）"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍚</div>
+          </div>
+          <div class="card-main-text">
+            <b>由布院釜飯 心</b>
+            <p>以現煮釜飯為主，一鍋米飯配上當季食材配料，在冷冷的由布院特別療癒。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 釜飯照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snoopy 茶屋 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">甜點</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/snoopy_cafe.png" alt="Snoopy 茶屋"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🐶</div>
+          </div>
+          <div class="card-main-text">
+            <b>Snoopy 茶屋</b>
+            <p>充滿史努比元素的可愛茶屋，甜點與飲品都很好拍，少女心大爆發。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 Snoopy 照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 由布院花卉村 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/hanamura.png" alt="由布院花卉村"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🏘️</div>
+          </div>
+          <div class="card-main-text">
+            <b>由布院花卉村</b>
+            <p>歐風小村落造景，彩色小屋與可愛小店，很適合到處拍照散步。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 花卉村照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 金鱗湖賞楓 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/kinrinko.png" alt="金鱗湖賞楓"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍁</div>
+          </div>
+          <div class="card-main-text">
+            <b>金鱗湖賞楓</b>
+            <p>湖邊楓紅與倒影一起拍，黃昏時光線柔和，景色特別美。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 楓葉照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 回飯店泡溫泉 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">溫泉</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/onsen.png" alt="飯店溫泉"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">♨️</div>
+          </div>
+          <div class="card-main-text">
+            <b>回飯店泡溫泉</b>
+            <p>逛街走一整天後回到飯店，好好泡溫泉放鬆腿跟肩膀。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 溫泉照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARNE 晚餐 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">晚餐</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/carne.png" alt="CARNE"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍽️</div>
+          </div>
+          <div class="card-main-text">
+            <b>CARNE 晚餐</b>
+            <p>在由布院享用氣氛感十足的晚餐，搭配紅酒與肉料理。</p>
+            <span class="sticker">⏰ 17:30 訂位 · 四位</span>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 晚餐照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12/18 -->
+    <section class="day-block" id="d18">
+      <div class="day-title">📍 12/18（四） 金鱗湖晨霧・回博多・麵屋兼虎・飛回台灣</div>
+
+      <div class="weather-box">
+        <div class="weather-top">
+          <span>由布院／福岡 · 晴 · 0–9°C</span>
+          <span>清晨超冷</span>
+        </div>
+        <div class="wear-tip">建議穿著：完整冬裝，清晨看霧建議戴帽子與手套。</div>
+        <div class="weather-hours">
+          <div class="weather-hour-item">06:00<br>0°</div>
+          <div class="weather-hour-item">09:00<br>3°</div>
+          <div class="weather-hour-item">12:00<br>7°</div>
+          <div class="weather-hour-item">15:00<br>9°</div>
+          <div class="weather-hour-item">18:00<br>5°</div>
+        </div>
+      </div>
+
+      <!-- 金鱗湖晨霧 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">景點</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/kinrinko_morning.png" alt="金鱗湖晨霧"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🌫️</div>
+          </div>
+          <div class="card-main-text">
+            <b>清晨金鱗湖晨霧</b>
+            <p>早上六點起床散步到金鱗湖，看湖面升起的晨霧和安靜的村落。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 晨霧照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 回博多 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">交通</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/train_airport.png" alt="回博多列車"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🚆</div>
+          </div>
+          <div class="card-main-text">
+            <b>由布院 → 博多車站</b>
+            <p>早上收拾行李搭車回到博多，準備最後一餐與伴手禮補貨。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 車程照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 麵屋兼虎 DEITOS 店 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">午餐</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/kanetora.png" alt="麵屋兼虎 DEITOS 店"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">🍜</div>
+          </div>
+          <div class="card-main-text">
+            <b>麵屋兼虎 DEITOS 店</b>
+            <p>回程前最後一碗拉麵，用濃郁湯頭與麵條替這次福岡旅行畫下句點。</p>
+            <div class="card-actions">
+              <button class="upload-btn" type="button">📷 拉麵照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 回台班機 -->
+      <div class="card">
+        <div class="card-header-line">
+          <span class="tag">航班</span>
+        </div>
+        <div class="card-main">
+          <div class="card-media">
+            <img src="img/airasia.png" alt="AirAsia AK1511"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';">
+            <div class="emoji-fallback">✈️</div>
+          </div>
+          <div class="card-main-text">
+            <b>Fukuoka → Taipei 回程班機</b>
+            <p>從福岡機場飛回桃園，結束這趟福岡 & 由布院之旅。</p>
+            <span class="sticker">✈ AirAsia AK1511 · 16:55 FUK → 18:30 TPE（約 2 小時 35 分）</span>
+            <div class="card-actions">
+              <a class="nav-btn" href="https://www.google.com/maps/search/?api=1&query=Fukuoka+Airport" target="_blank">📍 福岡機場</a>
+              <button class="upload-btn" type="button">📷 機場 / 機上照片</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- 必買清單 -->
@@ -598,7 +1194,7 @@
     <div id="drug-list">
       <div class="check-item">
         <input type="checkbox" id="dr1">
-        <label for="dr1">感冒藥 / 止痛藥（如 Eve 等）</label>
+        <label for="dr1">感冒藥 / 止痛藥（EVE 等）</label>
         <input type="file" class="photo-input" accept="image/*">
         <button class="upload-btn" type="button">📷 上傳</button>
         <button class="delete-btn" type="button">🗑</button>
@@ -760,7 +1356,7 @@
     // 初始化既有 check-item
     document.querySelectorAll(".check-item").forEach(setupUploadItem);
 
-    // 新增一項（必買清單）
+    // 新增一項（必買清單 / 藥妝）
     document.querySelectorAll(".add-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const targetId = btn.getAttribute("data-target");
@@ -789,3 +1385,4 @@
 
 </body>
 </html>
+
